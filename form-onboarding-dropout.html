@@ -162,6 +162,14 @@
   }
   textarea:focus { box-shadow: 0 0 0 2px #E70E22; }
 
+  .incentive-box {
+    background: white; border-radius: 10px; padding: 14px 16px;
+    margin-bottom: 16px; font-size: 13px; line-height: 1.55; color: #555;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    border-left: 3px solid #E70E22;
+  }
+  .incentive-box strong { color: #141414; }
+
   .optional-hint {
     font-size: 12px;
     color: #ADADAD;
@@ -358,6 +366,9 @@
     </div>
     <textarea id="q3" placeholder="Dein Kommentar..."></textarea>
     <p class="optional-hint">Optional</p>
+    <div class="incentive-box">
+      <strong>CHF 20.– Gutschein bei Datasport</strong> — Als Dankeschön für dein Feedback erhältst du einen Gutschein über CHF 20.–, den du für die Anmeldung zu einem Event deiner Wahl einlösen kannst. Wir schicken ihn direkt an deine hinterlegte E-Mail-Adresse.
+    </div>
     <div class="nav">
       <button class="btn-back" onclick="back(3)"><svg fill="none" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" stroke="#141414" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <button class="btn-next" onclick="submit()">Absenden <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>

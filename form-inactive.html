@@ -248,10 +248,19 @@
       <div class="milo-avatar">
         <svg width="22" height="22" viewBox="0 0 60 60" fill="none"><path d="M38 6L14 54h26C51.6 54 57.5 38.7 49.4 30.1L40.2 5.9C39.4 4.1 37.1 4.1 38 6Z" fill="white"/><path d="M22 6L46 54H20C13.4 54 9.8 38.7 17.9 30.1L27.1 5.9C27.9 4.1 30.2 4.1 22 6Z" fill="white" opacity="0.5"/></svg>
       </div>
-      <div class="speech-bubble">Was würde dich zur Rückkehr bewegen?</div>
+      <div class="speech-bubble">Hat Milo deinen Erwartungen entsprochen?</div>
     </div>
-    <textarea id="q2" placeholder="Deine Antwort..."></textarea>
-    <p class="optional-hint">Optional</p>
+    <div class="options" id="opts-2">
+      <label class="option"><input type="radio" name="q2" value="Ja"><span class="dot"></span><span>Ja</span></label>
+      <label class="option"><input type="radio" name="q2" value="Teilweise"><span class="dot"></span><span>Teilweise</span></label>
+      <label class="option"><input type="radio" name="q2" value="Nein"><span class="dot"></span><span>Nein</span></label>
+    </div>
+    <div class="error-msg" id="err-2">Bitte wähle eine Option aus.</div>
+    <div style="margin-top: 14px;">
+      <p class="sub-question">Warum?</p>
+      <textarea id="q2-warum" placeholder="Deine Antwort..."></textarea>
+      <p class="optional-hint">Optional</p>
+    </div>
     <div class="nav">
       <button class="btn-back" onclick="back(2)"><svg fill="none" viewBox="0 0 24 24" width="18" height="18"><path d="M15 18l-6-6 6-6" stroke="#141414" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <button class="btn-next" onclick="next(2)">Weiter <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -264,9 +273,9 @@
       <div class="milo-avatar">
         <svg width="22" height="22" viewBox="0 0 60 60" fill="none"><path d="M38 6L14 54h26C51.6 54 57.5 38.7 49.4 30.1L40.2 5.9C39.4 4.1 37.1 4.1 38 6Z" fill="white"/><path d="M22 6L46 54H20C13.4 54 9.8 38.7 17.9 30.1L27.1 5.9C27.9 4.1 30.2 4.1 22 6Z" fill="white" opacity="0.5"/></svg>
       </div>
-      <div class="speech-bubble">Möchtest du noch etwas hinzufügen?</div>
+      <div class="speech-bubble">Was würde dich zur Rückkehr bewegen?</div>
     </div>
-    <textarea id="q3" placeholder="Dein Kommentar..."></textarea>
+    <textarea id="q3" placeholder="Deine Antwort..."></textarea>
     <p class="optional-hint">Optional</p>
     <div class="nav">
       <button class="btn-back" onclick="back(3)"><svg fill="none" viewBox="0 0 24 24" width="18" height="18"><path d="M15 18l-6-6 6-6" stroke="#141414" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -274,20 +283,19 @@
     </div>
   </div>
 
-  <!-- Step 4: Incentive + email -->
+  <!-- Step 4 -->
   <div class="step" id="step-4">
     <div class="question-block">
       <div class="milo-avatar">
         <svg width="22" height="22" viewBox="0 0 60 60" fill="none"><path d="M38 6L14 54h26C51.6 54 57.5 38.7 49.4 30.1L40.2 5.9C39.4 4.1 37.1 4.1 38 6Z" fill="white"/><path d="M22 6L46 54H20C13.4 54 9.8 38.7 17.9 30.1L27.1 5.9C27.9 4.1 30.2 4.1 22 6Z" fill="white" opacity="0.5"/></svg>
       </div>
-      <div class="speech-bubble">Fast fertig — ein kleines Dankeschön wartet auf dich!</div>
+      <div class="speech-bubble">Möchtest du noch etwas hinzufügen?</div>
     </div>
-    <div class="incentive-box">
-      <strong>CHF 20.– Gutschein bei Datasport</strong> — Als Dankeschön für dein Feedback erhältst du einen Gutschein über CHF 20.–, den du für die Anmeldung zu einem Event deiner Wahl einlösen kannst. Du erhältst deinen Code per E-Mail innerhalb von 48 Stunden.
+    <textarea id="q4" placeholder="Dein Kommentar..."></textarea>
+    <p class="optional-hint">Optional</p>
+    <div class="incentive-box" style="margin-top: 16px;">
+      <strong>CHF 20.– Gutschein bei Datasport</strong> — Als Dankeschön für dein Feedback erhältst du einen Gutschein über CHF 20.–, den du für die Anmeldung zu einem Event deiner Wahl einlösen kannst. Wir schicken ihn direkt an deine hinterlegte E-Mail-Adresse.
     </div>
-    <label class="email-label" for="q4-email">Deine E-Mail-Adresse <span style="font-weight:400;color:#ADADAD;">(optional)</span></label>
-    <input type="email" id="q4-email" placeholder="deine@email.com">
-    <div class="error-msg" id="err-4">Bitte gib eine gültige E-Mail-Adresse ein.</div>
     <div class="nav">
       <button class="btn-back" onclick="back(4)"><svg fill="none" viewBox="0 0 24 24" width="18" height="18"><path d="M15 18l-6-6 6-6" stroke="#141414" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <button class="btn-next" onclick="submit()">Absenden <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -397,7 +405,11 @@
       }
       answers['q1'] = val;
     } else if (step === 2) {
-      answers['q2'] = document.getElementById('q2').value;
+      var val2 = getSelected('q2');
+      if (!val2) { document.getElementById('err-2').classList.add('visible'); return; }
+      document.getElementById('err-2').classList.remove('visible');
+      answers['q2'] = val2;
+      answers['q2_warum'] = document.getElementById('q2-warum').value;
     } else if (step === 3) {
       answers['q3'] = document.getElementById('q3').value;
     }
@@ -408,10 +420,7 @@
   function back(step) { current = step - 1; showStep(current); }
 
   function submit() {
-    var email = document.getElementById('q4-email').value.trim();
-    if (email && !isValidEmail(email)) { document.getElementById('err-4').classList.add('visible'); return; }
-    document.getElementById('err-4').classList.remove('visible');
-    answers['email'] = email;
+    answers['q4'] = document.getElementById('q4').value;
     submitForm(answers);
     showStep('done');
   }
