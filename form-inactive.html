@@ -34,11 +34,11 @@
     box-shadow: 0 -4px 32px rgba(0,0,0,0.18);
     display: flex; flex-direction: column;
   }
-  .seg-progress { display: flex; gap: 4px; margin-bottom: 32px; }
+  .seg-progress { display: flex; gap: 4px; margin-bottom: 20px; }
   .seg { flex: 1; height: 3px; border-radius: 2px; background: #DEDEDE; transition: background 0.3s; }
   .seg.filled { background: #E70E22; }
 
-  .question-block { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 24px; }
+  .question-block { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px; }
   .milo-avatar {
     width: 40px; height: 40px; border-radius: 50%;
     background: #720000; flex-shrink: 0;
@@ -51,10 +51,10 @@
     box-shadow: 0 1px 6px rgba(0,0,0,0.07); flex: 1;
   }
 
-  .options { display: flex; flex-direction: column; gap: 10px; }
+  .options { display: flex; flex-direction: column; gap: 8px; }
   .option {
     display: flex; align-items: center; gap: 14px;
-    padding: 15px 16px; background: white; border-radius: 10px;
+    padding: 12px 16px; background: white; border-radius: 10px;
     cursor: pointer; border-left: 3px solid transparent;
     box-shadow: 0 1px 4px rgba(0,0,0,0.06);
     transition: border-color 0.18s, background 0.18s;
@@ -84,22 +84,14 @@
   }
   textarea:focus { box-shadow: 0 0 0 2px #E70E22; }
 
-  input[type="email"] {
-    width: 100%; border: none; border-radius: 10px;
-    padding: 14px 16px; font-family: 'Open Sans', Arial, sans-serif;
-    font-size: 15px; color: #141414;
-    background: white; box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-    outline: none; transition: box-shadow 0.2s;
-  }
-  input[type="email"]:focus { box-shadow: 0 0 0 2px #E70E22; }
-
   .optional-hint { font-size: 12px; color: #ADADAD; margin-top: 8px; margin-left: 2px; }
 
-  .conditional-block { display: none; margin-top: 14px; }
+  .conditional-block { display: none; margin-top: 10px; }
   .conditional-block.visible { display: block; }
+  .conditional-block textarea { min-height: 76px; }
   .sub-question {
     font-size: 13px; font-weight: 700; color: #141414;
-    margin-bottom: 8px; padding-left: 4px;
+    margin-bottom: 6px; padding-left: 4px;
   }
 
   .incentive-box {
@@ -109,12 +101,11 @@
     border-left: 3px solid #E70E22;
   }
   .incentive-box strong { color: #141414; }
-  .email-label { font-size: 13px; font-weight: 700; color: #141414; margin-bottom: 8px; display: block; }
 
   .error-msg { color: #E70E22; font-size: 12px; margin-top: 6px; display: none; }
   .error-msg.visible { display: block; }
 
-  .nav { margin-top: 24px; display: flex; gap: 10px; align-items: center; }
+  .nav { margin-top: 16px; display: flex; gap: 10px; align-items: center; }
   .btn-back {
     width: 44px; height: 44px; border-radius: 22px;
     border: 2px solid #DEDEDE; background: white;
@@ -200,10 +191,9 @@
     <div class="seg filled"></div>
     <div class="seg"></div>
     <div class="seg"></div>
-    <div class="seg"></div>
   </div>
 
-  <!-- Step 1 -->
+  <!-- Step 1: Why no longer using Milo + conditional textarea -->
   <div class="step active" id="step-1">
     <div class="question-block">
       <div class="milo-avatar">
@@ -212,92 +202,54 @@
       <div class="speech-bubble">Warum nutzt du Milo nicht mehr?</div>
     </div>
     <div class="options" id="opts-1">
-      <label class="option"><input type="radio" name="q1" value="Keine Zeit"><span class="dot"></span><span>Ich habe momentan keine Zeit zum Trainieren</span></label>
-      <label class="option"><input type="radio" name="q1" value="Die Pläne passen nicht zu mir"><span class="dot"></span><span>Die Pläne passen nicht zu mir</span></label>
-      <label class="option"><input type="radio" name="q1" value="Ich hatte vergessen, dass es existiert"><span class="dot"></span><span>Ich hatte vergessen, dass es existiert</span></label>
+      <label class="option"><input type="radio" name="q1" value="Ich habe nicht mehr trainiert"><span class="dot"></span><span>Ich habe nicht mehr trainiert</span></label>
+      <label class="option"><input type="radio" name="q1" value="Milo hat meine Erwartungen/Bedürfnisse nicht erfüllt"><span class="dot"></span><span>Milo hat meine Erwartungen/Bedürfnisse nicht erfüllt</span></label>
       <label class="option"><input type="radio" name="q1" value="Ich nutze ein anderes Tool"><span class="dot"></span><span>Ich nutze ein anderes Tool</span></label>
-      <label class="option" id="opt-feature"><input type="radio" name="q1" value="Es fehlt eine Funktion"><span class="dot"></span><span>Es fehlt eine Funktion</span></label>
-      <label class="option"><input type="radio" name="q1" value="Anderes"><span class="dot"></span><span>Anderes</span></label>
+      <label class="option"><input type="radio" name="q1" value="Ich hatte es vergessen"><span class="dot"></span><span>Ich hatte es vergessen</span></label>
+      <label class="option"><input type="radio" name="q1" value="Technische Probleme"><span class="dot"></span><span>Technische Probleme</span></label>
     </div>
-
-    <div class="conditional-block" id="q1b-block">
-      <p class="sub-question">Welche Funktion fehlt dir?</p>
-      <textarea id="q1b" placeholder="Beschreibe die fehlende Funktion..."></textarea>
-      <div class="error-msg" id="err-1b">Bitte beschreibe die fehlende Funktion.</div>
+    <div class="conditional-block" id="q1-follow-block">
+      <p class="sub-question" id="q1-follow-label"></p>
+      <textarea id="q1-follow" placeholder="Deine Antwort..."></textarea>
+      <p class="optional-hint">Optional</p>
     </div>
-
-    <div class="conditional-block" id="q1c-block">
-      <p class="sub-question">Magst du das kurz erläutern?</p>
-      <textarea id="q1c" placeholder="Dein Grund..."></textarea>
-    </div>
-
-    <div class="conditional-block" id="q1d-block">
-      <p class="sub-question">Welches Tool nutzt du?</p>
-      <textarea id="q1d" placeholder="z. B. Garmin Coach, TrainingPeaks..."></textarea>
-    </div>
-
     <div class="error-msg" id="err-1">Bitte wähle eine Option aus.</div>
     <div class="nav">
       <button class="btn-next" onclick="next(1)">Weiter <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </div>
   </div>
 
-  <!-- Step 2 -->
+  <!-- Step 2: What would bring you back -->
   <div class="step" id="step-2">
-    <div class="question-block">
-      <div class="milo-avatar">
-        <svg width="22" height="22" viewBox="0 0 60 60" fill="none"><path d="M38 6L14 54h26C51.6 54 57.5 38.7 49.4 30.1L40.2 5.9C39.4 4.1 37.1 4.1 38 6Z" fill="white"/><path d="M22 6L46 54H20C13.4 54 9.8 38.7 17.9 30.1L27.1 5.9C27.9 4.1 30.2 4.1 22 6Z" fill="white" opacity="0.5"/></svg>
-      </div>
-      <div class="speech-bubble">Hat Milo deinen Erwartungen entsprochen?</div>
-    </div>
-    <div class="options" id="opts-2">
-      <label class="option"><input type="radio" name="q2" value="Ja"><span class="dot"></span><span>Ja</span></label>
-      <label class="option"><input type="radio" name="q2" value="Teilweise"><span class="dot"></span><span>Teilweise</span></label>
-      <label class="option"><input type="radio" name="q2" value="Nein"><span class="dot"></span><span>Nein</span></label>
-    </div>
-    <div class="error-msg" id="err-2">Bitte wähle eine Option aus.</div>
-    <div style="margin-top: 14px;">
-      <p class="sub-question">Warum?</p>
-      <textarea id="q2-warum" placeholder="Deine Antwort..."></textarea>
-      <p class="optional-hint">Optional</p>
-    </div>
-    <div class="nav">
-      <button class="btn-back" onclick="back(2)"><svg fill="none" viewBox="0 0 24 24" width="18" height="18"><path d="M15 18l-6-6 6-6" stroke="#141414" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <button class="btn-next" onclick="next(2)">Weiter <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-    </div>
-  </div>
-
-  <!-- Step 3 -->
-  <div class="step" id="step-3">
     <div class="question-block">
       <div class="milo-avatar">
         <svg width="22" height="22" viewBox="0 0 60 60" fill="none"><path d="M38 6L14 54h26C51.6 54 57.5 38.7 49.4 30.1L40.2 5.9C39.4 4.1 37.1 4.1 38 6Z" fill="white"/><path d="M22 6L46 54H20C13.4 54 9.8 38.7 17.9 30.1L27.1 5.9C27.9 4.1 30.2 4.1 22 6Z" fill="white" opacity="0.5"/></svg>
       </div>
       <div class="speech-bubble">Was würde dich zur Rückkehr bewegen?</div>
     </div>
-    <textarea id="q3" placeholder="Deine Antwort..."></textarea>
+    <textarea id="q2" placeholder="Deine Antwort..."></textarea>
     <p class="optional-hint">Optional</p>
     <div class="nav">
-      <button class="btn-back" onclick="back(3)"><svg fill="none" viewBox="0 0 24 24" width="18" height="18"><path d="M15 18l-6-6 6-6" stroke="#141414" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <button class="btn-next" onclick="next(3)">Weiter <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="btn-back" onclick="back(2)"><svg fill="none" viewBox="0 0 24 24" width="18" height="18"><path d="M15 18l-6-6 6-6" stroke="#141414" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="btn-next" onclick="next(2)">Weiter <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </div>
   </div>
 
-  <!-- Step 4 -->
-  <div class="step" id="step-4">
+  <!-- Step 3: Anything else + incentive + submit -->
+  <div class="step" id="step-3">
     <div class="question-block">
       <div class="milo-avatar">
         <svg width="22" height="22" viewBox="0 0 60 60" fill="none"><path d="M38 6L14 54h26C51.6 54 57.5 38.7 49.4 30.1L40.2 5.9C39.4 4.1 37.1 4.1 38 6Z" fill="white"/><path d="M22 6L46 54H20C13.4 54 9.8 38.7 17.9 30.1L27.1 5.9C27.9 4.1 30.2 4.1 22 6Z" fill="white" opacity="0.5"/></svg>
       </div>
       <div class="speech-bubble">Möchtest du noch etwas hinzufügen?</div>
     </div>
-    <textarea id="q4" placeholder="Dein Kommentar..."></textarea>
+    <textarea id="q3" placeholder="Dein Kommentar..."></textarea>
     <p class="optional-hint">Optional</p>
     <div class="incentive-box" style="margin-top: 16px;">
       <strong>CHF 20.– Gutschein bei Datasport</strong> — Als Dankeschön für dein Feedback erhältst du einen Gutschein über CHF 20.–, den du für die Anmeldung zu einem Event deiner Wahl einlösen kannst. Wir schicken ihn direkt an deine hinterlegte E-Mail-Adresse.
     </div>
     <div class="nav">
-      <button class="btn-back" onclick="back(4)"><svg fill="none" viewBox="0 0 24 24" width="18" height="18"><path d="M15 18l-6-6 6-6" stroke="#141414" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="btn-back" onclick="back(3)"><svg fill="none" viewBox="0 0 24 24" width="18" height="18"><path d="M15 18l-6-6 6-6" stroke="#141414" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <button class="btn-next" onclick="submit()">Absenden <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </div>
   </div>
@@ -318,51 +270,32 @@
 
 <script>
   var current = 1;
-  var total = 4;
-  var answers = {};
+  var total = 3;
+  var params = new URLSearchParams(window.location.search);
+  var answers = { email: params.get('email') || '' };
 
-  document.querySelectorAll('.options').forEach(function(g) {
-    g.querySelectorAll('.option').forEach(function(opt) {
-      opt.addEventListener('click', function() {
-        g.querySelectorAll('.option').forEach(function(o) { o.classList.remove('selected'); });
-        opt.classList.add('selected');
-        var radio = opt.querySelector('input');
-        radio.checked = true;
-        if (g.id === 'opts-1') {
-          var q1bBlock = document.getElementById('q1b-block');
-          var q1cBlock = document.getElementById('q1c-block');
-          var q1dBlock = document.getElementById('q1d-block');
-          if (radio.value === 'Es fehlt eine Funktion') {
-            q1bBlock.classList.add('visible');
-            q1cBlock.classList.remove('visible');
-            q1dBlock.classList.remove('visible');
-            document.getElementById('q1c').value = '';
-            document.getElementById('q1d').value = '';
-          } else if (radio.value === 'Anderes') {
-            q1cBlock.classList.add('visible');
-            q1bBlock.classList.remove('visible');
-            q1dBlock.classList.remove('visible');
-            document.getElementById('q1b').value = '';
-            document.getElementById('err-1b').classList.remove('visible');
-            document.getElementById('q1d').value = '';
-          } else if (radio.value === 'Ich nutze ein anderes Tool') {
-            q1dBlock.classList.add('visible');
-            q1bBlock.classList.remove('visible');
-            q1cBlock.classList.remove('visible');
-            document.getElementById('q1b').value = '';
-            document.getElementById('err-1b').classList.remove('visible');
-            document.getElementById('q1c').value = '';
-          } else {
-            q1bBlock.classList.remove('visible');
-            q1cBlock.classList.remove('visible');
-            q1dBlock.classList.remove('visible');
-            document.getElementById('q1b').value = '';
-            document.getElementById('err-1b').classList.remove('visible');
-            document.getElementById('q1c').value = '';
-            document.getElementById('q1d').value = '';
-          }
-        }
-      });
+  var Q1_FOLLOW = {
+    'Milo hat meine Erwartungen/Bedürfnisse nicht erfüllt': 'Was hat dich enttäuscht? Was hättest du erwartet?',
+    'Ich nutze ein anderes Tool': 'Welches Tool nutzt du? Was bietet es dir, das Milo nicht bietet?',
+    'Technische Probleme': 'Bitte beschreibe das Problem.'
+  };
+
+  document.querySelectorAll('#opts-1 .option').forEach(function(opt) {
+    opt.addEventListener('click', function() {
+      document.querySelectorAll('#opts-1 .option').forEach(function(o) { o.classList.remove('selected'); });
+      opt.classList.add('selected');
+      opt.querySelector('input').checked = true;
+      var val = opt.querySelector('input').value;
+      var followBlock = document.getElementById('q1-follow-block');
+      var prompt = Q1_FOLLOW[val];
+      if (prompt) {
+        document.getElementById('q1-follow-label').textContent = prompt;
+        document.getElementById('q1-follow').value = '';
+        followBlock.classList.add('visible');
+      } else {
+        followBlock.classList.remove('visible');
+        document.getElementById('q1-follow').value = '';
+      }
     });
   });
 
@@ -377,8 +310,6 @@
     return el ? el.value : null;
   }
 
-  function isValidEmail(v) { return !v || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
-
   function showStep(n) {
     document.querySelectorAll('.step').forEach(function(s) { s.classList.remove('active'); });
     document.getElementById(n === 'done' ? 'step-done' : 'step-' + n).classList.add('active');
@@ -391,27 +322,10 @@
       var val = getSelected('q1');
       if (!val) { document.getElementById('err-1').classList.add('visible'); return; }
       document.getElementById('err-1').classList.remove('visible');
-      if (val === 'Es fehlt eine Funktion') {
-        var q1bVal = document.getElementById('q1b').value.trim();
-        if (!q1bVal) { document.getElementById('err-1b').classList.add('visible'); return; }
-        document.getElementById('err-1b').classList.remove('visible');
-        answers['q1b'] = q1bVal;
-      }
-      if (val === 'Anderes') {
-        answers['q1c'] = document.getElementById('q1c').value;
-      }
-      if (val === 'Ich nutze ein anderes Tool') {
-        answers['q1d'] = document.getElementById('q1d').value;
-      }
       answers['q1'] = val;
+      answers['q1_follow'] = document.getElementById('q1-follow').value;
     } else if (step === 2) {
-      var val2 = getSelected('q2');
-      if (!val2) { document.getElementById('err-2').classList.add('visible'); return; }
-      document.getElementById('err-2').classList.remove('visible');
-      answers['q2'] = val2;
-      answers['q2_warum'] = document.getElementById('q2-warum').value;
-    } else if (step === 3) {
-      answers['q3'] = document.getElementById('q3').value;
+      answers['q2'] = document.getElementById('q2').value;
     }
     current = step + 1;
     showStep(current);
@@ -420,7 +334,7 @@
   function back(step) { current = step - 1; showStep(current); }
 
   function submit() {
-    answers['q4'] = document.getElementById('q4').value;
+    answers['q3'] = document.getElementById('q3').value;
     submitForm(answers);
     showStep('done');
   }
