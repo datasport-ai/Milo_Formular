@@ -500,8 +500,13 @@
   }
 
   function submitForm(data) {
-    // Placeholder — wird durch Google Apps Script Endpoint ersetzt
-    console.log('Form submitted:', data);
+    data.formType = 'dropout';
+    fetch('https://script.google.com/macros/s/AKfycbwcsuVh_oP9uRRGXbW_6FgtDu2YVV2R2G5zdiN2pgXFnRtOkAdJznv6rgbx60o3-gmfCg/exec', {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(data)
+    })
+    .catch(function(err) { console.error('Submit error:', err); });
   }
 </script>
 </body>

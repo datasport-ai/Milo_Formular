@@ -123,6 +123,5 @@ Fallback if unknown or missing: `"einem bestimmten Schritt"`
 
 ## Pending
 - [ ] Google Apps Script endpoint — replace `submitForm()` placeholder onceSheet is ready
-- [ ] CHF 20.– voucher mechanism to confirm with team
 - [ ] Incentive email sending process (48h turnaround mentioned in forms)
 - [ ] Personalized links to generate per user from Google Sheets (email + step query params)
