@@ -14,12 +14,12 @@ google-apps-script.js         → Apps Script code to paste in Google Sheets edi
 ## Infrastructure
 - **Google Sheet:** `1O-dJv9CNcgidMwbd23dw5fErdzZuRW1MWrIDFtMFBsA`
 - **Apps Script URL:** `https://script.google.com/macros/s/AKfycbyu_G3-Q1JanWo0mQMZ7EbowcPE2oNB0HC7RqjUEwyi2y2mA7IUprJ6Irnry0Ne8ZaEDw/exec`
-- **GitHub Pages base:** `https://rmalet-datasport.github.io/online-form/`
+- **GitHub Pages base:** `https://datasport-ai.github.io/Milo_Formular/`
 - **Responses:** 3 separate tabs — `Responses_active`, `Responses_inactive`, `Responses_dropout`
 
 ## Personalized Link Formula (Users tab, column I)
 ```
-=IF(E2="No","https://rmalet-datasport.github.io/online-form/form-onboarding-dropout.html?email="&ENCODEURL(A2)&"&step="&F2,IF(AND(E2="Yes",IFERROR(H2/G2,0)<0.2),"https://rmalet-datasport.github.io/online-form/form-inactive.html?email="&ENCODEURL(A2),"https://rmalet-datasport.github.io/online-form/form-active.html?email="&ENCODEURL(A2)))
+=IF(E2="No","https://datasport-ai.github.io/Milo_Formular/form-onboarding-dropout.html?email="&ENCODEURL(A2)&"&step="&F2,IF(AND(E2="Yes",IFERROR(H2/G2,0)<0.2),"https://datasport-ai.github.io/Milo_Formular/form-inactive.html?email="&ENCODEURL(A2),"https://datasport-ai.github.io/Milo_Formular/form-active.html?email="&ENCODEURL(A2)))
 ```
 Columns assumed: A=email, E=onboarding_completed, F=onboarding_step, G=planned_trainings, H=logged_trainings
 
