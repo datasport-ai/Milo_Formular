@@ -1,11 +1,11 @@
-# Milo Feedback Forms — Project Context
+# Fit for Life Coach Feedback Forms — Project Context
 
 ## Objective
-Collect feedback from ~150 Milo users segmented into 3 groups. Each user receives a personalized link generated from Google Sheets with pre-filled `?email=` parameter. Responses are submitted to Google Apps Script and written to Google Sheets.
+Collect feedback from ~150 Fit for Life Coach users segmented into 3 groups. Each user receives a personalized link generated from Google Sheets with pre-filled `?email=` parameter. Responses are submitted to Google Apps Script and written to Google Sheets.
 
 ## Files
 ```
-form-active.html              → Users actively using Milo (≥ 20% training ratio)
+form-active.html              → Users actively using Fit for Life Coach (≥ 20% training ratio)
 form-inactive.html            → Users who completed onboarding but stopped (< 20% training ratio)
 form-onboarding-dropout.html  → Users who never completed onboarding
 google-apps-script.js         → Apps Script code to paste in Google Sheets editor
@@ -14,12 +14,12 @@ google-apps-script.js         → Apps Script code to paste in Google Sheets edi
 ## Infrastructure
 - **Google Sheet:** `1O-dJv9CNcgidMwbd23dw5fErdzZuRW1MWrIDFtMFBsA`
 - **Apps Script URL:** `https://script.google.com/macros/s/AKfycbyu_G3-Q1JanWo0mQMZ7EbowcPE2oNB0HC7RqjUEwyi2y2mA7IUprJ6Irnry0Ne8ZaEDw/exec`
-- **GitHub Pages base:** `https://datasport-ai.github.io/Milo_Formular/`
+- **GitHub Pages base:** `https://datasport-ai.github.io/Fit for Life Coach_Formular/`
 - **Responses:** 3 separate tabs — `Responses_active`, `Responses_inactive`, `Responses_dropout`
 
 ## Personalized Link Formula (Users tab, column I)
 ```
-=IF(E2="No","https://datasport-ai.github.io/Milo_Formular/form-onboarding-dropout.html?email="&ENCODEURL(A2)&"&step="&F2,IF(AND(E2="Yes",IFERROR(H2/G2,0)<0.2),"https://datasport-ai.github.io/Milo_Formular/form-inactive.html?email="&ENCODEURL(A2),"https://datasport-ai.github.io/Milo_Formular/form-active.html?email="&ENCODEURL(A2)))
+=IF(E2="No","https://datasport-ai.github.io/Fit for Life Coach_Formular/form-onboarding-dropout.html?email="&ENCODEURL(A2)&"&step="&F2,IF(AND(E2="Yes",IFERROR(H2/G2,0)<0.2),"https://datasport-ai.github.io/Fit for Life Coach_Formular/form-inactive.html?email="&ENCODEURL(A2),"https://datasport-ai.github.io/Fit for Life Coach_Formular/form-active.html?email="&ENCODEURL(A2)))
 ```
 Columns assumed: A=email, E=onboarding_completed, F=onboarding_step, G=planned_trainings, H=logged_trainings
 
@@ -32,12 +32,12 @@ Columns assumed: A=email, E=onboarding_completed, F=onboarding_step, G=planned_t
 - All forms are in German (Swiss German tone — use "du", avoid "Sie")
 
 ## Design System
-- Background: red `#E70E22` (Milo brand color)
+- Background: red `#E70E22` (Fit for Life Coach brand color)
 - Card: `#F7F7F7`, rounded, bottom drawer on mobile / centered card on desktop
 - Primary color / CTA: `#E70E22`
 - Text: `#141414`
 - Font: Open Sans (Google Fonts), fallback Arial
-- Logo: Milo SVG logo in header
+- Logo: Fit for Life Coach SVG logo in header
 
 ## Query Parameters (all three forms)
 - `?email=user@example.com` → read on load, stored in `answers.email`, never displayed
@@ -75,11 +75,11 @@ Fallback if unknown or missing: `"einem bestimmten Schritt"`
 - "Nenn uns ein oder zwei Dinge, die wir dringend verbessern müssen." — textarea (optional)
 
 **Step 3** — NPS
-- Slider 0–10: "Auf einer Skala von 0 bis 10: Würdest du Milo jemandem in deinem Umfeld empfehlen?"
+- Slider 0–10: "Auf einer Skala von 0 bis 10: Würdest du Fit for Life Coach jemandem in deinem Umfeld empfehlen?"
 - No referral email block
 
 **Step 4** — Abschluss (open question + incentive + submit)
-- "Wenn du Milo einem Freund erklären müsstest, was würdest du sagen?" — textarea (required)
+- "Wenn du Fit for Life Coach einem Freund erklären müsstest, was würdest du sagen?" — textarea (required)
 - Incentive box: CHF 20.– Gutschein bei Datasport
 - Absenden button
 
@@ -89,11 +89,11 @@ Fallback if unknown or missing: `"einem bestimmten Schritt"`
 
 ### form-inactive.html — 3 steps
 
-**Step 1** — Warum nutzt du Milo nicht mehr?
-- Single choice (required): Ich habe nicht mehr trainiert / Milo hat meine Erwartungen/Bedürfnisse nicht erfüllt / Ich nutze ein anderes Tool / Ich hatte es vergessen / Technische Probleme
+**Step 1** — Warum nutzt du Fit for Life Coach nicht mehr?
+- Single choice (required): Ich habe nicht mehr trainiert / Fit for Life Coach hat meine Erwartungen/Bedürfnisse nicht erfüllt / Ich nutze ein anderes Tool / Ich hatte es vergessen / Technische Probleme
 - Conditional inline textarea (optional, no step change):
-  - "Milo hat meine Erwartungen/Bedürfnisse nicht erfüllt" → "Was hat dich enttäuscht? Was hättest du erwartet?"
-  - "Ich nutze ein anderes Tool" → "Welches Tool nutzt du? Was bietet es dir, das Milo nicht bietet?"
+  - "Fit for Life Coach hat meine Erwartungen/Bedürfnisse nicht erfüllt" → "Was hat dich enttäuscht? Was hättest du erwartet?"
+  - "Ich nutze ein anderes Tool" → "Welches Tool nutzt du? Was bietet es dir, das Fit for Life Coach nicht bietet?"
   - "Technische Probleme" → "Bitte beschreibe das Problem."
 
 **Step 2** — Was würde dich zur Rückkehr bewegen?
@@ -101,7 +101,7 @@ Fallback if unknown or missing: `"einem bestimmten Schritt"`
 
 **Step 3** — Abschluss (feedback + incentive + submit)
 - "Möchtest du noch etwas hinzufügen?" — textarea (optional)
-- Incentive box: 1 mois Milo offert, code envoyé par email sous 48h
+- Incentive box: 1 mois Fit for Life Coach offert, code envoyé par email sous 48h
 - Absenden button
 
 **submitForm payload:** `{ formType: 'inactive', email, q1, q1_follow, q2, q3 }`
@@ -111,7 +111,7 @@ Fallback if unknown or missing: `"einem bestimmten Schritt"`
 ### form-onboarding-dropout.html — 3 steps
 
 **Step 1** — Warum hast du aufgehört?
-- Question: "Du hast dein Milo-Setup bei **[stepLabel]** unterbrochen — was hat dich dazu bewogen?"
+- Question: "Du hast dein Fit for Life Coach-Setup bei **[stepLabel]** unterbrochen — was hat dich dazu bewogen?"
 - Single choice (required): Keine Zeit / Onboarding zu lang / Dieser Schritt war unklar / Ich wollte keine Daten weitergeben / Technische Probleme / Anderes
 - Conditional inline textarea (optional, no step change):
   - "Dieser Schritt war unklar" → "Was genau war unklar?"
@@ -120,11 +120,11 @@ Fallback if unknown or missing: `"einem bestimmten Schritt"`
   - "Anderes" → "Bitte beschreibe kurz."
 
 **Step 2** — Planst du abzuschliessen?
-- "Planst du, dein Milo-Profil noch abzuschliessen?" — Ja / Nein / Vielleicht (required)
+- "Planst du, dein Fit for Life Coach-Profil noch abzuschliessen?" — Ja / Nein / Vielleicht (required)
 
 **Step 3** — Abschluss (feedback + incentive + submit)
 - "Möchtest du noch etwas hinzufügen?" — textarea (optional)
-- Incentive box: 1 mois Milo offert, code envoyé par email sous 48h
+- Incentive box: 1 mois Fit for Life Coach offert, code envoyé par email sous 48h
 - Absenden button
 
 **submitForm payload:** `{ formType: 'dropout', email, stepRaw, stepLabel, reason, reasonDetail, completeLater, freeComment }`
@@ -132,4 +132,4 @@ Fallback if unknown or missing: `"einem bestimmten Schritt"`
 ---
 
 ## Pending
-- [ ] Incentive fulfillment — process to send CHF 20 voucher (active) and 1-month Milo code (inactive/dropout) within 48h
+- [ ] Incentive fulfillment — process to send CHF 20 voucher (active) and 1-month Fit for Life Coach code (inactive/dropout) within 48h
