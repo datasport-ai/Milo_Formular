@@ -18,7 +18,6 @@
     overflow-x: hidden;
   }
 
-  /* Red background diagonal shape */
   .bg-shape {
     position: fixed;
     top: 0; left: 0;
@@ -28,7 +27,6 @@
     overflow: hidden;
   }
 
-  /* Top header with logo */
   .top-header {
     position: relative;
     z-index: 2;
@@ -39,7 +37,6 @@
     flex-shrink: 0;
   }
 
-  /* Card drawer */
   .card {
     position: relative;
     z-index: 2;
@@ -52,7 +49,27 @@
     flex-direction: column;
   }
 
-  /* Segmented progress bar */
+  .lang-selector-wrap {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 12px;
+  }
+  .lang-selector {
+    -webkit-appearance: none;
+    appearance: none;
+    background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23E70E22' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 10px center;
+    border: 1.5px solid #E70E22;
+    border-radius: 6px;
+    padding: 5px 28px 5px 10px;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #E70E22;
+    cursor: pointer;
+    min-width: 64px;
+  }
+  .lang-selector:focus { outline: none; box-shadow: 0 0 0 2px rgba(231,14,34,0.2); }
+
   .seg-progress {
     display: flex;
     gap: 4px;
@@ -67,7 +84,6 @@
   }
   .seg.filled { background: #E70E22; }
 
-  /* Question block — avatar + bubble */
   .question-block {
     display: flex;
     align-items: flex-start;
@@ -99,7 +115,6 @@
     flex: 1;
   }
 
-  /* Answer options */
   .options {
     display: flex;
     flex-direction: column;
@@ -144,7 +159,6 @@
   .option.selected .dot { border-color: #E70E22; }
   .option.selected .dot::after { display: block; }
 
-  /* Textarea */
   textarea {
     width: 100%;
     min-height: 120px;
@@ -172,7 +186,7 @@
 
   .incentive-box {
     background: white; border-radius: 10px; padding: 14px 16px;
-    margin-bottom: 16px; font-size: 13px; line-height: 1.55; color: #555;
+    margin-top: 16px; margin-bottom: 16px; font-size: 13px; line-height: 1.55; color: #555;
     box-shadow: 0 1px 4px rgba(0,0,0,0.06);
     border-left: 3px solid #E70E22;
   }
@@ -193,7 +207,6 @@
   }
   .error-msg.visible { display: block; }
 
-  /* Navigation */
   .nav {
     margin-top: 16px;
     display: flex;
@@ -230,7 +243,6 @@
   .step { display: none; flex-direction: column; flex: 1; }
   .step.active { display: flex; }
 
-  /* Thank you */
   .thank-you {
     flex: 1;
     display: flex;
@@ -283,7 +295,6 @@
 </head>
 <body>
 
-<!-- Red diagonal background shape -->
 <div class="main-panel">
 
 <div class="bg-shape">
@@ -292,7 +303,6 @@
   </svg>
 </div>
 
-<!-- Logo -->
 <div class="top-header">
   <svg width="121" height="50" viewBox="0 0 121 50" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#fflc)">
@@ -309,10 +319,17 @@
   </svg>
 </div>
 
-<!-- Card -->
 <div class="card">
 
-  <!-- Progress -->
+  <div class="lang-selector-wrap">
+    <select class="lang-selector" id="langSelect" onchange="setLang(this.value)">
+      <option value="de">DE</option>
+      <option value="fr">FR</option>
+      <option value="en">EN</option>
+      <option value="it">IT</option>
+    </select>
+  </div>
+
   <div class="seg-progress" id="segProgress">
     <div class="seg filled"></div>
     <div class="seg"></div>
@@ -325,7 +342,7 @@
       <div class="milo-avatar">
         <svg width="22" height="22" viewBox="0 0 61 25" fill="none"><path d="M60.5365 25.0014H55.9676C51.9359 25.0014 48.0867 23.3177 45.3491 20.3565L31.4536 5.31674L35.9979 0.399178C36.486 -0.127851 37.3185 -0.127851 37.8046 0.399178L60.5365 25.0014Z" fill="white"/><path d="M22.1372 0.395558L0 24.9977H28.0535C35.1489 24.9977 38.8463 16.5509 34.0313 11.3401L23.909 0.385305C23.4312 -0.133521 22.611 -0.127369 22.1372 0.397609V0.395558Z" fill="white"/></svg>
       </div>
-      <div class="speech-bubble">Du hast dein Fit for Life Coach-Setup bei <strong id="stepLabel">einem bestimmten Schritt</strong> unterbrochen — was hat dich dazu bewogen?</div>
+      <div class="speech-bubble" id="q1-bubble">Du hast dein Fit for Life Coach-Setup bei <strong id="stepLabel">einem bestimmten Schritt</strong> unterbrochen — was hat dich dazu bewogen?</div>
     </div>
     <div class="options" id="opts-1">
       <label class="option"><input type="radio" name="q1" value="Keine Zeit"><span class="dot"></span><span>Keine Zeit</span></label>
@@ -337,12 +354,12 @@
     </div>
     <div class="conditional-block" id="q1-follow-block">
       <p class="sub-question" id="q1-follow-label"></p>
-      <textarea id="q1-follow" placeholder="Deine Antwort..."></textarea>
-      <p class="optional-hint">Optional</p>
+      <textarea id="q1-follow" data-i18n-ph="answerPlaceholder" placeholder="Deine Antwort..."></textarea>
+      <p class="optional-hint" data-i18n="optional">Optional</p>
     </div>
-    <div class="error-msg" id="err-1">Bitte wähle eine Option aus.</div>
+    <div class="error-msg" id="err-1" data-i18n="err1">Bitte wähle eine Option aus.</div>
     <div class="nav">
-      <button class="btn-next" onclick="next(1)">Weiter <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="btn-next" onclick="next(1)"><span data-i18n="btnNext">Weiter</span> <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </div>
   </div>
 
@@ -352,17 +369,17 @@
       <div class="milo-avatar">
         <svg width="22" height="22" viewBox="0 0 61 25" fill="none"><path d="M60.5365 25.0014H55.9676C51.9359 25.0014 48.0867 23.3177 45.3491 20.3565L31.4536 5.31674L35.9979 0.399178C36.486 -0.127851 37.3185 -0.127851 37.8046 0.399178L60.5365 25.0014Z" fill="white"/><path d="M22.1372 0.395558L0 24.9977H28.0535C35.1489 24.9977 38.8463 16.5509 34.0313 11.3401L23.909 0.385305C23.4312 -0.133521 22.611 -0.127369 22.1372 0.397609V0.395558Z" fill="white"/></svg>
       </div>
-      <div class="speech-bubble">Planst du, dein Fit for Life Coach-Profil noch abzuschliessen?</div>
+      <div class="speech-bubble" data-i18n="q2Question">Planst du, dein Fit for Life Coach-Profil noch abzuschliessen?</div>
     </div>
     <div class="options" id="opts-2">
-      <label class="option"><input type="radio" name="q2" value="Ja"><span class="dot"></span><span>Ja</span></label>
-      <label class="option"><input type="radio" name="q2" value="Nein"><span class="dot"></span><span>Nein</span></label>
-      <label class="option"><input type="radio" name="q2" value="Vielleicht"><span class="dot"></span><span>Vielleicht</span></label>
+      <label class="option"><input type="radio" name="q2" value="Ja"><span class="dot"></span><span data-i18n="optYes">Ja</span></label>
+      <label class="option"><input type="radio" name="q2" value="Nein"><span class="dot"></span><span data-i18n="optNo">Nein</span></label>
+      <label class="option"><input type="radio" name="q2" value="Vielleicht"><span class="dot"></span><span data-i18n="optMaybe">Vielleicht</span></label>
     </div>
-    <div class="error-msg" id="err-2">Bitte wähle eine Option aus.</div>
+    <div class="error-msg" id="err-2" data-i18n="err2">Bitte wähle eine Option aus.</div>
     <div class="nav">
       <button class="btn-back" onclick="back(2)"><svg fill="none" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" stroke="#141414" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <button class="btn-next" onclick="next(2)">Weiter <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="btn-next" onclick="next(2)"><span data-i18n="btnNext">Weiter</span> <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </div>
   </div>
 
@@ -372,16 +389,16 @@
       <div class="milo-avatar">
         <svg width="22" height="22" viewBox="0 0 61 25" fill="none"><path d="M60.5365 25.0014H55.9676C51.9359 25.0014 48.0867 23.3177 45.3491 20.3565L31.4536 5.31674L35.9979 0.399178C36.486 -0.127851 37.3185 -0.127851 37.8046 0.399178L60.5365 25.0014Z" fill="white"/><path d="M22.1372 0.395558L0 24.9977H28.0535C35.1489 24.9977 38.8463 16.5509 34.0313 11.3401L23.909 0.385305C23.4312 -0.133521 22.611 -0.127369 22.1372 0.397609V0.395558Z" fill="white"/></svg>
       </div>
-      <div class="speech-bubble">Möchtest du noch etwas hinzufügen?</div>
+      <div class="speech-bubble" data-i18n="q3Question">Möchtest du noch etwas hinzufügen?</div>
     </div>
-    <textarea id="q3" placeholder="Dein Kommentar..."></textarea>
-    <p class="optional-hint">Optional</p>
-    <div class="incentive-box" style="margin-top: 16px;">
+    <textarea id="q3" data-i18n-ph="commentPlaceholder" placeholder="Dein Kommentar..."></textarea>
+    <p class="optional-hint" data-i18n="optional">Optional</p>
+    <div class="incentive-box">
       <strong>CHF 20.– Gutschein bei Datasport</strong> — Als Dankeschön für dein Feedback erhältst du einen Gutschein über CHF 20.–, den du für die Anmeldung zu einem Event deiner Wahl einlösen kannst. Wir schicken ihn direkt an deine hinterlegte E-Mail-Adresse.
     </div>
     <div class="nav">
       <button class="btn-back" onclick="back(3)"><svg fill="none" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" stroke="#141414" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <button class="btn-next" onclick="submit()">Absenden <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="btn-next" onclick="submit()"><span data-i18n="btnSubmit">Absenden</span> <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </div>
   </div>
 
@@ -391,8 +408,8 @@
       <div class="ty-icon">
         <svg width="36" height="36" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
-      <h2>Vielen Dank!</h2>
-      <p>Dein Feedback hilft uns, Fit for Life Coach besser zu machen.</p>
+      <h2 data-i18n="tyTitle">Vielen Dank!</h2>
+      <p data-i18n="tyText">Dein Feedback hilft uns, Fit for Life Coach besser zu machen.</p>
     </div>
   </div>
 
@@ -400,33 +417,240 @@
 </div>
 
 <script>
-  var STEP_LABELS = {
-    'RESULTS_PERMISSION': 'Freigabe deiner Resultate',
-    'WEARABLE_CONNECTION': 'Verbindung deines Geräts (GPS-Uhr etc.)',
-    'CONTACT_PREFERENCES': 'Kommunikationseinstellungen',
-    'WEEKLY_SCHEDULE': 'Wochenplan',
-    'ARE_YOU_READY_FOR_THE_NEXT_CHALLENGE': 'Nächste Herausforderung',
-    'HOW_FAST_CAN_YOU_RUN': 'Lauftempo',
-    'START_DATE': 'Startdatum',
-    'GOAL_SETTING': 'Zielsetzung',
-    'TRAINING_FREQUENCY': 'Trainingsfrequenz'
+  var STEP_LABELS_BY_LANG = {
+    de: {
+      'RESULTS_PERMISSION': 'Freigabe deiner Resultate',
+      'WEARABLE_CONNECTION': 'Verbindung deines Geräts (GPS-Uhr etc.)',
+      'CONTACT_PREFERENCES': 'Kommunikationseinstellungen',
+      'WEEKLY_SCHEDULE': 'Wochenplan',
+      'ARE_YOU_READY_FOR_THE_NEXT_CHALLENGE': 'Nächste Herausforderung',
+      'HOW_FAST_CAN_YOU_RUN': 'Lauftempo',
+      'START_DATE': 'Startdatum',
+      'GOAL_SETTING': 'Zielsetzung',
+      'TRAINING_FREQUENCY': 'Trainingsfrequenz'
+    },
+    fr: {
+      'RESULTS_PERMISSION': 'Autorisation de tes résultats',
+      'WEARABLE_CONNECTION': 'Connexion de ton appareil (montre GPS, etc.)',
+      'CONTACT_PREFERENCES': 'Préférences de communication',
+      'WEEKLY_SCHEDULE': 'Planning hebdomadaire',
+      'ARE_YOU_READY_FOR_THE_NEXT_CHALLENGE': 'Prochain défi',
+      'HOW_FAST_CAN_YOU_RUN': 'Vitesse de course',
+      'START_DATE': 'Date de début',
+      'GOAL_SETTING': 'Définition des objectifs',
+      'TRAINING_FREQUENCY': 'Fréquence d'entraînement'
+    },
+    en: {
+      'RESULTS_PERMISSION': 'Permission for your results',
+      'WEARABLE_CONNECTION': 'Connecting your device (GPS watch, etc.)',
+      'CONTACT_PREFERENCES': 'Communication preferences',
+      'WEEKLY_SCHEDULE': 'Weekly schedule',
+      'ARE_YOU_READY_FOR_THE_NEXT_CHALLENGE': 'Next challenge',
+      'HOW_FAST_CAN_YOU_RUN': 'Running pace',
+      'START_DATE': 'Start date',
+      'GOAL_SETTING': 'Goal setting',
+      'TRAINING_FREQUENCY': 'Training frequency'
+    },
+    it: {
+      'RESULTS_PERMISSION': 'Autorizzazione dei tuoi risultati',
+      'WEARABLE_CONNECTION': 'Connessione del tuo dispositivo (orologio GPS, ecc.)',
+      'CONTACT_PREFERENCES': 'Preferenze di comunicazione',
+      'WEEKLY_SCHEDULE': 'Piano settimanale',
+      'ARE_YOU_READY_FOR_THE_NEXT_CHALLENGE': 'Prossima sfida',
+      'HOW_FAST_CAN_YOU_RUN': 'Velocità di corsa',
+      'START_DATE': 'Data di inizio',
+      'GOAL_SETTING': 'Definizione degli obiettivi',
+      'TRAINING_FREQUENCY': 'Frequenza di allenamento'
+    }
   };
 
-  var Q1_FOLLOW = {
-    'Dieser Schritt war unklar': 'Was genau war unklar?',
-    'Ich wollte keine Daten weitergeben': 'Welche Daten haben dich gestört?',
-    'Technische Probleme': 'Bitte beschreibe das Problem.',
-    'Anderes': 'Bitte beschreibe kurz.'
+  var TRANSLATIONS = {
+    de: {
+      q1BubblePre: 'Du hast dein Fit for Life Coach-Setup bei ',
+      q1BubblePost: ' unterbrochen — was hat dich dazu bewogen?',
+      stepFallback: 'einem bestimmten Schritt',
+      q1Options: ['Keine Zeit', 'Onboarding zu lang', 'Dieser Schritt war unklar', 'Ich wollte keine Daten weitergeben', 'Technische Probleme', 'Anderes'],
+      q1Follow: {
+        'Dieser Schritt war unklar': 'Was genau war unklar?',
+        'Ich wollte keine Daten weitergeben': 'Welche Daten haben dich gestört?',
+        'Technische Probleme': 'Bitte beschreibe das Problem.',
+        'Anderes': 'Bitte beschreibe kurz.'
+      },
+      answerPlaceholder: 'Deine Antwort...',
+      commentPlaceholder: 'Dein Kommentar...',
+      optional: 'Optional',
+      err1: 'Bitte wähle eine Option aus.',
+      q2Question: 'Planst du, dein Fit for Life Coach-Profil noch abzuschliessen?',
+      optYes: 'Ja',
+      optNo: 'Nein',
+      optMaybe: 'Vielleicht',
+      err2: 'Bitte wähle eine Option aus.',
+      q3Question: 'Möchtest du noch etwas hinzufügen?',
+      incentive: '<strong>CHF 20.– Gutschein bei Datasport</strong> — Als Dankeschön für dein Feedback erhältst du einen Gutschein über CHF 20.–, den du für die Anmeldung zu einem Event deiner Wahl einlösen kannst. Wir schicken ihn direkt an deine hinterlegte E-Mail-Adresse.',
+      btnNext: 'Weiter',
+      btnSubmit: 'Absenden',
+      tyTitle: 'Vielen Dank!',
+      tyText: 'Dein Feedback hilft uns, Fit for Life Coach besser zu machen.'
+    },
+    fr: {
+      q1BubblePre: 'Tu as interrompu la configuration de Fit for Life Coach à l'étape ',
+      q1BubblePost: ' — qu'est-ce qui t'a amené à t'arrêter ?',
+      stepFallback: 'une étape spécifique',
+      q1Options: ['Manque de temps', 'Onboarding trop long', 'Cette étape n'était pas claire', 'Je ne voulais pas partager mes données', 'Problèmes techniques', 'Autre'],
+      q1Follow: {
+        'Cette étape n'était pas claire': 'Qu'est-ce qui n'était pas clair ?',
+        'Je ne voulais pas partager mes données': 'Quelles données te dérangeaient ?',
+        'Problèmes techniques': 'Merci de décrire le problème.',
+        'Autre': 'Merci de décrire brièvement.'
+      },
+      answerPlaceholder: 'Ta réponse...',
+      commentPlaceholder: 'Ton commentaire...',
+      optional: 'Optionnel',
+      err1: 'Merci de choisir une option.',
+      q2Question: 'Prévois-tu de compléter ton profil Fit for Life Coach ?',
+      optYes: 'Oui',
+      optNo: 'Non',
+      optMaybe: 'Peut-être',
+      err2: 'Merci de choisir une option.',
+      q3Question: 'Tu souhaites ajouter quelque chose ?',
+      incentive: '<strong>Bon de CHF 20.– chez Datasport</strong> — En remerciement de ton feedback, tu recevras un bon d'une valeur de CHF 20.– à utiliser pour t'inscrire à l'événement de ton choix. Nous l'enverrons directement à ton adresse e-mail.',
+      btnNext: 'Suivant',
+      btnSubmit: 'Envoyer',
+      tyTitle: 'Merci beaucoup !',
+      tyText: 'Ton feedback nous aide à améliorer Fit for Life Coach.'
+    },
+    en: {
+      q1BubblePre: 'You interrupted your Fit for Life Coach setup at ',
+      q1BubblePost: ' — what led you to stop?',
+      stepFallback: 'a specific step',
+      q1Options: ['No time', 'Onboarding too long', 'This step was unclear', 'I didn't want to share my data', 'Technical issues', 'Other'],
+      q1Follow: {
+        'This step was unclear': 'What exactly was unclear?',
+        'I didn't want to share my data': 'Which data bothered you?',
+        'Technical issues': 'Please describe the problem.',
+        'Other': 'Please describe briefly.'
+      },
+      answerPlaceholder: 'Your answer...',
+      commentPlaceholder: 'Your comment...',
+      optional: 'Optional',
+      err1: 'Please select an option.',
+      q2Question: 'Do you plan to complete your Fit for Life Coach profile?',
+      optYes: 'Yes',
+      optNo: 'No',
+      optMaybe: 'Maybe',
+      err2: 'Please select an option.',
+      q3Question: 'Would you like to add anything?',
+      incentive: '<strong>CHF 20.– voucher at Datasport</strong> — As a thank-you for your feedback, you'll receive a CHF 20.– voucher to use for registering for an event of your choice. We'll send it directly to your registered email address.',
+      btnNext: 'Next',
+      btnSubmit: 'Submit',
+      tyTitle: 'Thank you!',
+      tyText: 'Your feedback helps us improve Fit for Life Coach.'
+    },
+    it: {
+      q1BubblePre: 'Hai interrotto la configurazione di Fit for Life Coach al passaggio ',
+      q1BubblePost: ' — cosa ti ha portato a fermarti?',
+      stepFallback: 'un passaggio specifico',
+      q1Options: ['Mancanza di tempo', 'Onboarding troppo lungo', 'Questo passaggio non era chiaro', 'Non volevo condividere i miei dati', 'Problemi tecnici', 'Altro'],
+      q1Follow: {
+        'Questo passaggio non era chiaro': 'Cosa esattamente non era chiaro?',
+        'Non volevo condividere i miei dati': 'Quali dati ti hanno disturbato?',
+        'Problemi tecnici': 'Descrivi il problema.',
+        'Altro': 'Descrivi brevemente.'
+      },
+      answerPlaceholder: 'La tua risposta...',
+      commentPlaceholder: 'Il tuo commento...',
+      optional: 'Facoltativo',
+      err1: 'Seleziona un'opzione.',
+      q2Question: 'Hai intenzione di completare il tuo profilo Fit for Life Coach?',
+      optYes: 'Sì',
+      optNo: 'No',
+      optMaybe: 'Forse',
+      err2: 'Seleziona un'opzione.',
+      q3Question: 'Vuoi aggiungere qualcosa?',
+      incentive: '<strong>Buono da CHF 20.– da Datasport</strong> — Come ringraziamento per il tuo feedback, riceverai un buono del valore di CHF 20.– da utilizzare per iscriverti all'evento di tua scelta. Lo invieremo direttamente al tuo indirizzo email.',
+      btnNext: 'Avanti',
+      btnSubmit: 'Invia',
+      tyTitle: 'Grazie mille!',
+      tyText: 'Il tuo feedback ci aiuta a migliorare Fit for Life Coach.'
+    }
   };
 
   var params = new URLSearchParams(window.location.search);
   var rawStep = params.get('step') || '';
-  var stepLabel = STEP_LABELS[rawStep] || 'einem bestimmten Schritt';
-  document.getElementById('stepLabel').textContent = stepLabel;
+  var currentLang = 'de';
+  var Q1_FOLLOW = TRANSLATIONS.de.q1Follow;
 
+  function getStepLabel(lang) {
+    return (STEP_LABELS_BY_LANG[lang] && STEP_LABELS_BY_LANG[lang][rawStep]) || TRANSLATIONS[lang].stepFallback;
+  }
+
+  function updateBubble(lang) {
+    var t = TRANSLATIONS[lang];
+    var label = getStepLabel(lang);
+    document.getElementById('q1-bubble').innerHTML =
+      t.q1BubblePre + '<strong id="stepLabel">' + label + '</strong>' + t.q1BubblePost;
+    answers.stepLabel = label;
+  }
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    var t = TRANSLATIONS[lang];
+
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n');
+      if (t[key] !== undefined) el.textContent = t[key];
+    });
+
+    document.querySelectorAll('[data-i18n-ph]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n-ph');
+      if (t[key] !== undefined) el.placeholder = t[key];
+    });
+
+    document.querySelector('.incentive-box').innerHTML = t.incentive;
+
+    updateBubble(lang);
+
+    var opts1 = document.querySelectorAll('#opts-1 .option');
+    var prevSelected1 = -1;
+    opts1.forEach(function(opt, i) { if (opt.querySelector('input').checked) prevSelected1 = i; });
+    opts1.forEach(function(opt, i) {
+      var newVal = t.q1Options[i];
+      opt.querySelector('input').value = newVal;
+      opt.querySelector('span:last-child').textContent = newVal;
+    });
+
+    Q1_FOLLOW = t.q1Follow;
+
+    if (prevSelected1 >= 0) {
+      var val1 = document.querySelectorAll('#opts-1 .option')[prevSelected1].querySelector('input').value;
+      var followLabel = Q1_FOLLOW[val1];
+      var followBlock = document.getElementById('q1-follow-block');
+      if (followLabel) {
+        document.getElementById('q1-follow-label').textContent = followLabel;
+        followBlock.classList.add('visible');
+      } else {
+        followBlock.classList.remove('visible');
+      }
+    }
+
+    var opts2 = document.querySelectorAll('#opts-2 .option');
+    opts2[0].querySelector('input').value = t.optYes;
+    opts2[1].querySelector('input').value = t.optNo;
+    opts2[2].querySelector('input').value = t.optMaybe;
+  }
+
+  var stepLabel = getStepLabel('de');
   var current = 1;
   var total = 3;
   var answers = { stepRaw: rawStep, stepLabel: stepLabel, email: params.get('email') || '' };
+
+  var initLang = params.get('lang') || 'de';
+  if (!TRANSLATIONS[initLang]) initLang = 'de';
+  if (initLang !== 'de') {
+    document.getElementById('langSelect').value = initLang;
+    setLang(initLang);
+  }
 
   document.querySelectorAll('#opts-1 .option').forEach(function(opt) {
     opt.addEventListener('click', function() {
@@ -494,6 +718,7 @@
 
   function submit() {
     answers['freeComment'] = document.getElementById('q3').value;
+    answers['lang'] = currentLang;
     submitForm(answers);
     showStep('done');
   }
