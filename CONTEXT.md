@@ -9,6 +9,8 @@ form-active.html              → Users actively using Fit for Life Coach (≥ 2
 form-inactive.html            → Users who completed onboarding but stopped (< 20% training ratio)
 form-onboarding-dropout.html  → Users who never completed onboarding
 google-apps-script.js         → Apps Script code to paste in Google Sheets editor
+send-mails.ps1                → PowerShell script to send personalized emails (Office 365 SMTP)
+preview-email.html            → Email template for local preview
 ```
 
 ## Infrastructure
@@ -17,19 +19,27 @@ google-apps-script.js         → Apps Script code to paste in Google Sheets edi
 - **GitHub Pages base:** `https://datasport-ai.github.io/Fit for Life Coach_Formular/`
 - **Responses:** 3 separate tabs — `Responses_active`, `Responses_inactive`, `Responses_dropout`
 
+## User Segmentation
+
+Segmentation was done manually from the Google Sheet:
+- **Active** (`form-active.html`): registered < 2 weeks ago AND logged > 50% of planned activities
+- **Inactive** (`form-inactive.html`): registered < 2 weeks ago AND logged ≤ 50% of planned activities
+- **Onboarding dropout** (`form-onboarding-dropout.html`): never completed onboarding (`onboarding_completed = No`)
+
 ## Personalized Link Formula (Users tab, column I)
 ```
-=IF(E2="No","https://datasport-ai.github.io/Fit for Life Coach_Formular/form-onboarding-dropout.html?email="&ENCODEURL(A2)&"&step="&F2,IF(AND(E2="Yes",IFERROR(H2/G2,0)<0.2),"https://datasport-ai.github.io/Fit for Life Coach_Formular/form-inactive.html?email="&ENCODEURL(A2),"https://datasport-ai.github.io/Fit for Life Coach_Formular/form-active.html?email="&ENCODEURL(A2)))
+=IF(E2="No","https://datasport-ai.github.io/Fit for Life Coach_Formular/form-onboarding-dropout.html?email="&ENCODEURL(A2)&"&step="&F2,IF(AND(E2="Yes",IFERROR(H2/G2,0)<0.5),"https://datasport-ai.github.io/Fit for Life Coach_Formular/form-inactive.html?email="&ENCODEURL(A2),"https://datasport-ai.github.io/Fit for Life Coach_Formular/form-active.html?email="&ENCODEURL(A2)))
 ```
 Columns assumed: A=email, E=onboarding_completed, F=onboarding_step, G=planned_trainings, H=logged_trainings
 
 ## Tech Rules
 - Standalone HTML files, zero external dependencies (except Open Sans via Google Fonts)
-- No framework, pure vanilla JS
+- No framework, pure vanilla JS — no Node.js
 - Mobile-first, responsive
 - Segmented progress bar at top (colored fill per step)
 - `submitForm(data)` sends POST to Apps Script with `Content-Type: text/plain;charset=utf-8` + `mode: no-cors`
 - All forms are in German (Swiss German tone — use "du", avoid "Sie")
+- Email sending: PowerShell + Office 365 SMTP (`smtp.office365.com:587`)
 
 ## Design System
 - Background: red `#E70E22` (Fit for Life Coach brand color)
