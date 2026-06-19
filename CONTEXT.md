@@ -16,7 +16,7 @@ preview-email.html            → Email template for local preview
 ## Infrastructure
 - **Google Sheet:** `1O-dJv9CNcgidMwbd23dw5fErdzZuRW1MWrIDFtMFBsA`
 - **Apps Script URL:** `https://script.google.com/macros/s/AKfycbyu_G3-Q1JanWo0mQMZ7EbowcPE2oNB0HC7RqjUEwyi2y2mA7IUprJ6Irnry0Ne8ZaEDw/exec`
-- **GitHub Pages base:** `https://datasport-ai.github.io/Fit for Life Coach_Formular/`
+- **GitHub Pages base:** `https://datasport-ai.github.io/Milo_Formular/`
 - **Responses:** 3 separate tabs — `Responses_active`, `Responses_inactive`, `Responses_dropout`
 
 ## User Segmentation
@@ -28,7 +28,7 @@ Segmentation was done manually from the Google Sheet:
 
 ## Personalized Link Formula (Users tab, column I)
 ```
-=IF(E2="No","https://datasport-ai.github.io/Fit for Life Coach_Formular/form-onboarding-dropout.html?email="&ENCODEURL(A2)&"&step="&F2,IF(AND(E2="Yes",IFERROR(H2/G2,0)<0.5),"https://datasport-ai.github.io/Fit for Life Coach_Formular/form-inactive.html?email="&ENCODEURL(A2),"https://datasport-ai.github.io/Fit for Life Coach_Formular/form-active.html?email="&ENCODEURL(A2)))
+=IF(E2="No","https://datasport-ai.github.io/Milo_Formular/form-onboarding-dropout.html?email="&ENCODEURL(A2)&"&step="&F2,IF(AND(E2="Yes",IFERROR(H2/G2,0)<0.5),"https://datasport-ai.github.io/Milo_Formular/form-inactive.html?email="&ENCODEURL(A2),"https://datasport-ai.github.io/Milo_Formular/form-active.html?email="&ENCODEURL(A2)))
 ```
 Columns assumed: A=email, E=onboarding_completed, F=onboarding_step, G=planned_trainings, H=logged_trainings
 
@@ -140,6 +140,20 @@ Fallback if unknown or missing: `"einem bestimmten Schritt"`
 **submitForm payload:** `{ formType: 'dropout', email, stepRaw, stepLabel, reason, reasonDetail, completeLater, freeComment }`
 
 ---
+
+## Email sending
+
+Script: `send-mails.ps1` — requires Outlook desktop (Outlook COM object), sent from `mydatasport@datasport.com`.
+
+```powershell
+.\send-mails.ps1 -Preview                        # preview in browser (no send)
+.\send-mails.ps1 -DryRun                         # list recipients without sending
+.\send-mails.ps1 -Limit 3                        # send to first 3 contacts
+.\send-mails.ps1                                 # send to all (asks confirmation)
+.\send-mails.ps1 -CsvPath .\contacts_test.csv    # test send to rmalet@datasport.com
+```
+
+`contacts_test.csv` — single-row CSV for test sends (rmalet@datasport.com, form-active link).
 
 ## Pending
 - [ ] Incentive fulfillment — process to send CHF 20.– voucher (all 3 forms) within 48h

@@ -16,13 +16,13 @@
 param(
     [switch]$DryRun,
     [switch]$Preview,
-    [int]$Limit = 0
+    [int]$Limit = 0,
+    [string]$CsvPath = ".\contacts.csv"
 )
 
 # --- Configuration ---
-$CsvPath   = ".\contacts.csv"
 $LogoPath  = ".\FIT for LIFE Coach Logo white background.png"
-$FromEmail = "rmalet@datasport.com"
+$FromEmail = "mydatasport@datasport.com"
 $Subject   = "FIT for LIFE Coach - Dein Feedback / Your Feedback"
 
 # --- Image Canva (decommenter quand disponible) ---

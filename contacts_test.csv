@@ -1,0 +1,2 @@
+email,first_name,last_name,onboarding_completed_at,onboarding_completed,onboarding_step,planned_trainings,logged_trainings,link,active?
+rmalet@datasport.com,Raphael,Malet,,Yes,COMPLETED,10,8,https://datasport-ai.github.io/Milo_Formular/form-active.html?email=rmalet%40datasport.com,active

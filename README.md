@@ -27,7 +27,7 @@ Segmentation was done manually from the Google Sheet:
 
 - **Google Sheet:** `1O-dJv9CNcgidMwbd23dw5fErdzZuRW1MWrIDFtMFBsA`
 - **Apps Script URL:** `https://script.google.com/macros/s/AKfycbyu_G3-Q1JanWo0mQMZ7EbowcPE2oNB0HC7RqjUEwyi2y2mA7IUprJ6Irnry0Ne8ZaEDw/exec`
-- **GitHub Pages:** `https://datasport-ai.github.io/Fit for Life Coach_Formular/`
+- **GitHub Pages:** `https://datasport-ai.github.io/Milo_Formular/`
 - **Responses:** 3 tabs — `Responses_active`, `Responses_inactive`, `Responses_dropout`
 
 ## Usage
@@ -48,6 +48,18 @@ Requires Outlook desktop (uses Outlook COM object). `contacts.csv` must be prese
 
 # Send to all contacts (asks for confirmation)
 .\send-mails.ps1
+```
+
+### Test send (single recipient)
+
+`contacts_test.csv` contains a single test entry (rmalet@datasport.com, form-active).
+
+```powershell
+# Preview test email in browser
+.\send-mails.ps1 -Preview -CsvPath .\contacts_test.csv
+
+# Send test email to rmalet@datasport.com
+.\send-mails.ps1 -CsvPath .\contacts_test.csv
 ```
 
 ### Deploy Google Apps Script
