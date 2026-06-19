@@ -111,7 +111,7 @@ Fallback if unknown or missing: `"einem bestimmten Schritt"`
 
 **Step 3** — Abschluss (feedback + incentive + submit)
 - "Möchtest du noch etwas hinzufügen?" — textarea (optional)
-- Incentive box: 1 mois Fit for Life Coach offert, code envoyé par email sous 48h
+- Incentive box: CHF 20.– Gutschein bei Datasport
 - Absenden button
 
 **submitForm payload:** `{ formType: 'inactive', email, q1, q1_follow, q2, q3 }`
@@ -134,7 +134,7 @@ Fallback if unknown or missing: `"einem bestimmten Schritt"`
 
 **Step 3** — Abschluss (feedback + incentive + submit)
 - "Möchtest du noch etwas hinzufügen?" — textarea (optional)
-- Incentive box: 1 mois Fit for Life Coach offert, code envoyé par email sous 48h
+- Incentive box: CHF 20.– Gutschein bei Datasport
 - Absenden button
 
 **submitForm payload:** `{ formType: 'dropout', email, stepRaw, stepLabel, reason, reasonDetail, completeLater, freeComment }`
@@ -142,4 +142,4 @@ Fallback if unknown or missing: `"einem bestimmten Schritt"`
 ---
 
 ## Pending
-- [ ] Incentive fulfillment — process to send CHF 20 voucher (active) and 1-month Fit for Life Coach code (inactive/dropout) within 48h
+- [ ] Incentive fulfillment — process to send CHF 20.– voucher (all 3 forms) within 48h
