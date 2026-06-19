@@ -30,10 +30,38 @@ Segmentation was done manually from the Google Sheet:
 - **GitHub Pages:** `https://datasport-ai.github.io/Fit for Life Coach_Formular/`
 - **Responses:** 3 tabs — `Responses_active`, `Responses_inactive`, `Responses_dropout`
 
+## Usage
+
+### Send emails
+
+Requires Outlook desktop (uses Outlook COM object). `contacts.csv` must be present at the root.
+
+```powershell
+# Preview the email in the browser (first contact in CSV)
+.\send-mails.ps1 -Preview
+
+# Dry run — list all recipients without sending
+.\send-mails.ps1 -DryRun
+
+# Send to first 3 contacts only (test)
+.\send-mails.ps1 -Limit 3
+
+# Send to all contacts (asks for confirmation)
+.\send-mails.ps1
+```
+
+### Deploy Google Apps Script
+
+Paste `google-apps-script.js` into the Apps Script editor of the Google Sheet and deploy as a web app.
+
+### Forms (GitHub Pages)
+
+The three HTML forms are served directly via GitHub Pages — no build step needed.
+
 ## Stack
 
 - Vanilla HTML/CSS/JS — no external dependencies (except Open Sans via Google Fonts)
-- Email sending: PowerShell + Office 365 SMTP (`smtp.office365.com:587`)
+- Email sending: PowerShell + Outlook COM (Outlook desktop required)
 - No Node.js
 
 ## See also
