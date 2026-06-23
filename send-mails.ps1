@@ -112,7 +112,7 @@ function Get-EmailHtml {
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:8px 0 24px;">
         <tr>
           <!--[if mso]>
-          <td align="center" style="background-color:#141414; border-radius:8px;">
+          <td align="center" style="background-color:#e70e22; border-radius:8px;">
           <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word"
             href="$Link" style="height:52px; v-text-anchor:middle; width:240px;"
             arcsize="12%" strokecolor="#141414" fillcolor="#141414">
@@ -126,7 +126,7 @@ function Get-EmailHtml {
           <!--[if !mso]><!-->
           <td align="center" style="background-color:#141414; border-radius:8px;">
             <a href="$Link"
-               style="display:inline-block; padding:15px 36px; background-color:#141414; color:#ffffff; font-family:'Segoe UI',Arial,sans-serif; font-size:16px; font-weight:700; text-decoration:none; border-radius:8px; letter-spacing:0.3px;">
+               style="display:inline-block; padding:15px 36px; background-color:#e70e22; color:#ffffff; font-family:'Segoe UI',Arial,sans-serif; font-size:16px; font-weight:700; text-decoration:none; border-radius:8px; letter-spacing:0.3px;">
               Zum Fragebogen &#8594;
             </a>
           </td>
@@ -202,10 +202,10 @@ function Get-EmailHtml {
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:8px 0 24px;">
         <tr>
           <!--[if mso]>
-          <td align="center" style="background-color:#141414; border-radius:8px;">
+          <td align="center" style="background-color:#e70e22; border-radius:8px;">
           <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word"
             href="$Link" style="height:52px; v-text-anchor:middle; width:240px;"
-            arcsize="12%" strokecolor="#141414" fillcolor="#141414">
+            arcsize="12%" strokecolor="#e70e22" fillcolor="#e70e22">
             <w:anchorlock/>
             <center style="color:#ffffff; font-family:'Segoe UI',Arial,sans-serif; font-size:16px; font-weight:700;">
               Go to the survey &#8594;
@@ -216,7 +216,7 @@ function Get-EmailHtml {
           <!--[if !mso]><!-->
           <td align="center" style="background-color:#141414; border-radius:8px;">
             <a href="$Link"
-               style="display:inline-block; padding:15px 36px; background-color:#141414; color:#ffffff; font-family:'Segoe UI',Arial,sans-serif; font-size:16px; font-weight:700; text-decoration:none; border-radius:8px; letter-spacing:0.3px;">
+               style="display:inline-block; padding:15px 36px; background-color:#e70e22; color:#ffffff; font-family:'Segoe UI',Arial,sans-serif; font-size:16px; font-weight:700; text-decoration:none; border-radius:8px; letter-spacing:0.3px;">
               Go to the survey &#8594;
             </a>
           </td>
