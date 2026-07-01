@@ -21,6 +21,9 @@ Segmentation was done manually from the Google Sheet:
 | `form-onboarding-dropout.html` | Form for onboarding dropouts |
 | `google-apps-script.js` | Code to paste in the Google Sheets Apps Script editor |
 | `send-mails.ps1` | PowerShell script to send personalized emails |
+| `contacts.csv` | Full contact list (all segments) |
+| `contacts-reminder.csv` | Filtered list for reminder (non-respondents only) — regénérer avant usage |
+| `responded.txt` | Emails of users who already responded (used to generate reminder list) |
 | `preview-email.html` | Email template (local preview only) |
 
 ## Infrastructure
@@ -49,6 +52,28 @@ Requires Outlook desktop (uses Outlook COM object). `contacts.csv` must be prese
 # Send to all contacts (asks for confirmation)
 .\send-mails.ps1
 ```
+
+### Send reminder (non-respondents only)
+
+1. Copy the emails of people who already responded from the Google Sheet into `responded.txt` (one email per line)
+2. Run the script below to generate `contacts-reminder.csv` (excludes respondents + deduplicates)
+3. Send as usual with `-CsvPath contacts-reminder.csv`
+
+```powershell
+# Generate contacts-reminder.csv
+$responded = Get-Content ".\responded.txt" | ForEach-Object { $_.Trim().ToLower() } | Where-Object { $_ -ne '' } | Sort-Object -Unique
+$all = Import-Csv ".\contacts.csv"
+$reminder = $all | Where-Object { $responded -notcontains $_.email.ToLower() }
+$reminder | Export-Csv ".\contacts-reminder.csv" -NoTypeInformation -Encoding UTF8
+Write-Host "Rappel : $($reminder.Count) contacts (sur $($all.Count) total, $($responded.Count) ont repondu)"
+
+# Then send
+.\send-mails.ps1 -CsvPath contacts-reminder.csv -DryRun  # vérifier d'abord
+.\send-mails.ps1 -CsvPath contacts-reminder.csv
+```
+
+> `responded.txt` est conservé dans le repo pour garder la trace des répondants.
+> Note : si un email de `responded.txt` n'existe pas dans `contacts.csv`, le total ne sera pas exactement `total - répondants` (cas normal pour les tests internes).
 
 ### Test send (single recipient)
 
