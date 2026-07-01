@@ -16,6 +16,8 @@
 param(
     [switch]$DryRun,
     [switch]$Preview,
+    [switch]$Reminder,
+    [switch]$FinalReminder,
     [int]$Limit = 0,
     [string]$CsvPath = ".\contacts.csv"
 )
@@ -23,7 +25,13 @@ param(
 # --- Configuration ---
 $LogoPath  = ".\FIT for LIFE Coach Logo white background.png"
 $FromEmail = "mydatasport@datasport.com"
-$Subject   = "FIT for LIFE Coach - Dein Feedback / Your Feedback"
+$Subject   = if ($FinalReminder) {
+    "FIT for LIFE Coach - Letzte Chance / Last Chance: Dein Feedback / Your Feedback"
+} elseif ($Reminder) {
+    "FIT for LIFE Coach - Erinnerung / Reminder: Dein Feedback / Your Feedback"
+} else {
+    "FIT for LIFE Coach - Dein Feedback / Your Feedback"
+}
 
 # --- Image Canva (decommenter quand disponible) ---
 # $CanvaImagePath = ".\canva-image.jpg"
@@ -260,6 +268,448 @@ function Get-EmailHtml {
 }
 
 # =====================================================================
+# Fonction : genere le HTML de RAPPEL personalise pour un contact
+# =====================================================================
+function Get-ReminderEmailHtml {
+    param([string]$FirstName, [string]$Link, [string]$LogoSrc = "cid:fflc-logo")
+
+    return @"
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin:0; padding:0; background-color:#F2F2F2; font-family:'Segoe UI',Arial,sans-serif;">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#F2F2F2;">
+<tr><td align="center" style="padding:32px 16px;">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="600" style="max-width:600px; width:100%; background-color:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,0.10);">
+
+  <!-- HEADER rouge avec logo + texte -->
+  <tr>
+    <td align="center" style="background-color:#E70E22; padding:24px 40px;">
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td style="vertical-align:middle; padding-right:14px;">
+            <img src="$LogoSrc" alt="" width="40"
+                 style="display:block; width:40px; height:40px;">
+          </td>
+          <td style="vertical-align:middle;">
+            <span style="font-size:22px; font-weight:700; color:#ffffff; font-family:'Segoe UI',Arial,sans-serif; letter-spacing:0.3px;">FIT for LIFE Coach</span>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- ======================================================
+       VERSION ALLEMANDE
+  ====================================================== -->
+  <tr>
+    <td style="padding:36px 48px 28px;">
+
+      <p style="margin:0 0 20px; font-size:22px; font-weight:700; color:#141414; line-height:1.3;">
+        Hallo $FirstName,<br>
+        nur eine kurze Erinnerung &ndash; dein Feedback fehlt noch.
+      </p>
+
+      <p style="margin:0 0 16px; font-size:16px; color:#444444; line-height:1.65;">
+        Vor einigen Tagen haben wir dich als einen unserer ersten Nutzer von
+        <strong style="color:#141414;">FIT for LIFE Coach</strong> angeschrieben.
+        Du hast noch nicht geantwortet &ndash; vielleicht war einfach keine Zeit?
+      </p>
+
+      <p style="margin:0 0 16px; font-size:16px; color:#444444; line-height:1.65;">
+        Es dauert nur <strong>2 Minuten</strong> &ndash; und deine Meinung hilft uns,
+        den Service weiterzuentwickeln.
+      </p>
+
+      <!-- Incentive DE -->
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0;">
+        <tr>
+          <td style="background-color:#FFF5F5; border-left:4px solid #E70E22; border-radius:6px; padding:16px 20px;">
+            <p style="margin:0; font-size:15px; color:#141414; line-height:1.6;">
+              <strong>Als Dankesh&ouml;n: CHF 20.&ndash; Gutschein bei Datasport</strong><br>
+              Nach dem Ausf&uuml;llen erh&auml;ltst du einen Gutschein &uuml;ber CHF 20.&ndash;,
+              den du f&uuml;r die Anmeldung zu einem Event deiner Wahl einl&ouml;sen kannst.
+            </p>
+          </td>
+        </tr>
+      </table>
+
+      <!-- CTA DE -->
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:8px 0 24px;">
+        <tr>
+          <!--[if mso]>
+          <td align="center" style="background-color:#e70e22; border-radius:8px;">
+          <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word"
+            href="$Link" style="height:52px; v-text-anchor:middle; width:240px;"
+            arcsize="12%" strokecolor="#141414" fillcolor="#141414">
+            <w:anchorlock/>
+            <center style="color:#ffffff; font-family:'Segoe UI',Arial,sans-serif; font-size:16px; font-weight:700;">
+              Zum Fragebogen &#8594;
+            </center>
+          </v:roundrect>
+          </td>
+          <![endif]-->
+          <!--[if !mso]><!-->
+          <td align="center" style="background-color:#141414; border-radius:8px;">
+            <a href="$Link"
+               style="display:inline-block; padding:15px 36px; background-color:#e70e22; color:#ffffff; font-family:'Segoe UI',Arial,sans-serif; font-size:16px; font-weight:700; text-decoration:none; border-radius:8px; letter-spacing:0.3px;">
+              Zum Fragebogen &#8594;
+            </a>
+          </td>
+          <!--<![endif]-->
+        </tr>
+      </table>
+
+      <p style="margin:0; font-size:13px; color:#ADADAD; line-height:1.5;">
+        Der Fragebogen dauert ca. 2 Minuten. Du kannst die Sprache im Formular selbst w&auml;hlen.
+      </p>
+
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0 20px;">
+        <tr><td style="border-top:1px solid #EEEEEE;"></td></tr>
+      </table>
+
+      <p style="margin:0 0 4px; font-size:15px; color:#444444; line-height:1.6;">Herzliche Gr&uuml;sse,</p>
+      <p style="margin:0; font-size:15px; font-weight:700; color:#141414;">Das Datasport-Team</p>
+
+    </td>
+  </tr>
+
+  <!-- SEPARATEUR BILINGUE -->
+  <tr>
+    <td style="padding:0 48px;">
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+        <tr>
+          <td style="border-top:2px dashed #DEDEDE; padding:16px 0; text-align:center;">
+            <span style="font-size:11px; color:#ADADAD; letter-spacing:1px; text-transform:uppercase;">
+              &#9670;&nbsp; English version below &nbsp;&#9670;
+            </span>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- ======================================================
+       VERSION ANGLAISE
+  ====================================================== -->
+  <tr>
+    <td style="padding:28px 48px 36px;">
+
+      <p style="margin:0 0 20px; font-size:22px; font-weight:700; color:#141414; line-height:1.3;">
+        Hi $FirstName,<br>
+        just a quick reminder &ndash; we'd still love your feedback.
+      </p>
+
+      <p style="margin:0 0 16px; font-size:16px; color:#444444; line-height:1.65;">
+        A few days ago we reached out to you as one of our first
+        <strong style="color:#141414;">FIT for LIFE Coach</strong> users.
+        We haven't heard back from you yet &ndash; maybe you just didn't have a moment?
+      </p>
+
+      <p style="margin:0 0 16px; font-size:16px; color:#444444; line-height:1.65;">
+        It only takes <strong>2 minutes</strong> &ndash; and your input helps us build something
+        truly useful.
+      </p>
+
+      <!-- Incentive EN -->
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0;">
+        <tr>
+          <td style="background-color:#FFF5F5; border-left:4px solid #E70E22; border-radius:6px; padding:16px 20px;">
+            <p style="margin:0; font-size:15px; color:#141414; line-height:1.6;">
+              <strong>As a thank-you: CHF 20.&ndash; voucher at Datasport</strong><br>
+              After completing the survey, you'll receive a CHF 20.&ndash; voucher to use
+              for registering for an event of your choice.
+            </p>
+          </td>
+        </tr>
+      </table>
+
+      <!-- CTA EN -->
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:8px 0 24px;">
+        <tr>
+          <!--[if mso]>
+          <td align="center" style="background-color:#e70e22; border-radius:8px;">
+          <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word"
+            href="$Link" style="height:52px; v-text-anchor:middle; width:240px;"
+            arcsize="12%" strokecolor="#e70e22" fillcolor="#e70e22">
+            <w:anchorlock/>
+            <center style="color:#ffffff; font-family:'Segoe UI',Arial,sans-serif; font-size:16px; font-weight:700;">
+              Go to the survey &#8594;
+            </center>
+          </v:roundrect>
+          </td>
+          <![endif]-->
+          <!--[if !mso]><!-->
+          <td align="center" style="background-color:#141414; border-radius:8px;">
+            <a href="$Link"
+               style="display:inline-block; padding:15px 36px; background-color:#e70e22; color:#ffffff; font-family:'Segoe UI',Arial,sans-serif; font-size:16px; font-weight:700; text-decoration:none; border-radius:8px; letter-spacing:0.3px;">
+              Go to the survey &#8594;
+            </a>
+          </td>
+          <!--<![endif]-->
+        </tr>
+      </table>
+
+      <p style="margin:0; font-size:13px; color:#ADADAD; line-height:1.5;">
+        The survey takes approx. 2 minutes. You can choose the language directly in the form.
+      </p>
+
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0 20px;">
+        <tr><td style="border-top:1px solid #EEEEEE;"></td></tr>
+      </table>
+
+      <p style="margin:0 0 4px; font-size:15px; color:#444444; line-height:1.6;">Best regards,</p>
+      <p style="margin:0; font-size:15px; font-weight:700; color:#141414;">The Datasport Team</p>
+
+    </td>
+  </tr>
+
+  <!-- FOOTER -->
+  <tr>
+    <td style="background-color:#F7F7F7; padding:20px 48px; border-top:1px solid #EEEEEE;">
+      <p style="margin:0 0 4px; font-size:12px; color:#ADADAD; line-height:1.6; text-align:center;">
+        Du erh&auml;ltst / You receive this email because you activated FIT for LIFE Coach on
+        <a href="https://www.datasport.com" style="color:#E70E22; text-decoration:none;">datasport.com</a>.
+      </p>
+      <p style="margin:0; font-size:12px; color:#ADADAD; text-align:center;">
+        &copy; 2026 Datasport AG &nbsp;|&nbsp; Schweiz
+      </p>
+    </td>
+  </tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>
+"@
+}
+
+# =====================================================================
+# Fonction : genere le HTML de DERNIERE RELANCE personalise pour un contact
+# =====================================================================
+function Get-FinalReminderEmailHtml {
+    param([string]$FirstName, [string]$Link, [string]$LogoSrc = "cid:fflc-logo")
+
+    return @"
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin:0; padding:0; background-color:#F2F2F2; font-family:'Segoe UI',Arial,sans-serif;">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#F2F2F2;">
+<tr><td align="center" style="padding:32px 16px;">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="600" style="max-width:600px; width:100%; background-color:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,0.10);">
+
+  <!-- HEADER rouge avec logo + texte -->
+  <tr>
+    <td align="center" style="background-color:#E70E22; padding:24px 40px;">
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td style="vertical-align:middle; padding-right:14px;">
+            <img src="$LogoSrc" alt="" width="40"
+                 style="display:block; width:40px; height:40px;">
+          </td>
+          <td style="vertical-align:middle;">
+            <span style="font-size:22px; font-weight:700; color:#ffffff; font-family:'Segoe UI',Arial,sans-serif; letter-spacing:0.3px;">FIT for LIFE Coach</span>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- ======================================================
+       VERSION ALLEMANDE
+  ====================================================== -->
+  <tr>
+    <td style="padding:36px 48px 28px;">
+
+      <p style="margin:0 0 20px; font-size:22px; font-weight:700; color:#141414; line-height:1.3;">
+        Hallo $FirstName,<br>
+        letzte Chance &ndash; wir fragen ein letztes Mal.
+      </p>
+
+      <p style="margin:0 0 16px; font-size:16px; color:#444444; line-height:1.65;">
+        Wir haben dich bereits zweimal angeschrieben &ndash; das ist unsere letzte Nachricht.
+        Wenn du m&ouml;chtest, kannst du deinen <strong style="color:#141414;">CHF 20.&ndash; Gutschein</strong>
+        noch einl&ouml;sen, indem du dir <strong>2 Minuten</strong> Zeit nimmst.
+      </p>
+
+      <p style="margin:0 0 16px; font-size:16px; color:#444444; line-height:1.65;">
+        Deine Meinung &ndash; ob positiv oder kritisch &ndash; hilft uns, FIT for LIFE Coach
+        weiterzuentwickeln. Wir freuen uns &uuml;ber jede R&uuml;ckmeldung.
+      </p>
+
+      <!-- Incentive DE -->
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0;">
+        <tr>
+          <td style="background-color:#FFF5F5; border-left:4px solid #E70E22; border-radius:6px; padding:16px 20px;">
+            <p style="margin:0; font-size:15px; color:#141414; line-height:1.6;">
+              <strong>Noch verf&uuml;gbar: CHF 20.&ndash; Gutschein bei Datasport</strong><br>
+              Nach dem Ausf&uuml;llen erh&auml;ltst du einen Gutschein &uuml;ber CHF 20.&ndash;,
+              den du f&uuml;r die Anmeldung zu einem Event deiner Wahl einl&ouml;sen kannst.
+            </p>
+          </td>
+        </tr>
+      </table>
+
+      <!-- CTA DE -->
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:8px 0 24px;">
+        <tr>
+          <!--[if mso]>
+          <td align="center" style="background-color:#e70e22; border-radius:8px;">
+          <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word"
+            href="$Link" style="height:52px; v-text-anchor:middle; width:240px;"
+            arcsize="12%" strokecolor="#141414" fillcolor="#141414">
+            <w:anchorlock/>
+            <center style="color:#ffffff; font-family:'Segoe UI',Arial,sans-serif; font-size:16px; font-weight:700;">
+              Zum Fragebogen &#8594;
+            </center>
+          </v:roundrect>
+          </td>
+          <![endif]-->
+          <!--[if !mso]><!-->
+          <td align="center" style="background-color:#141414; border-radius:8px;">
+            <a href="$Link"
+               style="display:inline-block; padding:15px 36px; background-color:#e70e22; color:#ffffff; font-family:'Segoe UI',Arial,sans-serif; font-size:16px; font-weight:700; text-decoration:none; border-radius:8px; letter-spacing:0.3px;">
+              Zum Fragebogen &#8594;
+            </a>
+          </td>
+          <!--<![endif]-->
+        </tr>
+      </table>
+
+      <p style="margin:0; font-size:13px; color:#ADADAD; line-height:1.5;">
+        Der Fragebogen dauert ca. 2 Minuten. Du kannst die Sprache im Formular selbst w&auml;hlen.
+      </p>
+
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0 20px;">
+        <tr><td style="border-top:1px solid #EEEEEE;"></td></tr>
+      </table>
+
+      <p style="margin:0 0 4px; font-size:15px; color:#444444; line-height:1.6;">Herzliche Gr&uuml;sse,</p>
+      <p style="margin:0; font-size:15px; font-weight:700; color:#141414;">Das Datasport-Team</p>
+
+    </td>
+  </tr>
+
+  <!-- SEPARATEUR BILINGUE -->
+  <tr>
+    <td style="padding:0 48px;">
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+        <tr>
+          <td style="border-top:2px dashed #DEDEDE; padding:16px 0; text-align:center;">
+            <span style="font-size:11px; color:#ADADAD; letter-spacing:1px; text-transform:uppercase;">
+              &#9670;&nbsp; English version below &nbsp;&#9670;
+            </span>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- ======================================================
+       VERSION ANGLAISE
+  ====================================================== -->
+  <tr>
+    <td style="padding:28px 48px 36px;">
+
+      <p style="margin:0 0 20px; font-size:22px; font-weight:700; color:#141414; line-height:1.3;">
+        Hi $FirstName,<br>
+        last chance &ndash; this is our final message.
+      </p>
+
+      <p style="margin:0 0 16px; font-size:16px; color:#444444; line-height:1.65;">
+        We've reached out twice already &ndash; this is the last time we'll ask.
+        If you'd like to claim your <strong style="color:#141414;">CHF 20.&ndash; voucher</strong>,
+        all it takes is <strong>2 minutes</strong>.
+      </p>
+
+      <p style="margin:0 0 16px; font-size:16px; color:#444444; line-height:1.65;">
+        Whether your experience has been great or not &ndash; your honest feedback helps us
+        improve FIT for LIFE Coach for everyone.
+      </p>
+
+      <!-- Incentive EN -->
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0;">
+        <tr>
+          <td style="background-color:#FFF5F5; border-left:4px solid #E70E22; border-radius:6px; padding:16px 20px;">
+            <p style="margin:0; font-size:15px; color:#141414; line-height:1.6;">
+              <strong>Still available: CHF 20.&ndash; voucher at Datasport</strong><br>
+              After completing the survey, you'll receive a CHF 20.&ndash; voucher to use
+              for registering for an event of your choice.
+            </p>
+          </td>
+        </tr>
+      </table>
+
+      <!-- CTA EN -->
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:8px 0 24px;">
+        <tr>
+          <!--[if mso]>
+          <td align="center" style="background-color:#e70e22; border-radius:8px;">
+          <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word"
+            href="$Link" style="height:52px; v-text-anchor:middle; width:240px;"
+            arcsize="12%" strokecolor="#e70e22" fillcolor="#e70e22">
+            <w:anchorlock/>
+            <center style="color:#ffffff; font-family:'Segoe UI',Arial,sans-serif; font-size:16px; font-weight:700;">
+              Go to the survey &#8594;
+            </center>
+          </v:roundrect>
+          </td>
+          <![endif]-->
+          <!--[if !mso]><!-->
+          <td align="center" style="background-color:#141414; border-radius:8px;">
+            <a href="$Link"
+               style="display:inline-block; padding:15px 36px; background-color:#e70e22; color:#ffffff; font-family:'Segoe UI',Arial,sans-serif; font-size:16px; font-weight:700; text-decoration:none; border-radius:8px; letter-spacing:0.3px;">
+              Go to the survey &#8594;
+            </a>
+          </td>
+          <!--<![endif]-->
+        </tr>
+      </table>
+
+      <p style="margin:0; font-size:13px; color:#ADADAD; line-height:1.5;">
+        The survey takes approx. 2 minutes. You can choose the language directly in the form.
+      </p>
+
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0 20px;">
+        <tr><td style="border-top:1px solid #EEEEEE;"></td></tr>
+      </table>
+
+      <p style="margin:0 0 4px; font-size:15px; color:#444444; line-height:1.6;">Best regards,</p>
+      <p style="margin:0; font-size:15px; font-weight:700; color:#141414;">The Datasport Team</p>
+
+    </td>
+  </tr>
+
+  <!-- FOOTER -->
+  <tr>
+    <td style="background-color:#F7F7F7; padding:20px 48px; border-top:1px solid #EEEEEE;">
+      <p style="margin:0 0 4px; font-size:12px; color:#ADADAD; line-height:1.6; text-align:center;">
+        Du erh&auml;ltst / You receive this email because you activated FIT for LIFE Coach on
+        <a href="https://www.datasport.com" style="color:#E70E22; text-decoration:none;">datasport.com</a>.
+      </p>
+      <p style="margin:0; font-size:12px; color:#ADADAD; text-align:center;">
+        &copy; 2026 Datasport AG &nbsp;|&nbsp; Schweiz
+      </p>
+    </td>
+  </tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>
+"@
+}
+
+# =====================================================================
 
 if (-not (Test-Path $CsvPath)) {
     Write-Host "ERREUR : CSV introuvable : $CsvPath" -ForegroundColor Red
@@ -273,9 +723,10 @@ if (-not (Test-Path $LogoPath)) {
 # --- Mode Preview ---
 if ($Preview) {
     $row       = Import-Csv $CsvPath | Select-Object -First 1
-    $previewPath = "$PSScriptRoot\preview-email.html"
+    $previewPath = if ($FinalReminder) { "$PSScriptRoot\preview-email-final-reminder.html" } elseif ($Reminder) { "$PSScriptRoot\preview-email-reminder.html" } else { "$PSScriptRoot\preview-email.html" }
     $logoSrcPreview = if ($LogoPath) { "file:///" + ((Resolve-Path $LogoPath).Path -replace '\\', '/') } else { "" }
-    Get-EmailHtml -FirstName $row.first_name -Link $row.link -LogoSrc $logoSrcPreview |
+    $htmlFn = if ($FinalReminder) { ${function:Get-FinalReminderEmailHtml} } elseif ($Reminder) { ${function:Get-ReminderEmailHtml} } else { ${function:Get-EmailHtml} }
+    & $htmlFn -FirstName $row.first_name -Link $row.link -LogoSrc $logoSrcPreview |
         Out-File -FilePath $previewPath -Encoding UTF8
     Write-Host "Preview genere : $previewPath" -ForegroundColor Green
     Write-Host "Contact test   : $($row.first_name) ($($row.email))" -ForegroundColor Gray
@@ -296,6 +747,11 @@ Write-Host "=======================================" -ForegroundColor Cyan
 Write-Host "  Contacts   : $total"
 Write-Host "  From       : $FromEmail"
 Write-Host "  Sujet      : $Subject"
+if ($FinalReminder) {
+    Write-Host "  MODE       : DERNIERE RELANCE (template last chance)" -ForegroundColor Red
+} elseif ($Reminder) {
+    Write-Host "  MODE       : RAPPEL (template de relance)" -ForegroundColor Magenta
+}
 if ($DryRun) {
     Write-Host "  MODE       : DRY RUN (aucun email envoye)" -ForegroundColor Yellow
 }
@@ -316,7 +772,13 @@ $errors  = 0
 
 foreach ($row in $contacts) {
 
-    $htmlBody = Get-EmailHtml -FirstName $row.first_name -Link $row.link
+    $htmlBody = if ($FinalReminder) {
+        Get-FinalReminderEmailHtml -FirstName $row.first_name -Link $row.link
+    } elseif ($Reminder) {
+        Get-ReminderEmailHtml -FirstName $row.first_name -Link $row.link
+    } else {
+        Get-EmailHtml -FirstName $row.first_name -Link $row.link
+    }
 
     if ($DryRun) {
         Write-Host "  [DRY RUN] $($row.email) ($($row.first_name))" -ForegroundColor Gray
