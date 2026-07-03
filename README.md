@@ -23,7 +23,11 @@ Segmentation was done manually from the Google Sheet:
 | `send-mails.ps1` | PowerShell script to send personalized emails |
 | `contacts.csv` | Full contact list (all segments) |
 | `contacts-reminder.csv` | Filtered list for reminder (non-respondents only) — regénérer avant usage |
-| `responded.txt` | Emails of users who already responded (used to generate reminder list) |
+| `responded.txt` | Emails of users who already responded (used to generate reminder list + thank-you list) |
+| `coupons.csv` | Raw voucher list (code, password, amount, validity) provided by Datasport |
+| `generate-thankyou-csv.ps1` | Generates `contacts-thankyou.csv` by assigning one voucher per respondent |
+| `contacts-thankyou.csv` | Generated: respondent + assigned voucher (input for `send-thankyou-mails.ps1`) |
+| `send-thankyou-mails.ps1` | PowerShell script to send thank-you emails with voucher to respondents |
 | `preview-email.html` | Email template (local preview only) |
 
 ## Infrastructure
@@ -74,6 +78,31 @@ Write-Host "Rappel : $($reminder.Count) contacts (sur $($all.Count) total, $($re
 
 > `responded.txt` est conservé dans le repo pour garder la trace des répondants.
 > Note : si un email de `responded.txt` n'existe pas dans `contacts.csv`, le total ne sera pas exactement `total - répondants` (cas normal pour les tests internes).
+
+### Send thank-you emails (with voucher)
+
+Chaque répondant reçoit un mail de remerciement avec un coupon de réduction unique (numéro + mot de passe).
+
+1. S'assurer que `responded.txt` est à jour (voir section rappel ci-dessus) et que `coupons.csv` contient assez de coupons non utilisés (un par répondant unique)
+2. Générer `contacts-thankyou.csv` (associe un coupon unique à chaque répondant, récupère prénom/nom depuis `contacts.csv`) :
+
+```powershell
+.\generate-thankyou-csv.ps1
+```
+
+Le script signale les emails absents de `contacts.csv` (prénom/nom à compléter manuellement dans le CSV généré) et le nombre de coupons non utilisés.
+
+3. Vérifier puis envoyer :
+
+```powershell
+.\send-thankyou-mails.ps1 -Preview   # apercu dans le navigateur
+.\send-thankyou-mails.ps1 -DryRun    # verifier la liste des destinataires
+.\send-thankyou-mails.ps1            # envoi reel (demande confirmation)
+```
+
+Chaque envoi réussi est noté dans `sent-thankyou.txt`. Au lancement suivant, ces contacts sont automatiquement sautés — pas besoin de gérer un index manuellement, et pas de risque de double envoi (donc double consommation de coupon) si le script est relancé après un envoi partiel ou un test avec `-Limit`. Utiliser `-Resend` pour forcer un renvoi malgré le log.
+
+> Les coupons sont une ressource limitée et non réutilisable : ne pas relancer `generate-thankyou-csv.ps1` après l'envoi des mails, sous peine de réassigner un coupon déjà communiqué à quelqu'un d'autre si `responded.txt` ou `coupons.csv` changent entretemps.
 
 ### Test send (single recipient)
 
