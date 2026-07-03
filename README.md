@@ -29,6 +29,8 @@ Segmentation was done manually from the Google Sheet:
 | `contacts-thankyou.csv` | Generated: respondent + assigned voucher (input for `send-thankyou-mails.ps1`) |
 | `send-thankyou-mails.ps1` | PowerShell script to send thank-you emails with voucher to respondents |
 | `preview-email.html` | Email template (local preview only) |
+| `milo-summary.html` | Executive summary report of form responses (KPIs, funnel, comments per segment) — also published as a Claude Artifact and as a Confluence page, see [Feedback Report](CONTEXT.md#feedback-report--analysis) |
+| `Milo Formulare.xlsx` | Raw response export from the Google Sheet (`Kopie von Users`, `Responses_dropout`, `Responses_inactive`, `Responses_active` tabs) — source data for `milo-summary.html` |
 
 ## Infrastructure
 

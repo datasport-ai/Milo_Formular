@@ -155,5 +155,16 @@ Script: `send-mails.ps1` — requires Outlook desktop (Outlook COM object), sent
 
 `contacts_test.csv` — single-row CSV for test sends (rmalet@datasport.com, form-active link).
 
+## Feedback Report & Analysis
+
+Once responses came in, an executive summary report was built from `Milo Formulare.xlsx` (sheets `Responses_dropout`, `Responses_inactive`, `Responses_active`) and `contacts.csv` (contacted-user counts per segment).
+
+- **Source file:** `milo-summary.html` (standalone HTML/CSS, no JS) — edit this file for any content change.
+- **Contents:** contacted/reply KPIs (216 contacted · 39 replies · 18%), per-segment breakdown, onboarding drop-off funnel, form question mockups (collapsible via native `<details>`/`<summary>`), response tallies, and verbatim forwarded comments per segment (kept in original language, cross-checked against the raw xlsx for completeness/attribution).
+- **Inaktiv Frage 2 classification:** responses to "Was würde dich zur Rückkehr bewegen?" were manually tagged in the xlsx (extra column) as `external motivation` (not actionable, e.g. weather, personal circumstances) vs `application improvement` (actionable product feedback) — this split and the resulting action items are reflected in the report.
+- **Methodology note:** several contacted addresses are internal Datasport employees (e.g. `@datasport.com` test accounts) who wouldn't be expected to respond — this is called out explicitly in the report to contextualize the reply rate.
+- **Published as a Claude Artifact:** https://claude.ai/code/artifact/dbe8f406-e1d2-4624-8d3a-7f80165cad15 — live-rendered copy with full styling. Redeploy via Claude Code (Artifact tool, same file path) after editing the source file to update it at the same URL; the user cannot edit it directly and must delete it themselves via the claude.ai Artifacts gallery if no longer needed.
+- **Published to Confluence:** https://datasport.atlassian.net/wiki/spaces/MC/pages/2080800769/Milo+Executive+Summary+Nutzerfeedback+Juli+2026 (space `MC`, under the "User Analytics Feedback" folder). Recreated in native Confluence storage format (panels/status lozenges/tables/expand macros) since Confluence doesn't support the custom CSS progress bars — the page links to the Artifact above for the visually-identical version. The three copies (HTML file, Artifact, Confluence page) do not auto-sync; each must be updated separately when the report changes.
+
 ## Pending
 - [ ] Incentive fulfillment — process to send CHF 20.– voucher (all 3 forms) within 48h

@@ -1,0 +1,1116 @@
+<title>Milo — Executive Summary · Nutzerfeedback</title>
+<style>
+  :root {
+    --bg: #ECEAE6;
+    --card: #FFFFFF;
+    --surface: #F4F3F0;
+    --text: #1B1918;
+    --muted: #7A746D;
+    --border: #DDDAD2;
+    --radius: 7px;
+
+    --d: #C12A0E;
+    --d-bg: #FEF1EE;
+    --d-border: #F5C5BB;
+    --i: #A34D07;
+    --i-bg: #FFF9ED;
+    --i-border: #F0D9A0;
+    --a: #136632;
+    --a-bg: #EDF9F2;
+    --a-border: #A8E0C0;
+    --bar: #E4E1D9;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14.5px;
+    line-height: 1.65;
+    padding: 44px 16px 80px;
+  }
+
+  .wrap { max-width: 860px; margin: 0 auto; }
+
+  /* ── PAGE HEADER ─────────────────────────── */
+  .pg-header { margin-bottom: 48px; }
+  .eyebrow {
+    font-size: 10.5px; font-weight: 600; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 10px;
+  }
+  h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 29px; font-weight: normal; line-height: 1.25;
+    text-wrap: balance; margin-bottom: 8px;
+  }
+  .pg-meta { font-size: 13px; color: var(--muted); }
+  .pg-rule { border: none; border-top: 1px solid var(--border); margin-top: 28px; }
+
+  /* ── SECTION SHELL ───────────────────────── */
+  .section {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: 0 1px 4px rgba(0,0,0,.07);
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .sec-head {
+    padding: 18px 28px;
+    display: flex; align-items: center; gap: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .badge {
+    font-size: 10px; font-weight: 700; letter-spacing: .08em;
+    text-transform: uppercase; padding: 3px 9px;
+    border-radius: 100px; white-space: nowrap;
+  }
+  .badge-d { background: var(--d-bg); color: var(--d); }
+  .badge-i { background: var(--i-bg); color: var(--i); }
+  .badge-a { background: var(--a-bg); color: var(--a); }
+  .sec-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 18px; font-weight: normal; flex: 1;
+  }
+  .sec-n { font-size: 12.5px; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .sec-body { padding: 28px; }
+
+  /* ── FORM MOCKUP ─────────────────────────── */
+  .form-snap {
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    overflow: hidden;
+    margin-bottom: 28px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.09);
+    background: #FAFAF8;
+  }
+  .form-snap-bar {
+    display: flex; align-items: center; gap: 8px;
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .fbar-dots { display: flex; gap: 5px; }
+  .fbar-dots span {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--border); display: block;
+  }
+  .fbar-title {
+    font-size: 11px; color: var(--muted);
+    letter-spacing: .04em; margin-left: 4px;
+  }
+  .form-snap-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .fq {
+    padding: 14px 16px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .fq:nth-last-child(-n+2) { border-bottom: none; }
+  .fq:nth-child(even), .fq:last-child { border-right: none; }
+  .fq-num {
+    font-size: 9.5px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 5px;
+  }
+  .fq-text { font-size: 12.5px; font-weight: 500; line-height: 1.35; margin-bottom: 8px; }
+  .fq-opts { display: flex; flex-direction: column; gap: 4px; }
+  .fopt { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+  .fopt-r, .fopt-c {
+    flex-shrink: 0; width: 12px; height: 12px;
+    border: 1.5px solid var(--border); background: white;
+  }
+  .fopt-r { border-radius: 50%; }
+  .fopt-c { border-radius: 2px; }
+  .fq-free {
+    height: 28px; background: white;
+    border: 1px solid var(--border); border-radius: 4px; margin-top: 4px;
+  }
+  .fq-scale { display: flex; gap: 3px; margin-top: 6px; flex-wrap: wrap; }
+  .fq-scale-n {
+    width: 23px; height: 23px; border-radius: 4px;
+    background: white; border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: var(--muted); font-variant-numeric: tabular-nums;
+  }
+  .fq-scale-label {
+    display: flex; justify-content: space-between;
+    font-size: 9.5px; color: var(--muted); margin-top: 4px;
+  }
+
+  /* ── KPIS ────────────────────────────────── */
+  .kpi-row { display: flex; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
+  .kpi {
+    background: var(--surface); border-radius: var(--radius);
+    padding: 14px 18px; flex: 1; min-width: 130px;
+  }
+  .kpi-val {
+    font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums;
+    line-height: 1; margin-bottom: 4px;
+  }
+  .kpi-label { font-size: 11.5px; color: var(--muted); line-height: 1.35; }
+  .kpi-d .kpi-val { color: var(--d); }
+  .kpi-i .kpi-val { color: var(--i); }
+  .kpi-a .kpi-val { color: var(--a); }
+  .kpi-n .kpi-val { color: #5A564F; }
+
+  /* ── DATA BLOCKS ─────────────────────────── */
+  .q-block { margin-bottom: 24px; }
+  .q-block + .q-block { padding-top: 24px; border-top: 1px solid var(--border); }
+  .q-label {
+    font-size: 10.5px; font-weight: 600; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 14px;
+  }
+  .bars { display: flex; flex-direction: column; gap: 8px; }
+  .bar-row {
+    display: grid; grid-template-columns: 220px 1fr 62px;
+    align-items: center; gap: 10px;
+  }
+  .bar-label { font-size: 13.5px; line-height: 1.3; }
+  .bar-track { background: var(--bar); border-radius: 3px; height: 7px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 3px; }
+  .fill-d { background: var(--d); }
+  .fill-i { background: var(--i); }
+  .fill-a { background: var(--a); }
+  .fill-n { background: #9A958E; }
+  .bar-stat { font-size: 12.5px; font-variant-numeric: tabular-nums; color: var(--muted); text-align: right; white-space: nowrap; }
+
+  /* ── NPS DOTS ────────────────────────────── */
+  .nps-dots { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+  .ndot {
+    width: 30px; height: 30px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: white; font-variant-numeric: tabular-nums;
+  }
+  .ndot-d { background: var(--d); }
+  .ndot-p { background: #888480; }
+  .ndot-pr { background: var(--a); }
+  .nps-legend { font-size: 11.5px; color: var(--muted); }
+
+  /* ── COMMENTS ────────────────────────────── */
+  .comments-sep { border-top: 1px solid var(--border); margin-top: 28px; padding-top: 24px; }
+  .comments-title {
+    font-size: 10.5px; font-weight: 600; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 4px;
+  }
+  .comments-note { font-size: 11.5px; color: var(--muted); margin-bottom: 16px; font-style: italic; }
+
+  .comment {
+    background: var(--surface); border-radius: var(--radius);
+    padding: 13px 15px 11px 17px; margin-bottom: 9px;
+    border-left: 3px solid var(--border);
+  }
+  .comment-d { border-left-color: var(--d); }
+  .comment-i { border-left-color: var(--i); }
+  .comment-a { border-left-color: var(--a); }
+
+  .comment-text {
+    font-size: 13.5px; line-height: 1.55;
+    font-style: italic; margin-bottom: 7px;
+  }
+  .comment-text strong { font-style: normal; font-weight: 600; }
+  .comment-footer {
+    font-size: 11px; color: var(--muted);
+    display: flex; gap: 6px; flex-wrap: wrap; align-items: center;
+  }
+  .ctag {
+    background: #E8E5DF; border-radius: 3px;
+    padding: 1px 6px; font-style: normal; font-size: 10.5px;
+  }
+  .lang-tag {
+    font-size: 9.5px; font-weight: 700; letter-spacing: .08em;
+    padding: 2px 6px; border-radius: 3px; font-style: normal;
+    text-transform: uppercase; border: 1px solid;
+  }
+  .lang-de { background: #EEF1FF; color: #3A4DA0; border-color: #C2CAEF; }
+  .lang-fr { background: #FFF0F0; color: #9A1B2A; border-color: #F0C0C5; }
+  .lang-en { background: #F0FBF4; color: #1A6E3A; border-color: #B0DFC0; }
+
+  /* ── FUNNEL ──────────────────────────────── */
+  .funnel-phases { display: flex; flex-direction: column; gap: 4px; }
+  .funnel-phase-group {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 4px;
+  }
+  .funnel-phase-label {
+    font-size: 10.5px; font-weight: 600; letter-spacing: .09em;
+    text-transform: uppercase; color: var(--muted);
+    background: var(--surface);
+    padding: 7px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .funnel-phase-critical .funnel-phase-label {
+    background: var(--d-bg);
+    color: var(--d);
+    border-bottom-color: var(--d-border);
+  }
+  .phase-count { font-weight: 400; color: var(--muted); font-size: 10px; text-transform: none; letter-spacing: 0; }
+  .phase-count-critical { color: var(--d); font-weight: 600; }
+  .funnel-phase-group .bars { padding: 10px 14px; }
+  .funnel-complete {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 14px;
+    background: var(--a-bg);
+    border: 1px solid var(--a-border);
+    border-radius: var(--radius);
+    font-size: 13px; font-weight: 600; color: var(--a);
+    margin-top: 4px;
+  }
+
+  /* ── FOOTNOTE ────────────────────────────── */
+  .footnote { font-size: 11.5px; color: var(--muted); margin-top: 18px; }
+
+  /* ── KURZFASSUNG ─────────────────────────── */
+  .tldr {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  .tldr-label {
+    font-size: 10.5px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+  }
+  .tldr ul { padding-left: 18px; display: flex; flex-direction: column; gap: 5px; }
+
+  /* ── COLLAPSIBLE FORM MOCKUP ─────────────── */
+  details.form-snap summary {
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+  details.form-snap summary::-webkit-details-marker { display: none; }
+  details.form-snap summary::after {
+    content: 'Fragen anzeigen ▸';
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 10.5px;
+    letter-spacing: .03em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  details.form-snap[open] summary::after { content: 'Fragen ausblenden ▾'; }
+  details.form-snap summary:hover { background: var(--surface); }
+
+  /* ── RESPONSIVE ──────────────────────────── */
+  @media (max-width: 600px) {
+    .bar-row { grid-template-columns: 1fr 54px; }
+    .bar-track { display: none; }
+    .sec-body { padding: 20px 16px; }
+    .sec-head { padding: 16px; flex-wrap: wrap; }
+    h1 { font-size: 24px; }
+    .kpi-row { flex-direction: column; }
+    .form-snap-body { grid-template-columns: 1fr; }
+    .fq { border-right: none !important; }
+    .fq:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
+    .fq:last-child { border-bottom: none; }
+  }
+</style>
+
+<div class="wrap">
+
+  <div class="pg-header">
+    <p class="eyebrow">Milo · Datasport · Juli 2026</p>
+    <h1>Executive Summary — Nutzerfeedback-Formulare</h1>
+    <p class="pg-meta">216 kontaktierte Nutzer · 39 Antworten (18%) · Zeitraum: 23. Juni – 2. Juli 2026</p>
+    <hr class="pg-rule">
+  </div>
+
+  <!-- ══ RÜCKLAUF-ÜBERSICHT ═════════════════════════ -->
+  <div class="section">
+    <div class="sec-head">
+      <span class="sec-title">Kontaktierte Nutzer &amp; Rücklauf</span>
+    </div>
+    <div class="sec-body">
+      <div class="kpi-row">
+        <div class="kpi kpi-n">
+          <div class="kpi-val">216</div>
+          <div class="kpi-label">Kontaktierte Nutzer<br>(E-Mails versendet)</div>
+        </div>
+        <div class="kpi kpi-a">
+          <div class="kpi-val">39 <span style="font-size:16px;font-weight:400;color:var(--muted)">18%</span></div>
+          <div class="kpi-label">Haben geantwortet</div>
+        </div>
+      </div>
+      <p class="q-label" style="margin-top:-8px">davon, nach Nutzersegment (von 39 Antworten)</p>
+      <div class="kpi-row" style="margin-bottom:20px">
+        <div class="kpi kpi-d">
+          <div class="kpi-val">9 <span style="font-size:16px;font-weight:400;color:var(--muted)">23%</span></div>
+          <div class="kpi-label">Abbruch<br>(Onboarding)</div>
+        </div>
+        <div class="kpi kpi-i">
+          <div class="kpi-val">24 <span style="font-size:16px;font-weight:400;color:var(--muted)">62%</span></div>
+          <div class="kpi-label">Inaktiv</div>
+        </div>
+        <div class="kpi kpi-a">
+          <div class="kpi-val">6 <span style="font-size:16px;font-weight:400;color:var(--muted)">15%</span></div>
+          <div class="kpi-label">Aktiv</div>
+        </div>
+      </div>
+      <div style="background: var(--i-bg); border: 1px solid var(--i-border); border-radius: var(--radius); padding: 14px 18px; color: var(--i); font-size: 13px; line-height: 1.55;">
+        <strong>Hinweis zur Rücklaufquote:</strong> Mehrere der angeschriebenen E-Mail-Adressen gehören internen Datasport-Mitarbeitenden. Diese haben das Formular erwartungsgemäss nicht ausgefüllt, da sie nicht zur eigentlichen Zielgruppe gehören. Dies erklärt einen Teil der tiefen Rücklaufquote und sollte bei der Interpretation berücksichtigt werden.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ KURZFASSUNG ═══════════════════════════════ -->
+  <div class="tldr">
+    <p class="tldr-label">Kurzfassung</p>
+    <ul>
+      <li><strong>Abbruch (23%):</strong> 67% aller Abbrüche passieren in der letzten Konfigurationsphase — v.a. bei Wearable-Verbindung und Freigabe der Resultate. Hauptgrund laut Formular: Zeitmangel.</li>
+      <li><strong>Inaktivität (24 Antworten):</strong> 13 von 24 nennen konkrete Produktverbesserungen (Trainingsflexibilität, Usability, Feature-Lücken) — der Rest ist extern motiviert und nicht beeinflussbar.</li>
+      <li><strong>Aktive Nutzer (6):</strong> NPS 5,3/10. Hauptthemen: bessere Anbindung an Sportuhren, starre Trainingspläne, ein gemeldeter Kalender-Bug.</li>
+    </ul>
+  </div>
+
+  <!-- ══ ABBRUCH-FORMULAR ══════════════════════════ -->
+  <div class="section">
+    <div class="sec-head">
+      <span class="badge badge-d">Abbruch</span>
+      <span class="sec-title">Onboarding-Abbruch — alle Nutzer + Formular-Rückmeldungen</span>
+      <span class="sec-n">216 Nutzer · 9 Formularantworten</span>
+    </div>
+    <div class="sec-body">
+
+      <!-- KPIs — full user base -->
+      <div class="kpi-row">
+        <div class="kpi kpi-n">
+          <div class="kpi-val">216</div>
+          <div class="kpi-label">Nutzer insgesamt<br>gestartet</div>
+        </div>
+        <div class="kpi kpi-a">
+          <div class="kpi-val">167 <span style="font-size:16px;font-weight:400;color:var(--muted)">77%</span></div>
+          <div class="kpi-label">Haben Onboarding<br>abgeschlossen</div>
+        </div>
+        <div class="kpi kpi-d">
+          <div class="kpi-val">49 <span style="font-size:16px;font-weight:400;color:var(--muted)">23%</span></div>
+          <div class="kpi-label">Haben abgebrochen<br>(alle Schritte)</div>
+        </div>
+        <div class="kpi kpi-d">
+          <div class="kpi-val">45%</div>
+          <div class="kpi-label">Der Abbrüche in<br>den letzten 2 Schritten</div>
+        </div>
+      </div>
+
+      <!-- Funnel by step -->
+      <div class="q-block">
+        <p class="q-label">Wo brechen Nutzer ab — alle 49 Abbrüche nach Schritt</p>
+
+        <div class="funnel-phases">
+
+          <div class="funnel-phase-group">
+            <div class="funnel-phase-label">Phase 1 · Profil &nbsp;<span class="phase-count">7 Abbrüche</span></div>
+            <div class="bars">
+              <div class="bar-row">
+                <span class="bar-label">Ziel setzen</span>
+                <div class="bar-track"><div class="bar-fill fill-n" style="width:21%"></div></div>
+                <span class="bar-stat">3 — 6%</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label">Event-Auswahl</span>
+                <div class="bar-track"><div class="bar-fill fill-n" style="width:7%"></div></div>
+                <span class="bar-stat">1 — 2%</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label">Erfahrungsstufe</span>
+                <div class="bar-track"><div class="bar-fill fill-n" style="width:7%"></div></div>
+                <span class="bar-stat">1 — 2%</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label">Andere Sportarten</span>
+                <div class="bar-track"><div class="bar-fill fill-n" style="width:7%"></div></div>
+                <span class="bar-stat">1 — 2%</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label">Gewicht</span>
+                <div class="bar-track"><div class="bar-fill fill-n" style="width:7%"></div></div>
+                <span class="bar-stat">1 — 2%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="funnel-phase-group">
+            <div class="funnel-phase-label">Phase 2 · Performance-Daten &nbsp;<span class="phase-count">9 Abbrüche</span></div>
+            <div class="bars">
+              <div class="bar-row">
+                <span class="bar-label">Lauftempo</span>
+                <div class="bar-track"><div class="bar-fill fill-n" style="width:14%"></div></div>
+                <span class="bar-stat">2 — 4%</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label">Maximale Herzfrequenz</span>
+                <div class="bar-track"><div class="bar-fill fill-n" style="width:7%"></div></div>
+                <span class="bar-stat">1 — 2%</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label">Trainingsfrequenz</span>
+                <div class="bar-track"><div class="bar-fill fill-n" style="width:7%"></div></div>
+                <span class="bar-stat">1 — 2%</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label">Wochenplan</span>
+                <div class="bar-track"><div class="bar-fill fill-d" style="width:36%"></div></div>
+                <span class="bar-stat">5 — 10%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="funnel-phase-group funnel-phase-critical">
+            <div class="funnel-phase-label">Phase 3 · Konfiguration &nbsp;<span class="phase-count phase-count-critical">33 Abbrüche — 67% aller Dropout</span></div>
+            <div class="bars">
+              <div class="bar-row">
+                <span class="bar-label">Kommunikationseinstellungen</span>
+                <div class="bar-track"><div class="bar-fill fill-d" style="width:43%"></div></div>
+                <span class="bar-stat">6 — 12%</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label">Startdatum</span>
+                <div class="bar-track"><div class="bar-fill fill-n" style="width:14%"></div></div>
+                <span class="bar-stat">2 — 4%</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label">Wearable verbinden</span>
+                <div class="bar-track"><div class="bar-fill fill-d" style="width:57%"></div></div>
+                <span class="bar-stat">8 — 16%</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label"><strong>Freigabe der Resultate</strong></span>
+                <div class="bar-track"><div class="bar-fill fill-d" style="width:100%"></div></div>
+                <span class="bar-stat"><strong>14 — 29%</strong></span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label">Bereit für nächste Challenge?</span>
+                <div class="bar-track"><div class="bar-fill fill-n" style="width:21%"></div></div>
+                <span class="bar-stat">3 — 6%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="funnel-complete">
+            <span>Onboarding abgeschlossen</span>
+            <span>167 Nutzer — 77%</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Form mockup — qualitative -->
+      <div class="q-block">
+        <p class="q-label">Qualitative Erhebung — gestellte Fragen (9 Formularantworten)</p>
+        <details class="form-snap" style="margin-bottom:0">
+          <summary class="form-snap-bar">
+            <span class="fbar-dots"><span></span><span></span><span></span></span>
+            <span class="fbar-title">Milo · Abbruch-Formular — an die 9 angeschriebenen Nutzer</span>
+          </summary>
+          <div class="form-snap-body">
+            <div class="fq">
+              <div class="fq-num">Automatisch erkannt</div>
+              <div class="fq-text">An welchem Schritt bist du abgebrochen?</div>
+              <div class="fopt" style="color:var(--muted);font-size:11.5px;font-style:italic">Aus der Session ermittelt</div>
+            </div>
+            <div class="fq">
+              <div class="fq-num">Frage 1</div>
+              <div class="fq-text">Du hast dein Fit for Life Coach-Setup bei einem bestimmten Schritt unterbrochen — was hat dich dazu bewogen?</div>
+              <div class="fq-opts">
+                <div class="fopt"><span class="fopt-r"></span> Keine Zeit</div>
+                <div class="fopt"><span class="fopt-r"></span> Onboarding zu lang</div>
+                <div class="fopt"><span class="fopt-r"></span> Dieser Schritt war unklar</div>
+                <div class="fopt"><span class="fopt-r"></span> Ich wollte keine Daten weitergeben</div>
+                <div class="fopt"><span class="fopt-r"></span> Technische Probleme</div>
+                <div class="fopt"><span class="fopt-r"></span> Anderes</div>
+              </div>
+            </div>
+            <div class="fq">
+              <div class="fq-num">Frage 2</div>
+              <div class="fq-text">Planst du, dein Fit for Life Coach-Profil noch abzuschliessen?</div>
+              <div class="fq-opts">
+                <div class="fopt"><span class="fopt-r"></span> Ja &nbsp;<span class="fopt-r"></span> Nein &nbsp;<span class="fopt-r"></span> Vielleicht</div>
+              </div>
+            </div>
+            <div class="fq">
+              <div class="fq-num">Frage 3 — Freitext</div>
+              <div class="fq-text">Möchtest du noch etwas hinzufügen?</div>
+              <div class="fq-free"></div>
+              <div class="fopt" style="margin-top:4px;color:var(--muted);font-size:11px;font-style:italic">Dein Kommentar... (Optional)</div>
+            </div>
+          </div>
+        </details>
+        <p class="footnote" style="padding:10px 16px 0">CHF 20.– Gutschein bei Datasport — Als Dankeschön für dein Feedback erhältst du einen Gutschein über CHF 20.–, den du für die Anmeldung zu einem Event deiner Wahl einlösen kannst. Wir schicken ihn direkt an deine hinterlegte E-Mail-Adresse.</p>
+      </div>
+
+      <!-- Form response insights -->
+      <div class="q-block">
+        <p class="q-label">Frage 1 — Abbruchgrund (9 Antworten)</p>
+        <div class="bars">
+          <div class="bar-row">
+            <span class="bar-label">Keine Zeit</span>
+            <div class="bar-track"><div class="bar-fill fill-d" style="width:100%"></div></div>
+            <span class="bar-stat">5 — 56%</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Onboarding zu lang</span>
+            <div class="bar-track"><div class="bar-fill fill-n" style="width:20%"></div></div>
+            <span class="bar-stat">1 — 11%</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Technische Probleme</span>
+            <div class="bar-track"><div class="bar-fill fill-n" style="width:20%"></div></div>
+            <span class="bar-stat">1 — 11%</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Schritt unklar</span>
+            <div class="bar-track"><div class="bar-fill fill-n" style="width:20%"></div></div>
+            <span class="bar-stat">1 — 11%</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Anderes (fehlende Garmin-Sync)</span>
+            <div class="bar-track"><div class="bar-fill fill-n" style="width:20%"></div></div>
+            <span class="bar-stat">1 — 11%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <p class="q-label">Frage 2 — Profil noch abschliessen? (9 Antworten)</p>
+        <div class="bars">
+          <div class="bar-row">
+            <span class="bar-label">Nein</span>
+            <div class="bar-track"><div class="bar-fill fill-d" style="width:100%"></div></div>
+            <span class="bar-stat">5 — 56%</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Vielleicht</span>
+            <div class="bar-track"><div class="bar-fill fill-n" style="width:40%"></div></div>
+            <span class="bar-stat">2 — 22%</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Ja</span>
+            <div class="bar-track"><div class="bar-fill fill-a" style="width:40%"></div></div>
+            <span class="bar-stat">2 — 22%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="comments-sep">
+        <p class="comments-title">Frage 3 — Weiterzuleitende Kommentare</p>
+        <p class="comments-note">Originalsprache der Antworten beibehalten.</p>
+
+        <div class="comment comment-d">
+          <p class="comment-text">«&nbsp;Synchronisation der geplanten Workouts z.B. nach <strong>Garmin Connect oder TrainingPeaks</strong> wäre für mich ein zwingendes Feature gewesen. Für etwas erfahrenere Läufer ist die Funktionalität ungenügend. Konkurrenten wie z.B. <strong>AI-Endurance</strong> bieten deutlich mehr.&nbsp;»</p>
+          <div class="comment-footer">
+            <span class="lang-tag lang-de">DE</span>
+            <span class="ctag">smerillat</span>
+            Abbruch bei: Trainingsfrequenz · Grund: Anderes
+          </div>
+        </div>
+
+        <div class="comment comment-d">
+          <p class="comment-text">«&nbsp;<strong>Dieser Schritt war unklar</strong>&nbsp;» — explizit als Abbruchgrund für den Schritt <em>Lauftempo</em> (HOW_FAST_CAN_YOU_RUN) angegeben.</p>
+          <div class="comment-footer">
+            <span class="lang-tag lang-de">DE</span>
+            <span class="ctag">guenther.salathe</span>
+            Abbruch bei: Lauftempo · Wird Profil fertigstellen: Nein
+          </div>
+        </div>
+
+        <div class="comment comment-d">
+          <p class="comment-text">«&nbsp;<strong>Onboarding zu lang</strong>&nbsp;» — explizit als Abbruchgrund angegeben.</p>
+          <div class="comment-footer">
+            <span class="lang-tag lang-de">DE</span>
+            <span class="ctag">jil.haeusler</span>
+            Abbruch bei: Max Heart Rate BPM · Wird Profil fertigstellen: Vielleicht
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ INAKTIVITÄTS-FORMULAR ══════════════════════ -->
+  <div class="section">
+    <div class="sec-head">
+      <span class="badge badge-i">Inaktiv</span>
+      <span class="sec-title">Inaktivitäts-Formular — Nutzer, die aufgehört haben</span>
+      <span class="sec-n">24 Antworten</span>
+    </div>
+    <div class="sec-body">
+
+      <!-- Form mockup -->
+      <details class="form-snap">
+        <summary class="form-snap-bar">
+          <span class="fbar-dots"><span></span><span></span><span></span></span>
+          <span class="fbar-title">Milo · Inaktivitäts-Formular — gestellte Fragen</span>
+        </summary>
+        <div class="form-snap-body">
+          <div class="fq">
+            <div class="fq-num">Frage 1</div>
+            <div class="fq-text">Warum nutzt du Fit for Life Coach nicht mehr?</div>
+            <div class="fq-opts">
+              <div class="fopt"><span class="fopt-r"></span> Ich habe nicht mehr trainiert</div>
+              <div class="fopt"><span class="fopt-r"></span> Fit for Life Coach hat meine Erwartungen/Bedürfnisse nicht erfüllt</div>
+              <div class="fopt"><span class="fopt-r"></span> Ich nutze ein anderes Tool</div>
+              <div class="fopt"><span class="fopt-r"></span> Ich hatte es vergessen</div>
+              <div class="fopt"><span class="fopt-r"></span> Technische Probleme</div>
+            </div>
+          </div>
+          <div class="fq">
+            <div class="fq-num">Frage 1b · falls «Erwartungen/Bedürfnisse nicht erfüllt»</div>
+            <div class="fq-text">Was hat dich enttäuscht? Was hättest du erwartet?</div>
+            <div class="fq-free"></div>
+            <div class="fopt" style="margin-top:4px;color:var(--muted);font-size:11px;font-style:italic">Deine Antwort... (Optional)</div>
+          </div>
+          <div class="fq">
+            <div class="fq-num">Frage 1b · falls «Ich nutze ein anderes Tool»</div>
+            <div class="fq-text">Welches Tool nutzt du? Was bietet es dir, das Fit for Life Coach nicht bietet?</div>
+            <div class="fq-free"></div>
+            <div class="fopt" style="margin-top:4px;color:var(--muted);font-size:11px;font-style:italic">Deine Antwort...</div>
+          </div>
+          <div class="fq">
+            <div class="fq-num">Frage 1b · falls «Technische Probleme»</div>
+            <div class="fq-text">Bitte beschreibe das Problem.</div>
+            <div class="fq-free"></div>
+            <div class="fopt" style="margin-top:4px;color:var(--muted);font-size:11px;font-style:italic">Deine Antwort... (Optional)</div>
+          </div>
+          <div class="fq">
+            <div class="fq-num">Frage 2</div>
+            <div class="fq-text">Was würde dich zur Rückkehr bewegen?</div>
+            <div class="fq-free"></div>
+            <div class="fopt" style="margin-top:4px;color:var(--muted);font-size:11px;font-style:italic">Deine Antwort... (Optional)</div>
+          </div>
+          <div class="fq">
+            <div class="fq-num">Frage 3 — Freitext</div>
+            <div class="fq-text">Möchtest du noch etwas hinzufügen?</div>
+            <div class="fq-free"></div>
+          </div>
+        </div>
+      </details>
+
+      <!-- KPIs -->
+      <div class="kpi-row">
+        <div class="kpi kpi-i">
+          <div class="kpi-val">33%</div>
+          <div class="kpi-label">Haben es schlicht<br>vergessen</div>
+        </div>
+        <div class="kpi kpi-i">
+          <div class="kpi-val">25%</div>
+          <div class="kpi-label">Nutzen bereits<br>ein anderes Tool</div>
+        </div>
+        <div class="kpi kpi-i">
+          <div class="kpi-val">21%</div>
+          <div class="kpi-label">Erwartungen<br>nicht erfüllt</div>
+        </div>
+        <div class="kpi kpi-n">
+          <div class="kpi-val">13%</div>
+          <div class="kpi-label">Technische<br>Probleme</div>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <p class="q-label">Hauptgrund für Inaktivität (Frage 1)</p>
+        <div class="bars">
+          <div class="bar-row">
+            <span class="bar-label">Vergessen</span>
+            <div class="bar-track"><div class="bar-fill fill-i" style="width:100%"></div></div>
+            <span class="bar-stat">8 — 33%</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Nutzt ein anderes Tool</span>
+            <div class="bar-track"><div class="bar-fill fill-i" style="width:75%"></div></div>
+            <span class="bar-stat">6 — 25%</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Erwartungen nicht erfüllt</span>
+            <div class="bar-track"><div class="bar-fill fill-i" style="width:63%"></div></div>
+            <span class="bar-stat">5 — 21%</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Technische Probleme</span>
+            <div class="bar-track"><div class="bar-fill fill-n" style="width:38%"></div></div>
+            <span class="bar-stat">3 — 13%</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Hat aufgehört zu trainieren</span>
+            <div class="bar-track"><div class="bar-fill fill-n" style="width:25%"></div></div>
+            <span class="bar-stat">2 — 8%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <p class="q-label">Genannte alternative Tools (von 6 Nutzern)</p>
+        <div class="bars">
+          <div class="bar-row">
+            <span class="bar-label">Garmin</span>
+            <div class="bar-track"><div class="bar-fill fill-i" style="width:100%"></div></div>
+            <span class="bar-stat">2</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Runna</span>
+            <div class="bar-track"><div class="bar-fill fill-i" style="width:100%"></div></div>
+            <span class="bar-stat">2</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">ChatGPT</span>
+            <div class="bar-track"><div class="bar-fill fill-n" style="width:50%"></div></div>
+            <span class="bar-stat">1</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Strava</span>
+            <div class="bar-track"><div class="bar-fill fill-n" style="width:50%"></div></div>
+            <span class="bar-stat">1</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Runningcoach App</span>
+            <div class="bar-track"><div class="bar-fill fill-n" style="width:50%"></div></div>
+            <span class="bar-stat">1</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <p class="q-label">Was zur Rückkehr motivieren würde (Frage 2) — Klassifizierung</p>
+        <p style="font-size:12.5px;color:var(--muted);font-style:italic;margin-bottom:14px">Jede Antwort wurde danach eingeteilt, ob der Grund ausserhalb unseres Einflussbereichs liegt («externe Motivation») oder ob er auf eine konkrete Produktverbesserung hinweist («Produktverbesserung»).</p>
+        <div class="bars" style="margin-bottom:20px">
+          <div class="bar-row">
+            <span class="bar-label">Produktverbesserung — umsetzbar</span>
+            <div class="bar-track"><div class="bar-fill fill-i" style="width:100%"></div></div>
+            <span class="bar-stat">13 — 65%</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Externe Motivation — nicht beeinflussbar</span>
+            <div class="bar-track"><div class="bar-fill fill-n" style="width:38%"></div></div>
+            <span class="bar-stat">5 — 25%</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Unklar / keine verwertbare Angabe</span>
+            <div class="bar-track"><div class="bar-fill fill-n" style="width:15%"></div></div>
+            <span class="bar-stat">2 — 10%</span>
+          </div>
+        </div>
+
+        <p class="q-label" style="margin-top:4px">Produktverbesserung — Themen (13 Antworten)</p>
+        <div class="bars" style="margin-bottom:12px">
+          <div class="bar-row">
+            <span class="bar-label">Starre Trainingspläne / feste Tage</span>
+            <div class="bar-track"><div class="bar-fill fill-i" style="width:100%"></div></div>
+            <span class="bar-stat">3 Nennungen</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Usability / Interface-Reibung</span>
+            <div class="bar-track"><div class="bar-fill fill-i" style="width:100%"></div></div>
+            <span class="bar-stat">4 Nennungen</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Feature-Lücken (Multi-Event, Krafttraining, D+/Höhenmeter, Triathlon)</span>
+            <div class="bar-track"><div class="bar-fill fill-i" style="width:100%"></div></div>
+            <span class="bar-stat">4 Nennungen</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Benachrichtigungen nicht konfigurierbar</span>
+            <div class="bar-track"><div class="bar-fill fill-n" style="width:50%"></div></div>
+            <span class="bar-stat">2 Nennungen</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Account-Reaktivierung umständlich</span>
+            <div class="bar-track"><div class="bar-fill fill-n" style="width:25%"></div></div>
+            <span class="bar-stat">1 Nennung</span>
+          </div>
+        </div>
+
+        <div style="background:var(--surface); border-radius:var(--radius); padding:16px 18px">
+          <p style="font-size:11.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Handlungsempfehlungen</p>
+          <ul style="padding-left:18px; display:flex; flex-direction:column; gap:9px; font-size:13px; line-height:1.5">
+            <li><strong>Trainingsplan flexibilisieren:</strong> feste Wochentage aufheben — Nutzer sollen Einheiten frei über die Woche verteilen können (dominik.egloff, f.morger).</li>
+            <li><strong>Onboarding &amp; Login vereinfachen:</strong> wiederholte Logins und unklare Navigation beheben, mobiler Bug nach 2. Login fixen (zeynepmeral), Bedienungsfreundlichkeit erhöhen (rahelnsteiner, rebecca.taraborrelli, nath-m).</li>
+            <li><strong>Feature-Lücken schliessen:</strong> mehrere Events/Testwettkämpfe gleichzeitig hinterlegen können, Krafttraining integrieren, D+/D-/Höhenmeter in die Trainingsanalyse einbeziehen, Triathlon-/Multisport-Pläne anbieten (wittwerch, ciccolini.olivier, christoph, samuel.reber).</li>
+            <li><strong>Benachrichtigungen konfigurierbar machen:</strong> manche Nutzer wollen weniger aufdringliche Reminder, andere wünschen sich explizit mehr Erinnerungen — beides über Einstellungen steuerbar machen (jakobkurmann1965, richard.deletroz).</li>
+            <li><strong>Reaktivierung erleichtern:</strong> einfacher Einladungslink, um ein pausiertes Profil ohne Reibung wieder zu starten (f.morger).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="comments-sep">
+        <p class="comments-title">Weiterzuleitende Kommentare</p>
+        <p class="comments-note">Originalsprache der Antworten beibehalten.</p>
+
+        <div class="comment comment-i">
+          <p class="comment-text">«&nbsp;Man kann nur einen Wettkampf hinterlegen, keine Test-Wettkämpfe. Planung der Trainings in der Woche sollte automatisch erfolgen. <strong>Krafttraining fehlt komplett.</strong> Keine Übersicht über die Wochenkilometer, Zeiten eintragen wo ich nicht trainieren kann etc.&nbsp;» + «&nbsp;Datasport ist ein Anbieter von Zeitmessungen. Ich möchte eine viel bessere Übersicht über mein <strong>Profil als Athlet</strong> mit allen meinen Resultaten. Der Trainingsprozess ist bereits durch andere Plattformen abgedeckt. Sowas wie <strong>finishr.app</strong> solltet ihr machen.&nbsp;»</p>
+          <div class="comment-footer">
+            <span class="lang-tag lang-de">DE</span>
+            <span class="ctag">wittwerch</span>
+            Grund: Erwartungen nicht erfüllt
+          </div>
+        </div>
+
+        <div class="comment comment-i">
+          <p class="comment-text">«&nbsp;Dans le cas d'entraînements pour <strong>Glacier3000Run</strong>, jusqu'ici le dénivelé n'est pas pris en compte (alors que c'est une composante importante de la course), ni même l'altitude.&nbsp;» — Q2: «&nbsp;Une analyse plus complète des données d'entraînement (calcul de l'effort sur la distance, le <strong>D+ et le D-</strong>, par exemple).&nbsp;»</p>
+          <div class="comment-footer">
+            <span class="lang-tag lang-fr">FR</span>
+            <span class="ctag">ciccolini.olivier</span>
+            Grund: Erwartungen nicht erfüllt
+          </div>
+        </div>
+
+        <div class="comment comment-i">
+          <p class="comment-text">«&nbsp;Kam nur die ersten zwei Mal in den Account — danach <strong>funktionierte es auf dem Handy nicht mehr!</strong> Sehr ärgerlich.&nbsp;» — Q2: «&nbsp;Nicht intuitiv das Handling der Seite. Sehr umständlich und veraltet sich einzuloggen. Eine einfache kompakte App oder Internetseite. Zudem die technischen Fehler müssten behoben sein. So wirkt es unseriös.&nbsp;»</p>
+          <div class="comment-footer">
+            <span class="lang-tag lang-de">DE</span>
+            <span class="ctag">zeynepmeral</span>
+            Grund: Technische Probleme
+          </div>
+        </div>
+
+        <div class="comment comment-i">
+          <p class="comment-text">«&nbsp;Die <strong>fixen Tage stören mich.</strong> Besser wäre: diese zwei Einheiten wären diese Woche für den Aufbau hilfreich — ich trainiere nicht fix an jedem gleichen Tag in der Woche, daher: tagesunabhängige Trainingseinheiten pro Woche.&nbsp;»</p>
+          <div class="comment-footer">
+            <span class="lang-tag lang-de">DE</span>
+            <span class="ctag">dominik.egloff</span>
+            Grund: Vergessen · 2 separate Antworten
+          </div>
+        </div>
+
+        <div class="comment comment-i">
+          <p class="comment-text">«&nbsp;Das <strong>zusätzliche Trainings nicht erfasst werden können</strong>. Oder mehrere an einem Tag nicht eingetragen werden konnten.&nbsp;» + «&nbsp;Ich fand es cool zum Ausprobieren und kann mir vorstellen, es wieder zu benutzen.&nbsp;»</p>
+          <div class="comment-footer">
+            <span class="lang-tag lang-de">DE</span>
+            <span class="ctag">h-und-m</span>
+            Grund: Erwartungen nicht erfüllt
+          </div>
+        </div>
+
+        <div class="comment comment-i">
+          <p class="comment-text">«&nbsp;Je n'ai pas compris où trouver et comment ça fonctionne.&nbsp;»</p>
+          <div class="comment-footer">
+            <span class="lang-tag lang-fr">FR</span>
+            <span class="ctag">nath-m</span>
+            Grund: Technische Probleme
+          </div>
+        </div>
+
+        <div class="comment comment-i">
+          <p class="comment-text">«&nbsp;Eine Einladung mit einem Link, den ich anklicken kann und dann funktioniert es wieder. Ich muss individueller trainieren können und keine Reminder, dass ich ein Training noch hochladen muss. Und wenn ich in einer Woche <strong>4× trainieren möchte, möchte ich Training bekommen</strong> und nicht den Hinweis, ich soll mich ausruhen.&nbsp;»</p>
+          <div class="comment-footer">
+            <span class="lang-tag lang-de">DE</span>
+            <span class="ctag">f.morger</span>
+            Grund: Technische Probleme
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ AKTIV-FORMULAR ════════════════════════════ -->
+  <div class="section">
+    <div class="sec-head">
+      <span class="badge badge-a">Aktiv</span>
+      <span class="sec-title">Aktiv-Formular — Nutzer in aktiver Nutzung</span>
+      <span class="sec-n">6 Nutzer*</span>
+    </div>
+    <div class="sec-body">
+
+      <!-- Form mockup -->
+      <details class="form-snap">
+        <summary class="form-snap-bar">
+          <span class="fbar-dots"><span></span><span></span><span></span></span>
+          <span class="fbar-title">Milo · Aktiv-Formular — gestellte Fragen</span>
+        </summary>
+        <div class="form-snap-body">
+          <div class="fq" style="grid-column: 1 / -1; border-right: none;">
+            <div class="fq-num">NPS</div>
+            <div class="fq-text">Wie wahrscheinlich ist es, dass du Milo weiterempfiehlst?</div>
+            <div class="fq-scale">
+              <div class="fq-scale-n">0</div><div class="fq-scale-n">1</div><div class="fq-scale-n">2</div>
+              <div class="fq-scale-n">3</div><div class="fq-scale-n">4</div><div class="fq-scale-n">5</div>
+              <div class="fq-scale-n">6</div><div class="fq-scale-n">7</div><div class="fq-scale-n">8</div>
+              <div class="fq-scale-n">9</div><div class="fq-scale-n">10</div>
+            </div>
+            <div class="fq-scale-label"><span>Überhaupt nicht</span><span>Auf jeden Fall</span></div>
+          </div>
+          <div class="fq">
+            <div class="fq-num">Frage 1</div>
+            <div class="fq-text">Hilft dir der Coach wirklich?</div>
+            <div class="fq-opts">
+              <div class="fopt"><span class="fopt-r"></span> Ja, deutlich</div>
+              <div class="fopt"><span class="fopt-r"></span> Nein</div>
+              <div class="fopt"><span class="fopt-r"></span> Noch zu früh, um das zu sagen</div>
+            </div>
+          </div>
+          <div class="fq">
+            <div class="fq-num">Frage 1b — Freitext</div>
+            <div class="fq-text">Warum? Was hat der Coach konkret gebracht?</div>
+            <div class="fq-free"></div>
+          </div>
+          <div class="fq">
+            <div class="fq-num">Frage 2</div>
+            <div class="fq-text">Was würde dir noch helfen oder sollte verbessert werden?</div>
+            <div class="fq-free"></div>
+          </div>
+          <div class="fq">
+            <div class="fq-num">Frage 4</div>
+            <div class="fq-text">Wie würdest du Milo in einem Satz beschreiben?</div>
+            <div class="fq-free"></div>
+          </div>
+        </div>
+      </details>
+
+      <!-- KPIs -->
+      <div class="kpi-row">
+        <div class="kpi kpi-i">
+          <div class="kpi-val">5,3<span style="font-size:16px;font-weight:400;color:var(--muted)">/10</span></div>
+          <div class="kpi-label">Durchschnittliche<br>Bewertung (NPS)</div>
+        </div>
+        <div class="kpi kpi-a">
+          <div class="kpi-val">2 / 6</div>
+          <div class="kpi-label">Coach hilft<br>klar und deutlich</div>
+        </div>
+        <div class="kpi kpi-n">
+          <div class="kpi-val">3 / 6</div>
+          <div class="kpi-label">Noch zu früh<br>für ein Urteil</div>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <p class="q-label">Verteilung der Einzelnoten</p>
+        <div class="nps-dots">
+          <div class="ndot ndot-d">2</div>
+          <div class="ndot ndot-d">3</div>
+          <div class="ndot ndot-d">5</div>
+          <div class="ndot ndot-d">6</div>
+          <div class="ndot ndot-p">7</div>
+          <div class="ndot ndot-pr">9</div>
+        </div>
+        <p class="nps-legend">Rot = unzufrieden (0–6) &nbsp;·&nbsp; Grau = neutral (7–8) &nbsp;·&nbsp; Grün = zufrieden (9–10)</p>
+      </div>
+
+      <div class="q-block">
+        <p class="q-label">Hilft der Coach wirklich? (Frage 1)</p>
+        <div class="bars">
+          <div class="bar-row">
+            <span class="bar-label">Noch zu früh um zu urteilen</span>
+            <div class="bar-track"><div class="bar-fill fill-n" style="width:100%"></div></div>
+            <span class="bar-stat">3 — 50%</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Ja, deutlich</span>
+            <div class="bar-track"><div class="bar-fill fill-a" style="width:67%"></div></div>
+            <span class="bar-stat">2 — 33%</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Nein</span>
+            <div class="bar-track"><div class="bar-fill fill-d" style="width:33%"></div></div>
+            <span class="bar-stat">1 — 17%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <p class="q-label">Was verbessert werden könnte (Frage 2 — Themen)</p>
+        <div class="bars">
+          <div class="bar-row">
+            <span class="bar-label">Bessere Verbindung mit Sportuhren</span>
+            <div class="bar-track"><div class="bar-fill fill-i" style="width:100%"></div></div>
+            <span class="bar-stat">2 Nennungen</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Flexibilität bei Planänderungen</span>
+            <div class="bar-track"><div class="bar-fill fill-n" style="width:50%"></div></div>
+            <span class="bar-stat">1 Nennung</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Individuelle HF-Anpassung</span>
+            <div class="bar-track"><div class="bar-fill fill-n" style="width:50%"></div></div>
+            <span class="bar-stat">1 Nennung</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Nächste Woche bereits sichtbar</span>
+            <div class="bar-track"><div class="bar-fill fill-n" style="width:50%"></div></div>
+            <span class="bar-stat">1 Nennung</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Temperatur / Untergrund / Höhenmeter einbeziehen</span>
+            <div class="bar-track"><div class="bar-fill fill-n" style="width:50%"></div></div>
+            <span class="bar-stat">1 Nennung</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Kalender-Bug nach Plananpassung <em style="font-style:italic;color:var(--muted);font-weight:400">(technischer Defekt, keine Feature-Idee)</em></span>
+            <div class="bar-track"><div class="bar-fill fill-d" style="width:50%"></div></div>
+            <span class="bar-stat">1 Nennung</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="comments-sep">
+        <p class="comments-title">Weiterzuleitende Kommentare</p>
+        <p class="comments-note">Originalsprache der Antworten beibehalten.</p>
+
+        <div class="comment comment-i">
+          <p class="comment-text">Q2: «&nbsp;Dass der Wochenplan für die folgende Woche bereits ersichtlich ist.&nbsp;» — Milo in einem Satz: «&nbsp;Die Trainings sind schlüssig erklärt. Ich weiss, warum ich zum Beispiel einen Longrun mache.&nbsp;»</p>
+          <div class="comment-footer">
+            <span class="lang-tag lang-de">DE</span>
+            <span class="ctag">sraidler · Note 5/10</span>
+            Hilft der Coach: Noch zu früh
+          </div>
+        </div>
+
+        <div class="comment comment-d">
+          <p class="comment-text">Q1-Detail: «&nbsp;Meine Regeneration nach den Trainings oder nach einem Lauf verläuft schneller und besser.&nbsp;» — Q2: «&nbsp;Ich habe heute das weitere Training ab nächster Woche bis zum Swissalpine 42 eingestellt/angefragt. Aber <strong>im Kalender erscheint nichts und die Trainings dieser Woche sind weg!</strong> Irgendetwas stimmt nicht. Auch Milo weisst immer darauf hin, dass das Training für den Swissalpine angepasst ist. Aber ich glaube dies nicht.&nbsp;» — Milo in einem Satz: «&nbsp;Versuchs mal.&nbsp;»</p>
+          <div class="comment-footer">
+            <span class="lang-tag lang-de">DE</span>
+            <span class="ctag">walter_ruegg · Note 3/10</span>
+            Bug · Kalender geleert nach Plananpassung · Hilft der Coach: Ja, deutlich
+          </div>
+        </div>
+
+        <div class="comment comment-d">
+          <p class="comment-text">Q1 (Nein): «&nbsp;Ich brauche die Trainings auf meiner <strong>Garmin Uhr</strong>.&nbsp;» — Q2: «&nbsp;Die Trainings müssen automatisch auf der Garmin Uhr ersichtlich sein.&nbsp;» — Milo in einem Satz: «&nbsp;Wie gesagt, für mich als Breitensportlerin ist der Funktionalitätsgrad nicht genügend, solange ich die Trainings nicht direkt auf meiner Garmin Uhr habe. Deshalb kann ich zum aktuellen Stand den Coach <strong>nicht weiterempfehlen</strong>.&nbsp;»</p>
+          <div class="comment-footer">
+            <span class="lang-tag lang-de">DE</span>
+            <span class="ctag">ltrees · Note 2/10</span>
+            Hilft der Coach: Nein
+          </div>
+        </div>
+
+        <div class="comment comment-a">
+          <p class="comment-text">Q1-Detail: «&nbsp;Für mich war sehr, sehr wichtig in der Anfangszeit "gebremst" zu werden. Es war keine Bremse, sondern ein Bewusstmachen, auf den <strong>Puls zu achten, statt Geschwindigkeit zu bolzen</strong>. Die Erklärungen warum etwas gemacht werden soll, hat immer motiviert!!&nbsp;» — Q2: «&nbsp;Bei Planänderungen, meist aus Zeitgründen, war die KI einfach <strong>unflexibel</strong> und hat die Einheit, die ich einen Tag später machte oder mit einer anderen getauscht habe, dann als <strong>nicht gemacht weggelassen</strong>.&nbsp;»</p>
+          <div class="comment-footer">
+            <span class="lang-tag lang-de">DE</span>
+            <span class="ctag">peter · Note 9/10</span>
+            Hilft der Coach: Ja, deutlich
+          </div>
+        </div>
+
+        <div class="comment comment-d">
+          <p class="comment-text">«&nbsp;Ich habe wieder aufgehört den Coach zu nutzen, weil leider immer dieselben Rückmeldungen kamen, die so leider nicht hilfreich waren. <strong>Mein Puls ist grundsätzlich, bekannterweise überdurchschnittlich hoch.</strong> So war keines meiner Trainings gut. Ich hätte spazieren gehen müssen. Somit für mich leider nur mit sehr viel Selbstinterpretation brauchbar.&nbsp;» — Q2: «&nbsp;Siehe letztes Textfeld. Wenn jemand beim total entspannt Joggen einen Puls von 130 hat, weil beim langsamen Spazieren schon bei 118, muss dies berücksichtigt werden können — und so eingestellt sein, dass danach auch die Rückmeldung entsprechend angepasst wird.&nbsp;»</p>
+          <div class="comment-footer">
+            <span class="lang-tag lang-de">DE</span>
+            <span class="ctag">Daninela · Note 6/10</span>
+            Hilft der Coach: Noch zu früh
+          </div>
+        </div>
+
+        <div class="comment comment-a">
+          <p class="comment-text">Q1-Detail: «&nbsp;Vorschlag der Trainings entspricht meinem Niveau und Vorstellung. <strong>Einfache Anpassung der Trainingstage.</strong> Einfacher Übertrag der Garmin-Daten. Informationen und Erläuterungen zum vorgeschlagenen Training helfen!&nbsp;» — Q2: «&nbsp;Die Genauigkeit der Übernahme meiner Garmin-Daten ist teilweise ungenau. Mehr Einbezug von <strong>Temperatur, Untergrund und Höhendifferenz</strong> im Training.&nbsp;»</p>
+          <div class="comment-footer">
+            <span class="lang-tag lang-de">DE</span>
+            <span class="ctag">brueggerk · Note 7/10</span>
+            Hilft der Coach: Noch zu früh
+          </div>
+        </div>
+
+      </div>
+
+      <p class="footnote">* Ein Doublon identifiziert (Daninela, 2 Einsendungen) — für die Statistiken wird nur die erste Antwort gezählt.</p>
+    </div>
+  </div>
+
+</div>
