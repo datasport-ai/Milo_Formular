@@ -266,6 +266,33 @@
   /* ── FOOTNOTE ────────────────────────────── */
   .footnote { font-size: 11.5px; color: var(--muted); margin-top: 18px; }
 
+  /* ── SOMMAIRE / TOC ──────────────────────── */
+  html { scroll-behavior: smooth; }
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 28px;
+  }
+  .toc-label {
+    font-size: 10.5px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 10px;
+  }
+  .toc-list { display: flex; flex-direction: column; gap: 3px; }
+  .toc-link {
+    font-size: 13.5px; color: var(--text); text-decoration: none;
+    display: flex; align-items: center; gap: 10px;
+    padding: 5px 6px; border-radius: 4px;
+  }
+  .toc-link:hover { background: var(--card); color: var(--a); }
+  .toc-num {
+    font-variant-numeric: tabular-nums; color: var(--muted);
+    font-size: 11.5px; width: 16px; flex-shrink: 0;
+  }
+  .toc-link .badge { flex-shrink: 0; }
+  :target { scroll-margin-top: 20px; }
+
   /* ── KURZFASSUNG ─────────────────────────── */
   .tldr {
     background: var(--surface);
@@ -325,8 +352,21 @@
     <hr class="pg-rule">
   </div>
 
+  <!-- ══ SOMMAIRE ═══════════════════════════════════ -->
+  <nav class="toc" aria-label="Sommaire">
+    <p class="toc-label">Sommaire</p>
+    <div class="toc-list">
+      <a class="toc-link" href="#rueklauf"><span class="toc-num">01</span> Kontaktierte Nutzer &amp; Rücklauf</a>
+      <a class="toc-link" href="#kurzfassung"><span class="toc-num">02</span> Kurzfassung</a>
+      <a class="toc-link" href="#next-steps"><span class="toc-num">03</span> Nächste Schritte — priorisierte Handlungsempfehlungen</a>
+      <a class="toc-link" href="#abbruch"><span class="toc-num">04</span> <span class="badge badge-d">Abbruch</span> Onboarding-Abbruch</a>
+      <a class="toc-link" href="#inaktiv"><span class="toc-num">05</span> <span class="badge badge-i">Inaktiv</span> Inaktivitäts-Formular</a>
+      <a class="toc-link" href="#aktiv"><span class="toc-num">06</span> <span class="badge badge-a">Aktiv</span> Aktiv-Formular</a>
+    </div>
+  </nav>
+
   <!-- ══ RÜCKLAUF-ÜBERSICHT ═════════════════════════ -->
-  <div class="section">
+  <div class="section" id="rueklauf">
     <div class="sec-head">
       <span class="sec-title">Kontaktierte Nutzer &amp; Rücklauf</span>
     </div>
@@ -363,7 +403,7 @@
   </div>
 
   <!-- ══ KURZFASSUNG ═══════════════════════════════ -->
-  <div class="tldr">
+  <div class="tldr" id="kurzfassung">
     <p class="tldr-label">Kurzfassung</p>
     <ul>
       <li><strong>Abbruch (23%):</strong> 67% aller Abbrüche passieren in der letzten Konfigurationsphase — v.a. bei Wearable-Verbindung und Freigabe der Resultate. Hauptgrund laut Formular: Zeitmangel.</li>
@@ -373,7 +413,7 @@
   </div>
 
   <!-- ══ NÄCHSTE SCHRITTE ═══════════════════════════ -->
-  <div class="section">
+  <div class="section" id="next-steps">
     <div class="sec-head">
       <span class="sec-title">Nächste Schritte — priorisierte Handlungsempfehlungen</span>
       <span class="sec-n">segmentübergreifend</span>
@@ -409,12 +449,19 @@
         <p style="font-size:11px;color:var(--muted);margin-top:8px">Segmente: Inaktiv · Aktiv</p>
       </div>
 
+      <div style="background:var(--surface); border-left:4px solid var(--i); border-radius:var(--radius); padding:16px 18px; margin-bottom:12px">
+        <p style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--i);margin-bottom:6px">Priorität 5 · Aufwand gering · Impact mittel (ermöglicht bessere Priorisierung)</p>
+        <p style="font-size:14px;font-weight:600;margin-bottom:6px">Klick-Tracking auf «Verbinden»-Buttons einführen (Wearable &amp; Freigabe der Resultate)</p>
+        <p style="font-size:13px;color:#444;line-height:1.55">Bei den zwei Schritten mit dem höchsten Abbruch — Freigabe der Resultate (29%) und Wearable verbinden (16%) — ist aktuell unklar, ob der Abbruch <strong>vor</strong> oder <strong>nach</strong> dem Klick auf «Verbinden» bzw. «Ja, nutze meine Daten» erfolgt. Ein manueller Test des Wearable-Flows zeigte, dass die technische Rückführung nach der Drittanbieter-Anmeldung (Garmin-OAuth) korrekt funktioniert — ein technischer Defekt ist damit als alleinige Ursache unwahrscheinlich. Empfehlung: Event-Tracking auf Klickebene einführen (z.B. «connect_clicked», «oauth_returned», «permission_granted/declined»), um zu quantifizieren, ob der Abbruch vor jeder Interaktion oder erst nach einem expliziten Klick erfolgt, und ob bestimmte Anbieter (z.B. Garmin vs. Polar) spezifisch zu weniger abgeschlossenen Onboardings führen.</p>
+        <p style="font-size:11px;color:var(--muted);margin-top:8px">Segment: Abbruch</p>
+      </div>
+
       <p style="font-size:12.5px;color:var(--muted);line-height:1.6">Weitere, tiefer priorisierte Themen (Feature-Lücken wie Multi-Event/Krafttraining/Höhenmeter, konfigurierbare Benachrichtigungen, einfachere Account-Reaktivierung) bleiben gültig — siehe Handlungsempfehlungen im Abschnitt «Inaktivitäts-Formular».</p>
     </div>
   </div>
 
   <!-- ══ ABBRUCH-FORMULAR ══════════════════════════ -->
-  <div class="section">
+  <div class="section" id="abbruch">
     <div class="sec-head">
       <span class="badge badge-d">Abbruch</span>
       <span class="sec-title">Onboarding-Abbruch — alle Nutzer + Formular-Rückmeldungen</span>
@@ -544,53 +591,9 @@
         </div>
       </div>
 
-      <!-- Form mockup — qualitative -->
+      <!-- Frage 1 -->
       <div class="q-block">
-        <p class="q-label">Qualitative Erhebung — gestellte Fragen (9 Formularantworten)</p>
-        <details class="form-snap" style="margin-bottom:0">
-          <summary class="form-snap-bar">
-            <span class="fbar-dots"><span></span><span></span><span></span></span>
-            <span class="fbar-title">Milo · Abbruch-Formular — an die 9 angeschriebenen Nutzer</span>
-          </summary>
-          <div class="form-snap-body">
-            <div class="fq">
-              <div class="fq-num">Automatisch erkannt</div>
-              <div class="fq-text">An welchem Schritt bist du abgebrochen?</div>
-              <div class="fopt" style="color:var(--muted);font-size:11.5px;font-style:italic">Aus der Session ermittelt</div>
-            </div>
-            <div class="fq">
-              <div class="fq-num">Frage 1</div>
-              <div class="fq-text">Du hast dein Fit for Life Coach-Setup bei einem bestimmten Schritt unterbrochen — was hat dich dazu bewogen?</div>
-              <div class="fq-opts">
-                <div class="fopt"><span class="fopt-r"></span> Keine Zeit</div>
-                <div class="fopt"><span class="fopt-r"></span> Onboarding zu lang</div>
-                <div class="fopt"><span class="fopt-r"></span> Dieser Schritt war unklar</div>
-                <div class="fopt"><span class="fopt-r"></span> Ich wollte keine Daten weitergeben</div>
-                <div class="fopt"><span class="fopt-r"></span> Technische Probleme</div>
-                <div class="fopt"><span class="fopt-r"></span> Anderes</div>
-              </div>
-            </div>
-            <div class="fq">
-              <div class="fq-num">Frage 2</div>
-              <div class="fq-text">Planst du, dein Fit for Life Coach-Profil noch abzuschliessen?</div>
-              <div class="fq-opts">
-                <div class="fopt"><span class="fopt-r"></span> Ja &nbsp;<span class="fopt-r"></span> Nein &nbsp;<span class="fopt-r"></span> Vielleicht</div>
-              </div>
-            </div>
-            <div class="fq">
-              <div class="fq-num">Frage 3 — Freitext</div>
-              <div class="fq-text">Möchtest du noch etwas hinzufügen?</div>
-              <div class="fq-free"></div>
-              <div class="fopt" style="margin-top:4px;color:var(--muted);font-size:11px;font-style:italic">Dein Kommentar... (Optional)</div>
-            </div>
-          </div>
-        </details>
-        <p class="footnote" style="padding:10px 16px 0">CHF 20.– Gutschein bei Datasport — Als Dankeschön für dein Feedback erhältst du einen Gutschein über CHF 20.–, den du für die Anmeldung zu einem Event deiner Wahl einlösen kannst. Wir schicken ihn direkt an deine hinterlegte E-Mail-Adresse.</p>
-      </div>
-
-      <!-- Form response insights -->
-      <div class="q-block">
-        <p class="q-label">Frage 1 — Abbruchgrund (9 Antworten)</p>
+        <p class="q-label">Frage 1 — «Du hast dein Fit for Life Coach-Setup bei einem bestimmten Schritt unterbrochen — was hat dich dazu bewogen?» (9 Antworten)</p>
         <div class="bars">
           <div class="bar-row">
             <span class="bar-label">Keine Zeit</span>
@@ -613,15 +616,25 @@
             <span class="bar-stat">1 — 11%</span>
           </div>
           <div class="bar-row">
-            <span class="bar-label">Anderes (fehlende Garmin-Sync)</span>
+            <span class="bar-label">Anderes</span>
             <div class="bar-track"><div class="bar-fill fill-n" style="width:20%"></div></div>
             <span class="bar-stat">1 — 11%</span>
           </div>
         </div>
+        <p class="comments-note" style="margin-top:14px">Zusatztext bei «Anderes» (1 Antwort mit Text):</p>
+        <div class="comment comment-d">
+          <p class="comment-text">«&nbsp;Synchronisation der geplanten Workouts z.B. nach <strong>Garmin Connect oder TrainingPeaks</strong> wäre für mich ein zwingendes Feature gewesen.&nbsp;»</p>
+          <div class="comment-footer">
+            <span class="lang-tag lang-de">DE</span>
+            <span class="ctag">smerillat</span>
+            Abbruch bei: Trainingsfrequenz
+          </div>
+        </div>
       </div>
 
+      <!-- Frage 2 -->
       <div class="q-block">
-        <p class="q-label">Frage 2 — Profil noch abschliessen? (9 Antworten)</p>
+        <p class="q-label">Frage 2 — «Planst du, dein Fit for Life Coach-Profil noch abzuschliessen?» (9 Antworten)</p>
         <div class="bars">
           <div class="bar-row">
             <span class="bar-label">Nein</span>
@@ -641,99 +654,42 @@
         </div>
       </div>
 
-      <div class="comments-sep">
-        <p class="comments-title">Frage 3 — Weiterzuleitende Kommentare</p>
-        <p class="comments-note">Originalsprache der Antworten beibehalten.</p>
+      <!-- Frage 3 — Freitext, alle Antworten -->
+      <div class="q-block">
+        <p class="q-label">Frage 3 — Freitext: «Möchtest du noch etwas hinzufügen?» (9 Antworten, 2 mit Text)</p>
+        <p class="comments-note">Originalsprache der Antworten beibehalten. Alle 9 Antworten aufgeführt — bei 7 wurde das Feld leer gelassen.</p>
 
         <div class="comment comment-d">
-          <p class="comment-text">«&nbsp;Synchronisation der geplanten Workouts z.B. nach <strong>Garmin Connect oder TrainingPeaks</strong> wäre für mich ein zwingendes Feature gewesen. Für etwas erfahrenere Läufer ist die Funktionalität ungenügend. Konkurrenten wie z.B. <strong>AI-Endurance</strong> bieten deutlich mehr.&nbsp;»</p>
+          <p class="comment-text">«&nbsp;Für etwas erfahrenere Läufer ist die Funktionalität ungenügend. Konkurrenten wie z.B. <strong>AI-Endurance</strong> bieten deutlich mehr.&nbsp;»</p>
           <div class="comment-footer">
             <span class="lang-tag lang-de">DE</span>
             <span class="ctag">smerillat</span>
-            Abbruch bei: Trainingsfrequenz · Grund: Anderes
+            Abbruch bei: Trainingsfrequenz · Grund: Anderes · Profil fertigstellen: Nein
           </div>
         </div>
 
-        <div class="comment comment-d">
-          <p class="comment-text">«&nbsp;<strong>Dieser Schritt war unklar</strong>&nbsp;» — explizit als Abbruchgrund für den Schritt <em>Lauftempo</em> (HOW_FAST_CAN_YOU_RUN) angegeben.</p>
+        <div class="comment comment-i">
+          <p class="comment-text">«&nbsp;Vielen Dank&nbsp;»</p>
           <div class="comment-footer">
             <span class="lang-tag lang-de">DE</span>
-            <span class="ctag">guenther.salathe</span>
-            Abbruch bei: Lauftempo · Wird Profil fertigstellen: Nein
+            <span class="ctag">mudlaffz</span>
+            Abbruch bei: Wochenplan · Grund: Keine Zeit · Profil fertigstellen: Nein
           </div>
         </div>
 
-        <div class="comment comment-d">
-          <p class="comment-text">«&nbsp;<strong>Onboarding zu lang</strong>&nbsp;» — explizit als Abbruchgrund angegeben.</p>
-          <div class="comment-footer">
-            <span class="lang-tag lang-de">DE</span>
-            <span class="ctag">jil.haeusler</span>
-            Abbruch bei: Max Heart Rate BPM · Wird Profil fertigstellen: Vielleicht
-          </div>
-        </div>
-
+        <p style="font-size:12px;color:var(--muted);margin-top:10px">Ohne Text: kat_tam, Gadalexsa, malux75, jil.haeusler, peter.aeberhard, sebastian.wolniak, guenther.salathe.</p>
       </div>
     </div>
   </div>
 
   <!-- ══ INAKTIVITÄTS-FORMULAR ══════════════════════ -->
-  <div class="section">
+  <div class="section" id="inaktiv">
     <div class="sec-head">
       <span class="badge badge-i">Inaktiv</span>
       <span class="sec-title">Inaktivitäts-Formular — Nutzer, die aufgehört haben</span>
       <span class="sec-n">24 Antworten</span>
     </div>
     <div class="sec-body">
-
-      <!-- Form mockup -->
-      <details class="form-snap">
-        <summary class="form-snap-bar">
-          <span class="fbar-dots"><span></span><span></span><span></span></span>
-          <span class="fbar-title">Milo · Inaktivitäts-Formular — gestellte Fragen</span>
-        </summary>
-        <div class="form-snap-body">
-          <div class="fq">
-            <div class="fq-num">Frage 1</div>
-            <div class="fq-text">Warum nutzt du Fit for Life Coach nicht mehr?</div>
-            <div class="fq-opts">
-              <div class="fopt"><span class="fopt-r"></span> Ich habe nicht mehr trainiert</div>
-              <div class="fopt"><span class="fopt-r"></span> Fit for Life Coach hat meine Erwartungen/Bedürfnisse nicht erfüllt</div>
-              <div class="fopt"><span class="fopt-r"></span> Ich nutze ein anderes Tool</div>
-              <div class="fopt"><span class="fopt-r"></span> Ich hatte es vergessen</div>
-              <div class="fopt"><span class="fopt-r"></span> Technische Probleme</div>
-            </div>
-          </div>
-          <div class="fq">
-            <div class="fq-num">Frage 1b · falls «Erwartungen/Bedürfnisse nicht erfüllt»</div>
-            <div class="fq-text">Was hat dich enttäuscht? Was hättest du erwartet?</div>
-            <div class="fq-free"></div>
-            <div class="fopt" style="margin-top:4px;color:var(--muted);font-size:11px;font-style:italic">Deine Antwort... (Optional)</div>
-          </div>
-          <div class="fq">
-            <div class="fq-num">Frage 1b · falls «Ich nutze ein anderes Tool»</div>
-            <div class="fq-text">Welches Tool nutzt du? Was bietet es dir, das Fit for Life Coach nicht bietet?</div>
-            <div class="fq-free"></div>
-            <div class="fopt" style="margin-top:4px;color:var(--muted);font-size:11px;font-style:italic">Deine Antwort...</div>
-          </div>
-          <div class="fq">
-            <div class="fq-num">Frage 1b · falls «Technische Probleme»</div>
-            <div class="fq-text">Bitte beschreibe das Problem.</div>
-            <div class="fq-free"></div>
-            <div class="fopt" style="margin-top:4px;color:var(--muted);font-size:11px;font-style:italic">Deine Antwort... (Optional)</div>
-          </div>
-          <div class="fq">
-            <div class="fq-num">Frage 2</div>
-            <div class="fq-text">Was würde dich zur Rückkehr bewegen?</div>
-            <div class="fq-free"></div>
-            <div class="fopt" style="margin-top:4px;color:var(--muted);font-size:11px;font-style:italic">Deine Antwort... (Optional)</div>
-          </div>
-          <div class="fq">
-            <div class="fq-num">Frage 3 — Freitext</div>
-            <div class="fq-text">Möchtest du noch etwas hinzufügen?</div>
-            <div class="fq-free"></div>
-          </div>
-        </div>
-      </details>
 
       <!-- KPIs -->
       <div class="kpi-row">
@@ -756,7 +712,7 @@
       </div>
 
       <div class="q-block">
-        <p class="q-label">Hauptgrund für Inaktivität (Frage 1)</p>
+        <p class="q-label">Frage 1 — «Warum nutzt du Fit for Life Coach nicht mehr?» (24 Antworten)</p>
         <div class="bars">
           <div class="bar-row">
             <span class="bar-label">Vergessen</span>
@@ -784,6 +740,57 @@
             <span class="bar-stat">2 — 8%</span>
           </div>
         </div>
+
+        <p class="comments-note" style="margin-top:16px">Zusatztext bei «Erwartungen/Bedürfnisse nicht erfüllt» (3 von 5 mit Text):</p>
+        <div class="comment comment-i">
+          <p class="comment-text">«&nbsp;Man kann nur einen Wettkampf hinterlegen, keine Test-Wettkämpfe. Planung der Trainings in der Woche sollte automatisch erfolgen, die Reihenfolge ist ja wichtig. <strong>Krafttraining fehlt komplett.</strong> Keine Übersicht über die Wochenkilometer, Zeiten eintragen wo ich nicht trainieren kann etc.&nbsp;»</p>
+          <div class="comment-footer"><span class="lang-tag lang-de">DE</span><span class="ctag">wittwerch</span></div>
+        </div>
+        <div class="comment comment-i">
+          <p class="comment-text">«&nbsp;Dans le cas d'entraînements pour <strong>Glacier3000Run</strong>, jusqu'ici le dénivelé n'est pas pris en compte (alors que c'est une composante importante de la course), ni même l'altitude.&nbsp;»</p>
+          <div class="comment-footer"><span class="lang-tag lang-fr">FR</span><span class="ctag">ciccolini.olivier</span></div>
+        </div>
+        <div class="comment comment-i">
+          <p class="comment-text">«&nbsp;Das <strong>zusätzliche Trainings nicht erfasst werden können</strong>. Oder mehrere an einem Tag nicht eingetragen werden konnten.&nbsp;»</p>
+          <div class="comment-footer"><span class="lang-tag lang-de">DE</span><span class="ctag">h-und-m</span></div>
+        </div>
+
+        <p class="comments-note" style="margin-top:16px">Zusatztext bei «Ich nutze ein anderes Tool» (6 von 6 mit Text):</p>
+        <div class="comment comment-i">
+          <p class="comment-text">«&nbsp;Ich benutze <strong>Runna</strong>, das mir alle Workouts direkt auf die Uhr synchronisiert und sehr einfach habzuhaben ist.&nbsp;»</p>
+          <div class="comment-footer"><span class="lang-tag lang-de">DE</span><span class="ctag">rahelnsteiner</span></div>
+        </div>
+        <div class="comment comment-i">
+          <p class="comment-text">«&nbsp;<strong>Garmin</strong>&nbsp;»</p>
+          <div class="comment-footer"><span class="lang-tag lang-de">DE</span><span class="ctag">christoph</span></div>
+        </div>
+        <div class="comment comment-i">
+          <p class="comment-text">«&nbsp;<strong>Chat GPT</strong>&nbsp;»</p>
+          <div class="comment-footer"><span class="lang-tag lang-de">DE</span><span class="ctag">rebecca.taraborrelli</span></div>
+        </div>
+        <div class="comment comment-i">
+          <p class="comment-text">«&nbsp;<strong>Garmin</strong>, es überschnitt sich mit dem Fit for Life Coach. Ich habe die Eingabe gemacht, dass der Start erst am 29.6.26 ist.&nbsp;»</p>
+          <div class="comment-footer"><span class="lang-tag lang-de">DE</span><span class="ctag">simiboesch</span></div>
+        </div>
+        <div class="comment comment-i">
+          <p class="comment-text">«&nbsp;<strong>Strava</strong>&nbsp;»</p>
+          <div class="comment-footer"><span class="lang-tag lang-fr">FR</span><span class="ctag">Jobin.julien</span></div>
+        </div>
+        <div class="comment comment-i">
+          <p class="comment-text">«&nbsp;<strong>Runningcoach App</strong>&nbsp;»</p>
+          <div class="comment-footer"><span class="lang-tag lang-de">DE</span><span class="ctag">pepe.daniele</span></div>
+        </div>
+
+        <p class="comments-note" style="margin-top:16px">Zusatztext bei «Technische Probleme» (2 von 3 mit Text):</p>
+        <div class="comment comment-i">
+          <p class="comment-text">«&nbsp;Kam nur die ersten zwei Mal in den Account — danach <strong>funktionierte es auf dem Handy nicht mehr!</strong> Sehr ärgerlich.&nbsp;»</p>
+          <div class="comment-footer"><span class="lang-tag lang-de">DE</span><span class="ctag">zeynepmeral</span></div>
+        </div>
+        <div class="comment comment-i">
+          <p class="comment-text">«&nbsp;Je n'ai pas compris où trouver et comment ça fonctionne.&nbsp;»</p>
+          <div class="comment-footer"><span class="lang-tag lang-fr">FR</span><span class="ctag">nath-m</span></div>
+        </div>
+        <p style="font-size:12px;color:var(--muted);margin-top:10px">Ohne Zusatztext: jboeniger, jakobkurmann1965 (2 Antworten), f.morger.</p>
       </div>
 
       <div class="q-block">
@@ -818,7 +825,7 @@
       </div>
 
       <div class="q-block">
-        <p class="q-label">Was zur Rückkehr motivieren würde (Frage 2) — Klassifizierung</p>
+        <p class="q-label">Frage 2 — «Was würde dich zur Rückkehr bewegen?» — Klassifizierung</p>
         <p style="font-size:12.5px;color:var(--muted);font-style:italic;margin-bottom:14px">Jede Antwort wurde danach eingeteilt, ob der Grund ausserhalb unseres Einflussbereichs liegt («externe Motivation») oder ob er auf eine konkrete Produktverbesserung hinweist («Produktverbesserung»).</p>
         <div class="bars" style="margin-bottom:20px">
           <div class="bar-row">
@@ -841,11 +848,6 @@
         <p class="q-label" style="margin-top:4px">Produktverbesserung — Themen (13 Antworten)</p>
         <div class="bars" style="margin-bottom:12px">
           <div class="bar-row">
-            <span class="bar-label">Starre Trainingspläne / feste Tage</span>
-            <div class="bar-track"><div class="bar-fill fill-i" style="width:100%"></div></div>
-            <span class="bar-stat">3 Nennungen</span>
-          </div>
-          <div class="bar-row">
             <span class="bar-label">Usability / Interface-Reibung</span>
             <div class="bar-track"><div class="bar-fill fill-i" style="width:100%"></div></div>
             <span class="bar-stat">4 Nennungen</span>
@@ -854,6 +856,11 @@
             <span class="bar-label">Feature-Lücken (Multi-Event, Krafttraining, D+/Höhenmeter, Triathlon)</span>
             <div class="bar-track"><div class="bar-fill fill-i" style="width:100%"></div></div>
             <span class="bar-stat">4 Nennungen</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Starre Trainingspläne / feste Tage</span>
+            <div class="bar-track"><div class="bar-fill fill-i" style="width:75%"></div></div>
+            <span class="bar-stat">3 Nennungen</span>
           </div>
           <div class="bar-row">
             <span class="bar-label">Benachrichtigungen nicht konfigurierbar</span>
@@ -867,142 +874,97 @@
           </div>
         </div>
 
+        <p class="comments-note">Alle Antworten (19 von 24 mit Text):</p>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:9px; margin-bottom:16px">
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">rahelnsteiner</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Ich denke, eine bessere Bedienungsfreundlichkeit.&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">wittwerch</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Features :)&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">christoph</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Triathlon-Pläne&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">ciccolini.olivier</span> <span class="lang-tag lang-fr">FR</span> «&nbsp;Une analyse plus complète des données d'entraînement (calcul de l'effort sur la distance, le D+ et le D-, par exemple).&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">rebecca.taraborrelli</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Weniger einloggen, Interfaces etc. dynamisches Abfragen und Anpassen… schwierig zu sagen. Der Vergleich mit Chat GPT, Google ist hart.&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">jakobkurmann1965</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Flexibel, weniger aufdringlich&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">zeynepmeral</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Bessere Technologie: nicht intuitiv das Handling der Seite. Auch sehr umständlich und veraltet sich einzuloggen. Eine einfache kompakte App oder Internetseite. Zudem die technischen Fehler müssten behoben sein. So wirkt es unseriös.&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">f.morger</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Eine Einladung mit einem Link, den ich anklicken kann und dann funktioniert es wieder. Ich muss individueller trainieren können und keine Reminder, dass ich ein Training noch hochladen muss. Und wenn ich in einer Woche 4× trainieren möchte, möchte ich Training bekommen und nicht den Hinweis, ich soll mich ausruhen.&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">anja_matiza</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Mehr trainieren&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">simiboesch</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Ein neuer Event&nbsp;» (1. Antwort)</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">simiboesch</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Start am 29.6.26&nbsp;» (2. Antwort)</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">Jobin.julien</span> <span class="lang-tag lang-fr">FR</span> «&nbsp;Je risque de revenir prochainement.&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">dominik.egloff</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Wegen Krankheit den Anschluss/Bezug verloren. Die fixen Tage stören mich. Besser wäre, diese zwei Einheiten wären diese Woche für den Aufbau hilfreich.&nbsp;» (1. Antwort)</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">nath-m</span> <span class="lang-tag lang-fr">FR</span> «&nbsp;Je réponds à votre sondage.&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">eduardo.peire</span> <span class="lang-tag lang-en">EN</span> «&nbsp;Motivation would help ;)&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">denise.marti</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Ich trainiere lieber nach Gefühl statt fixem Plan. Daher ist es für mich nicht optimal. Nehme aber immer wieder Inputs für mein Training auf.&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">richard.deletroz</span> <span class="lang-tag lang-fr">FR</span> «&nbsp;Une notification de rappel.&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">dominik.egloff</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Spannendes Format, ich trainiere nicht fix an jedem gleichen Tag in der Woche, daher tagesunabhängige Trainingseinheiten pro Woche anstehend.&nbsp;» (2. Antwort)</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">samuel.reber</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Ambitionierteres Training&nbsp;»</li>
+        </ul>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:16px">Ohne Text: h-und-m, jboeniger, jakobkurmann1965 (2. Antwort), pepe.daniele, regisjaccoud.</p>
+
         <div style="background:var(--surface); border-radius:var(--radius); padding:16px 18px">
-          <p style="font-size:11.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Handlungsempfehlungen</p>
-          <ul style="padding-left:18px; display:flex; flex-direction:column; gap:9px; font-size:13px; line-height:1.5">
-            <li><strong>Trainingsplan flexibilisieren:</strong> feste Wochentage aufheben — Nutzer sollen Einheiten frei über die Woche verteilen können (dominik.egloff, f.morger).</li>
-            <li><strong>Onboarding &amp; Login vereinfachen:</strong> wiederholte Logins und unklare Navigation beheben, mobiler Bug nach 2. Login fixen (zeynepmeral), Bedienungsfreundlichkeit erhöhen (rahelnsteiner, rebecca.taraborrelli, nath-m).</li>
-            <li><strong>Feature-Lücken schliessen:</strong> mehrere Events/Testwettkämpfe gleichzeitig hinterlegen können, Krafttraining integrieren, D+/D-/Höhenmeter in die Trainingsanalyse einbeziehen, Triathlon-/Multisport-Pläne anbieten (wittwerch, ciccolini.olivier, christoph, samuel.reber).</li>
-            <li><strong>Benachrichtigungen konfigurierbar machen:</strong> manche Nutzer wollen weniger aufdringliche Reminder, andere wünschen sich explizit mehr Erinnerungen — beides über Einstellungen steuerbar machen (jakobkurmann1965, richard.deletroz).</li>
-            <li><strong>Reaktivierung erleichtern:</strong> einfacher Einladungslink, um ein pausiertes Profil ohne Reibung wieder zu starten (f.morger).</li>
+          <p style="font-size:11.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Handlungsempfehlungen</p>
+
+          <p style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px">Trainingsplan-Logik &amp; Flexibilität</p>
+          <ul style="padding-left:18px; margin-bottom:16px; display:flex; flex-direction:column; gap:8px; font-size:13px; line-height:1.5">
+            <li>Mehrere Wettkämpfe/Testwettkämpfe gleichzeitig hinterlegen können — der Trainingsrhythmus soll sich automatisch um die Renntermine herum anpassen (wittwerch).</li>
+            <li>Trainingsreihenfolge aktiv empfehlen statt sie dem Athleten offen zu überlassen — die Abfolge der Einheiten ist trainingswirksam und sollte nicht frei definierbar sein (wittwerch).</li>
+            <li>Tagesunabhängige Einheiten: feste Wochentage aufheben, Training frei über die Woche verteilbar machen (dominik.egloff).</li>
+            <li>Programm bei unvorhergesehenen Ereignissen (z.B. Krankheit) anpassbar machen, statt starr am ursprünglichen Plan festzuhalten (dominik.egloff).</li>
+            <li>Coaching-Logik weniger starr gestalten: bei Trainingswunsch nicht pauschal zur Ruhe raten, individuelleres Training zulassen (rahelnsteiner, rebecca.taraborrelli, zeynepmeral, f.morger).</li>
+          </ul>
+
+          <p style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px">Trainingsdaten &amp; Auswertung</p>
+          <ul style="padding-left:18px; margin-bottom:16px; display:flex; flex-direction:column; gap:8px; font-size:13px; line-height:1.5">
+            <li>Vollständige Programm-Übersicht bereitstellen: Wochenkilometer, Höhenmeter D+/D- (wittwerch, ciccolini.olivier).</li>
+            <li>Ganzheitliche Athleten-Profilansicht mit allen Resultaten schaffen — Vorbild: finishr.app (wittwerch).</li>
+          </ul>
+
+          <p style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px">Feature-Lücken</p>
+          <ul style="padding-left:18px; margin-bottom:16px; display:flex; flex-direction:column; gap:8px; font-size:13px; line-height:1.5">
+            <li>Krafttraining vollständig integrieren — fehlt aktuell komplett (wittwerch).</li>
+            <li>Triathlon-/Multisport-Trainingspläne anbieten (christoph, samuel.reber).</li>
+          </ul>
+
+          <p style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px">Technische Probleme &amp; Einstieg</p>
+          <ul style="padding-left:18px; margin-bottom:16px; display:flex; flex-direction:column; gap:8px; font-size:13px; line-height:1.5">
+            <li>Mobile-Bug beheben: App funktionierte nach dem 2. Login nicht mehr auf dem Handy (zeynepmeral).</li>
+            <li>Login &amp; Navigation vereinfachen, Einstieg klarer gestalten (nath-m, zeynepmeral).</li>
+          </ul>
+
+          <p style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px">Benachrichtigungen &amp; Reaktivierung</p>
+          <ul style="padding-left:18px; display:flex; flex-direction:column; gap:8px; font-size:13px; line-height:1.5">
+            <li>Benachrichtigungen konfigurierbar machen: manche Nutzer wollen weniger aufdringliche Reminder, andere explizit mehr (jakobkurmann1965, richard.deletroz).</li>
+            <li>Reaktivierung erleichtern: einfacher Einladungslink, um ein pausiertes Profil ohne Reibung wieder zu starten (f.morger).</li>
           </ul>
         </div>
       </div>
 
       <div class="comments-sep">
-        <p class="comments-title">Weiterzuleitende Kommentare</p>
-        <p class="comments-note">Originalsprache der Antworten beibehalten.</p>
+        <p class="comments-title">Frage 3 — Freitext: «Möchtest du noch etwas hinzufügen?» (24 Antworten, 10 mit Text)</p>
+        <p class="comments-note">Originalsprache der Antworten beibehalten. Alle Antworten mit Text aufgeführt.</p>
 
-        <div class="comment comment-i">
-          <p class="comment-text">«&nbsp;Man kann nur einen Wettkampf hinterlegen, keine Test-Wettkämpfe. Planung der Trainings in der Woche sollte automatisch erfolgen. <strong>Krafttraining fehlt komplett.</strong> Keine Übersicht über die Wochenkilometer, Zeiten eintragen wo ich nicht trainieren kann etc.&nbsp;» + «&nbsp;Datasport ist ein Anbieter von Zeitmessungen. Ich möchte eine viel bessere Übersicht über mein <strong>Profil als Athlet</strong> mit allen meinen Resultaten. Der Trainingsprozess ist bereits durch andere Plattformen abgedeckt. Sowas wie <strong>finishr.app</strong> solltet ihr machen.&nbsp;»</p>
-          <div class="comment-footer">
-            <span class="lang-tag lang-de">DE</span>
-            <span class="ctag">wittwerch</span>
-            Grund: Erwartungen nicht erfüllt
-          </div>
-        </div>
-
-        <div class="comment comment-i">
-          <p class="comment-text">«&nbsp;Dans le cas d'entraînements pour <strong>Glacier3000Run</strong>, jusqu'ici le dénivelé n'est pas pris en compte (alors que c'est une composante importante de la course), ni même l'altitude.&nbsp;» — Q2: «&nbsp;Une analyse plus complète des données d'entraînement (calcul de l'effort sur la distance, le <strong>D+ et le D-</strong>, par exemple).&nbsp;»</p>
-          <div class="comment-footer">
-            <span class="lang-tag lang-fr">FR</span>
-            <span class="ctag">ciccolini.olivier</span>
-            Grund: Erwartungen nicht erfüllt
-          </div>
-        </div>
-
-        <div class="comment comment-i">
-          <p class="comment-text">«&nbsp;Kam nur die ersten zwei Mal in den Account — danach <strong>funktionierte es auf dem Handy nicht mehr!</strong> Sehr ärgerlich.&nbsp;» — Q2: «&nbsp;Nicht intuitiv das Handling der Seite. Sehr umständlich und veraltet sich einzuloggen. Eine einfache kompakte App oder Internetseite. Zudem die technischen Fehler müssten behoben sein. So wirkt es unseriös.&nbsp;»</p>
-          <div class="comment-footer">
-            <span class="lang-tag lang-de">DE</span>
-            <span class="ctag">zeynepmeral</span>
-            Grund: Technische Probleme
-          </div>
-        </div>
-
-        <div class="comment comment-i">
-          <p class="comment-text">«&nbsp;Die <strong>fixen Tage stören mich.</strong> Besser wäre: diese zwei Einheiten wären diese Woche für den Aufbau hilfreich — ich trainiere nicht fix an jedem gleichen Tag in der Woche, daher: tagesunabhängige Trainingseinheiten pro Woche.&nbsp;»</p>
-          <div class="comment-footer">
-            <span class="lang-tag lang-de">DE</span>
-            <span class="ctag">dominik.egloff</span>
-            Grund: Vergessen · 2 separate Antworten
-          </div>
-        </div>
-
-        <div class="comment comment-i">
-          <p class="comment-text">«&nbsp;Das <strong>zusätzliche Trainings nicht erfasst werden können</strong>. Oder mehrere an einem Tag nicht eingetragen werden konnten.&nbsp;» + «&nbsp;Ich fand es cool zum Ausprobieren und kann mir vorstellen, es wieder zu benutzen.&nbsp;»</p>
-          <div class="comment-footer">
-            <span class="lang-tag lang-de">DE</span>
-            <span class="ctag">h-und-m</span>
-            Grund: Erwartungen nicht erfüllt
-          </div>
-        </div>
-
-        <div class="comment comment-i">
-          <p class="comment-text">«&nbsp;Je n'ai pas compris où trouver et comment ça fonctionne.&nbsp;»</p>
-          <div class="comment-footer">
-            <span class="lang-tag lang-fr">FR</span>
-            <span class="ctag">nath-m</span>
-            Grund: Technische Probleme
-          </div>
-        </div>
-
-        <div class="comment comment-i">
-          <p class="comment-text">«&nbsp;Eine Einladung mit einem Link, den ich anklicken kann und dann funktioniert es wieder. Ich muss individueller trainieren können und keine Reminder, dass ich ein Training noch hochladen muss. Und wenn ich in einer Woche <strong>4× trainieren möchte, möchte ich Training bekommen</strong> und nicht den Hinweis, ich soll mich ausruhen.&nbsp;»</p>
-          <div class="comment-footer">
-            <span class="lang-tag lang-de">DE</span>
-            <span class="ctag">f.morger</span>
-            Grund: Technische Probleme
-          </div>
-        </div>
-
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:9px">
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">wittwerch</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Solche Plattformen gibt es bereits mehrere, welche alle weit voraus sind. Datasport ist ein Anbieter von Zeitmessungen (und im weitesten Sinne Events). Ich möchte da eine viel bessere Übersicht über mein <strong>Profil als Athlet</strong> haben, mit allen meinen Resultaten. Der Trainingsprozess ist mMn bereits abgedeckt durch andere Plattformen. Sowas wie <strong>finishr.app</strong> solltet ihr machen ;)&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">h-und-m</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Ich fand es cool zum Ausprobieren und kann mir vorstellen, es wieder zu benutzen. Aktuell mache ich nach einem Trainingsplan meiner Garmin Uhr Trainings.&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">anja_matiza</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Nein&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">simiboesch</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Ich wäre gespannt auf den Coach.&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">Jobin.julien</span> <span class="lang-tag lang-fr">FR</span> «&nbsp;Je vais réessayer tout ça bientôt.&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">dominik.egloff</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Ansonsten spannendes Format&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">nath-m</span> <span class="lang-tag lang-fr">FR</span> «&nbsp;Non&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">eduardo.peire</span> <span class="lang-tag lang-en">EN</span> «&nbsp;You are doing a good job and I really hope it works!!!&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">denise.marti</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Siehe Kommentar vorher&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">richard.deletroz</span> <span class="lang-tag lang-fr">FR</span> «&nbsp;Merci tout de même pour le lancement du produit.&nbsp;»</li>
+        </ul>
+        <p style="font-size:12px;color:var(--muted);margin-top:10px">Ohne Text: rahelnsteiner, christoph, ciccolini.olivier, rebecca.taraborrelli, jboeniger, jakobkurmann1965 (2 Antworten), zeynepmeral, f.morger, simiboesch (1. Antwort), pepe.daniele, regisjaccoud, dominik.egloff (2. Antwort), samuel.reber.</p>
       </div>
     </div>
   </div>
 
   <!-- ══ AKTIV-FORMULAR ════════════════════════════ -->
-  <div class="section">
+  <div class="section" id="aktiv">
     <div class="sec-head">
       <span class="badge badge-a">Aktiv</span>
       <span class="sec-title">Aktiv-Formular — Nutzer in aktiver Nutzung</span>
       <span class="sec-n">7 Nutzer*</span>
     </div>
     <div class="sec-body">
-
-      <!-- Form mockup -->
-      <details class="form-snap">
-        <summary class="form-snap-bar">
-          <span class="fbar-dots"><span></span><span></span><span></span></span>
-          <span class="fbar-title">Milo · Aktiv-Formular — gestellte Fragen</span>
-        </summary>
-        <div class="form-snap-body">
-          <div class="fq" style="grid-column: 1 / -1; border-right: none;">
-            <div class="fq-num">NPS</div>
-            <div class="fq-text">Wie wahrscheinlich ist es, dass du Milo weiterempfiehlst?</div>
-            <div class="fq-scale">
-              <div class="fq-scale-n">0</div><div class="fq-scale-n">1</div><div class="fq-scale-n">2</div>
-              <div class="fq-scale-n">3</div><div class="fq-scale-n">4</div><div class="fq-scale-n">5</div>
-              <div class="fq-scale-n">6</div><div class="fq-scale-n">7</div><div class="fq-scale-n">8</div>
-              <div class="fq-scale-n">9</div><div class="fq-scale-n">10</div>
-            </div>
-            <div class="fq-scale-label"><span>Überhaupt nicht</span><span>Auf jeden Fall</span></div>
-          </div>
-          <div class="fq">
-            <div class="fq-num">Frage 1</div>
-            <div class="fq-text">Hilft dir der Coach wirklich?</div>
-            <div class="fq-opts">
-              <div class="fopt"><span class="fopt-r"></span> Ja, deutlich</div>
-              <div class="fopt"><span class="fopt-r"></span> Nein</div>
-              <div class="fopt"><span class="fopt-r"></span> Noch zu früh, um das zu sagen</div>
-            </div>
-          </div>
-          <div class="fq">
-            <div class="fq-num">Frage 1b — Freitext</div>
-            <div class="fq-text">Warum? Was hat der Coach konkret gebracht?</div>
-            <div class="fq-free"></div>
-          </div>
-          <div class="fq">
-            <div class="fq-num">Frage 2</div>
-            <div class="fq-text">Was würde dir noch helfen oder sollte verbessert werden?</div>
-            <div class="fq-free"></div>
-          </div>
-          <div class="fq">
-            <div class="fq-num">Frage 4</div>
-            <div class="fq-text">Wie würdest du Milo in einem Satz beschreiben?</div>
-            <div class="fq-free"></div>
-          </div>
-        </div>
-      </details>
 
       <!-- KPIs -->
       <div class="kpi-row">
@@ -1021,11 +983,10 @@
       </div>
 
       <div class="q-block">
-        <p class="q-label">Verteilung der Einzelnoten</p>
+        <p class="q-label">NPS — «Wie wahrscheinlich ist es, dass du Milo weiterempfiehlst?» — Verteilung der Einzelnoten</p>
         <div class="nps-dots">
           <div class="ndot ndot-d">2</div>
           <div class="ndot ndot-d">3</div>
-          <div class="ndot ndot-d">5</div>
           <div class="ndot ndot-d">5</div>
           <div class="ndot ndot-d">6</div>
           <div class="ndot ndot-p">7</div>
@@ -1035,7 +996,7 @@
       </div>
 
       <div class="q-block">
-        <p class="q-label">Hilft der Coach wirklich? (Frage 1)</p>
+        <p class="q-label">Frage 1 — «Hilft dir der Coach wirklich?» (7 Antworten)</p>
         <div class="bars">
           <div class="bar-row">
             <span class="bar-label">Noch zu früh um zu urteilen</span>
@@ -1053,10 +1014,21 @@
             <span class="bar-stat">1 — 14%</span>
           </div>
         </div>
+
+        <p class="comments-note" style="margin-top:14px">Frage 1b — Freitext: «Warum? Was hat der Coach konkret gebracht?» (6 von 7 mit Text):</p>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:9px">
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">brueggerk · 7/10</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Vorschlag der Trainings entspricht meinem Niveau und Vorstellung. <strong>Einfache Anpassung der Trainingstage.</strong> Einfacher Übertrag der Garmin-Daten. Informationen und Erläuterungen zum vorgeschlagenen Training helfen!&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">ltrees · 2/10</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Ich brauche die Trainings auf meiner <strong>Garmin Uhr</strong>.&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">walter_ruegg · 3/10</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Meine Regeneration nach den Trainings oder nach einem Lauf verläuft schneller und besser.&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">Daninela · 6/10</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Ich habe wieder aufgehört den Coach zu nutzen, weil leider immer dieselben Rückmeldungen kamen, die so leider nicht hilfreich waren. <strong>Mein Puls ist grundsätzlich, bekannterweise überdurchschnittlich hoch.</strong> So war keines meiner Trainings gut. Ich hätte spazieren gehen müssen. Somit für mich leider nur mit sehr viel Selbstinterpretation brauchbar.&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">peter · 9/10</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Für mich war sehr, sehr wichtig in der Anfangszeit «gebremst» zu werden. Es war keine Bremse, sondern ein Bewusstmachen, auf den <strong>Puls zu achten, statt Geschwindigkeit zu bolzen</strong>. Die Erklärungen warum etwas gemacht werden soll, hat immer motiviert!!&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">mpbettoni · 5/10</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Die Variante die Zeit oder Distance zu verlängern oder verkürzen.&nbsp;»</li>
+        </ul>
+        <p style="font-size:12px;color:var(--muted);margin-top:10px">Ohne Text: sraidler.</p>
       </div>
 
       <div class="q-block">
-        <p class="q-label">Was verbessert werden könnte (Frage 2 — Themen)</p>
+        <p class="q-label">Frage 2 — «Was würde dir noch helfen oder sollte verbessert werden?» — Themen</p>
         <div class="bars">
           <div class="bar-row">
             <span class="bar-label">Bessere Verbindung mit Sportuhren</span>
@@ -1089,78 +1061,64 @@
             <span class="bar-stat">1 Nennung</span>
           </div>
         </div>
+
+        <p class="comments-note" style="margin-top:14px">Alle Antworten (7 von 7 mit Text):</p>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:9px">
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">sraidler · 5/10</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Dass der Wochenplan für die folgende Woche bereits ersichtlich ist.&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">brueggerk · 7/10</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Die Genauigkeit der Übernahme meiner Garmin-Daten ist teilweise ungenau. Mehr Einbezug von <strong>Temperatur, Untergrund und Höhendifferenz</strong> im Training.&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">ltrees · 2/10</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Die Trainings müssen automatisch auf der Garmin Uhr ersichtlich sein.&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">walter_ruegg · 3/10</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Ich habe heute das weitere Training ab nächster Woche bis zum Swissalpine 42 eingestellt/angefragt. Aber <strong>im Kalender erscheint nichts und die Trainings dieser Woche sind weg!</strong> Irgendetwas stimmt nicht. Auch Milo weisst immer darauf hin, dass das Training für den Swissalpine angepasst ist. Aber ich glaube dies nicht.&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">Daninela · 6/10</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Siehe letztes Textfeld. Wenn jemand beim total entspannt Joggen einen Puls von 130 hat, weil beim langsamen Spazieren schon bei 118, muss dies berücksichtigt werden können — und so eingestellt sein, dass danach auch die Rückmeldung entsprechend angepasst wird.&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">peter · 9/10</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Bei Planänderungen, meist aus Zeitgründen, war die KI einfach <strong>unflexibel</strong> und hat die Einheit, die ich einen Tag später machte oder mit einer anderen getauscht habe, dann als <strong>nicht gemacht weggelassen</strong>.&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">mpbettoni · 5/10</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Wenn ein Training verschoben wird, kann die KI nicht sagen, dass es nicht möglich ist. Bsp. zwei intensive Trainings («Ausdauer» und «Interval») hintereinander: die erste Planung war Montag Ausdauer, Dienstag Pause, Mittwoch Interval. Das Training vom Montag auf Dienstag verschieben war möglich. Am Schluss war ich am Montag genug früh zuhause und wollte das Training wieder auf Montag nehmen — das war jedoch <strong>nicht möglich, da am Sonntag davor schon ein Ausdauerlauf war, obwohl das Training von der KI selber schon am Montag so geplant war</strong>.&nbsp;»</li>
+        </ul>
+      </div>
+
+      <div class="q-block">
+        <div style="background:var(--surface); border-radius:var(--radius); padding:16px 18px">
+          <p style="font-size:11.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Handlungsempfehlungen</p>
+
+          <p style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px">Bugs beheben (höchste Priorität)</p>
+          <ul style="padding-left:18px; margin-bottom:16px; display:flex; flex-direction:column; gap:8px; font-size:13px; line-height:1.5">
+            <li>Kalender wird nach Plananpassung geleert (walter_ruegg, 3/10).</li>
+            <li>Verschiebungslogik inkonsistent: eine Einheit lässt sich verschieben, aber nicht mehr zurückverschieben, oder wird bei einem Tausch fälschlich als «nicht gemacht» markiert (peter, 9/10; mpbettoni, 5/10).</li>
+          </ul>
+
+          <p style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px">Sportuhren-Integration verbessern</p>
+          <ul style="padding-left:18px; margin-bottom:16px; display:flex; flex-direction:column; gap:8px; font-size:13px; line-height:1.5">
+            <li>Trainings direkt auf der Garmin-Uhr anzeigen, nicht nur in der App — aktuell Grund für fehlende Weiterempfehlung (ltrees, 2/10).</li>
+            <li>Genauigkeit der Garmin-Datenübernahme erhöhen (brueggerk, 7/10).</li>
+          </ul>
+
+          <p style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px">Individualisierung der Trainingssteuerung</p>
+          <ul style="padding-left:18px; margin-bottom:16px; display:flex; flex-direction:column; gap:8px; font-size:13px; line-height:1.5">
+            <li>Abweichende physiologische Baselines berücksichtigen (z.B. natürlich hoher Ruhepuls) statt generischer Pulszonen — aktuell wird jedes Training als «nicht gut» bewertet, obwohl es das subjektiv war (Daninela, 6/10).</li>
+            <li>Temperatur, Untergrund und Höhendifferenz in die Trainingsanalyse einbeziehen (brueggerk, 7/10).</li>
+          </ul>
+
+          <p style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px">Planungstransparenz</p>
+          <ul style="padding-left:18px; display:flex; flex-direction:column; gap:8px; font-size:13px; line-height:1.5">
+            <li>Wochenplan der Folgewoche schon im Voraus sichtbar machen, nicht erst kurzfristig (sraidler, 5/10).</li>
+          </ul>
+        </div>
       </div>
 
       <div class="comments-sep">
-        <p class="comments-title">Weiterzuleitende Kommentare</p>
+        <p class="comments-title">Frage 4 — «Wie würdest du Milo in einem Satz beschreiben?» (7 von 7 mit Text)</p>
         <p class="comments-note">Originalsprache der Antworten beibehalten.</p>
 
-        <div class="comment comment-i">
-          <p class="comment-text">Q2: «&nbsp;Dass der Wochenplan für die folgende Woche bereits ersichtlich ist.&nbsp;» — Milo in einem Satz: «&nbsp;Die Trainings sind schlüssig erklärt. Ich weiss, warum ich zum Beispiel einen Longrun mache.&nbsp;»</p>
-          <div class="comment-footer">
-            <span class="lang-tag lang-de">DE</span>
-            <span class="ctag">sraidler · Note 5/10</span>
-            Hilft der Coach: Noch zu früh
-          </div>
-        </div>
-
-        <div class="comment comment-d">
-          <p class="comment-text">Q1-Detail: «&nbsp;Meine Regeneration nach den Trainings oder nach einem Lauf verläuft schneller und besser.&nbsp;» — Q2: «&nbsp;Ich habe heute das weitere Training ab nächster Woche bis zum Swissalpine 42 eingestellt/angefragt. Aber <strong>im Kalender erscheint nichts und die Trainings dieser Woche sind weg!</strong> Irgendetwas stimmt nicht. Auch Milo weisst immer darauf hin, dass das Training für den Swissalpine angepasst ist. Aber ich glaube dies nicht.&nbsp;» — Milo in einem Satz: «&nbsp;Versuchs mal.&nbsp;»</p>
-          <div class="comment-footer">
-            <span class="lang-tag lang-de">DE</span>
-            <span class="ctag">walter_ruegg · Note 3/10</span>
-            Bug · Kalender geleert nach Plananpassung · Hilft der Coach: Ja, deutlich
-          </div>
-        </div>
-
-        <div class="comment comment-d">
-          <p class="comment-text">Q1 (Nein): «&nbsp;Ich brauche die Trainings auf meiner <strong>Garmin Uhr</strong>.&nbsp;» — Q2: «&nbsp;Die Trainings müssen automatisch auf der Garmin Uhr ersichtlich sein.&nbsp;» — Milo in einem Satz: «&nbsp;Wie gesagt, für mich als Breitensportlerin ist der Funktionalitätsgrad nicht genügend, solange ich die Trainings nicht direkt auf meiner Garmin Uhr habe. Deshalb kann ich zum aktuellen Stand den Coach <strong>nicht weiterempfehlen</strong>.&nbsp;»</p>
-          <div class="comment-footer">
-            <span class="lang-tag lang-de">DE</span>
-            <span class="ctag">ltrees · Note 2/10</span>
-            Hilft der Coach: Nein
-          </div>
-        </div>
-
-        <div class="comment comment-a">
-          <p class="comment-text">Q1-Detail: «&nbsp;Für mich war sehr, sehr wichtig in der Anfangszeit "gebremst" zu werden. Es war keine Bremse, sondern ein Bewusstmachen, auf den <strong>Puls zu achten, statt Geschwindigkeit zu bolzen</strong>. Die Erklärungen warum etwas gemacht werden soll, hat immer motiviert!!&nbsp;» — Q2: «&nbsp;Bei Planänderungen, meist aus Zeitgründen, war die KI einfach <strong>unflexibel</strong> und hat die Einheit, die ich einen Tag später machte oder mit einer anderen getauscht habe, dann als <strong>nicht gemacht weggelassen</strong>.&nbsp;»</p>
-          <div class="comment-footer">
-            <span class="lang-tag lang-de">DE</span>
-            <span class="ctag">peter · Note 9/10</span>
-            Hilft der Coach: Ja, deutlich
-          </div>
-        </div>
-
-        <div class="comment comment-d">
-          <p class="comment-text">«&nbsp;Ich habe wieder aufgehört den Coach zu nutzen, weil leider immer dieselben Rückmeldungen kamen, die so leider nicht hilfreich waren. <strong>Mein Puls ist grundsätzlich, bekannterweise überdurchschnittlich hoch.</strong> So war keines meiner Trainings gut. Ich hätte spazieren gehen müssen. Somit für mich leider nur mit sehr viel Selbstinterpretation brauchbar.&nbsp;» — Q2: «&nbsp;Siehe letztes Textfeld. Wenn jemand beim total entspannt Joggen einen Puls von 130 hat, weil beim langsamen Spazieren schon bei 118, muss dies berücksichtigt werden können — und so eingestellt sein, dass danach auch die Rückmeldung entsprechend angepasst wird.&nbsp;»</p>
-          <div class="comment-footer">
-            <span class="lang-tag lang-de">DE</span>
-            <span class="ctag">Daninela · Note 6/10</span>
-            Hilft der Coach: Noch zu früh
-          </div>
-        </div>
-
-        <div class="comment comment-a">
-          <p class="comment-text">Q1-Detail: «&nbsp;Vorschlag der Trainings entspricht meinem Niveau und Vorstellung. <strong>Einfache Anpassung der Trainingstage.</strong> Einfacher Übertrag der Garmin-Daten. Informationen und Erläuterungen zum vorgeschlagenen Training helfen!&nbsp;» — Q2: «&nbsp;Die Genauigkeit der Übernahme meiner Garmin-Daten ist teilweise ungenau. Mehr Einbezug von <strong>Temperatur, Untergrund und Höhendifferenz</strong> im Training.&nbsp;»</p>
-          <div class="comment-footer">
-            <span class="lang-tag lang-de">DE</span>
-            <span class="ctag">brueggerk · Note 7/10</span>
-            Hilft der Coach: Noch zu früh
-          </div>
-        </div>
-
-        <div class="comment comment-d">
-          <p class="comment-text">Q1-Detail: «&nbsp;Die Variante die Zeit oder Distance zu verlängern oder verkürzen.&nbsp;» — Q2: «&nbsp;Wenn ein Training verschoben wird, kann die KI nicht sagen, dass es nicht möglich ist. Bsp. zwei intensive Trainings ("Ausdauer" und "Interval") hintereinander: die erste Planung war Montag Ausdauer, Dienstag Pause, Mittwoch Interval. Das Training vom Montag auf Dienstag verschieben war möglich. Am Schluss war ich am Montag genug früh zuhause und wollte das Training wieder auf Montag nehmen — das war jedoch <strong>nicht möglich, da am Sonntag davor schon ein Ausdauerlauf war, obwohl das Training von der KI selber schon am Montag so geplant war</strong>.&nbsp;» — Milo in einem Satz: «&nbsp;Es bietet eine gute Grundlage für das Training.&nbsp;»</p>
-          <div class="comment-footer">
-            <span class="lang-tag lang-de">DE</span>
-            <span class="ctag">mpbettoni · Note 5/10</span>
-            Bug · Verschiebungslogik inkonsistent · Hilft der Coach: Ja, deutlich
-          </div>
-        </div>
-
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:9px">
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">sraidler · 5/10</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Die Trainings sind schlüssig erklärt. Ich weiss, warum ich zum Beispiel einen Longrun mache.&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">brueggerk · 7/10</span> <span class="lang-tag lang-de">DE</span> «&nbsp;KI-unterstützter Trainingsplan mit Einbezug der eigenen Trainingsdaten einer Smartwatch.&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">ltrees · 2/10</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Wie gesagt, für mich als Breitensportlerin ist der Funktionalitätsgrad nicht genügend, solange ich die Trainings nicht direkt auf meiner Garmin Uhr habe. Deshalb kann ich zum aktuellen Stand den Coach <strong>nicht weiterempfehlen</strong>.&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">walter_ruegg · 3/10</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Versuchs mal.&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">Daninela · 6/10</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Gibt gute Inputs, gute Trainingsideen und einen seriösen Plan, solange du ins Schema F passt.&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">peter · 9/10</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Dass der Plan durchstrukturiert und sinnvoll gestaltet ist.&nbsp;»</li>
+          <li style="font-size:13px; line-height:1.5"><span class="ctag">mpbettoni · 5/10</span> <span class="lang-tag lang-de">DE</span> «&nbsp;Es bietet eine gute Grundlage für das Training.&nbsp;»</li>
+        </ul>
       </div>
 
-      <p class="footnote">* Ein Doublon identifiziert (Daninela, 2 Einsendungen) — für die Statistiken wird nur die erste Antwort gezählt.</p>
+      <p class="footnote">* Ein Doublon identifiziert (Daninela, 2 Einsendungen) — für die Statistiken wird nur die erste Antwort gezählt. Die zweite Einsendung war grösstenteils eine Beschwerde über einen nicht erhaltenen Gutschein, enthielt aber einen zusätzlichen Punkt: «&nbsp;Schade ist das Programm so stur und lässt sich nicht an andere Pulsfrequenzen anpassen&nbsp;» — deckt sich mit ihrer ersten Antwort.</p>
     </div>
   </div>
 
