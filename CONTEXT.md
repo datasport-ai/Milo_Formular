@@ -31,7 +31,7 @@ The **Form Structures**, **Query Parameters**, and **Design System** sections be
 
 Segmentation was done manually from the Google Sheet:
 - **Active** (`form-active.html`): registered < 2 weeks ago AND logged > 50% of planned activities
-- **Inactive** (`form-inactive.html`): registered < 2 weeks ago AND logged ≤ 50% of planned activities
+- **Inactive** (`form-inactive.html`): registered > 2 weeks ago AND logged ≤ 50% of planned activities or have 0 planned activities
 - **Onboarding dropout** (`form-onboarding-dropout.html`): never completed onboarding (`onboarding_completed = No`)
 
 ## Personalized Link Formula (Users tab, column I)
