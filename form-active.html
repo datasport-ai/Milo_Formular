@@ -34,7 +34,6 @@
     box-shadow: 0 -4px 32px rgba(0,0,0,0.18);
     display: flex; flex-direction: column;
   }
-
   .lang-selector-wrap {
     display: flex;
     justify-content: flex-end;
@@ -56,147 +55,17 @@
   }
   .lang-selector:focus { outline: none; box-shadow: 0 0 0 2px rgba(231,14,34,0.2); }
 
-  .seg-progress { display: flex; gap: 4px; margin-bottom: 32px; }
-  .seg { flex: 1; height: 3px; border-radius: 2px; background: #DEDEDE; transition: background 0.3s; }
-  .seg.filled { background: #E70E22; }
-
-  .question-block { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 24px; }
-  .milo-avatar {
-    width: 40px; height: 40px; border-radius: 50%;
-    background: #720000; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center; margin-top: 2px;
-  }
-  .speech-bubble {
-    background: white; border-radius: 0 14px 14px 14px;
-    padding: 14px 16px; font-size: 15px; font-weight: 700;
-    color: #141414; line-height: 1.45;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.07); flex: 1;
-  }
-
-  .options { display: flex; flex-direction: column; gap: 10px; }
-  .option {
-    display: flex; align-items: center; gap: 14px;
-    padding: 15px 16px; background: white; border-radius: 10px;
-    cursor: pointer; border-left: 3px solid transparent;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-    transition: border-color 0.18s, background 0.18s;
-    font-size: 15px; color: #141414;
-  }
-  .option input[type="radio"] { display: none; }
-  .option .dot {
-    width: 20px; height: 20px; border-radius: 50%;
-    border: 2px solid #DEDEDE; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    transition: border-color 0.18s;
-  }
-  .option .dot::after {
-    content: ''; width: 10px; height: 10px;
-    border-radius: 50%; background: #E70E22; display: none;
-  }
-  .option.selected { border-left-color: #E70E22; background: #FFF5F5; }
-  .option.selected .dot { border-color: #E70E22; }
-  .option.selected .dot::after { display: block; }
-
-  .conditional-block { display: none; margin-top: 14px; }
-  .conditional-block.visible { display: block; }
-  .sub-question {
-    font-size: 13px; font-weight: 700; color: #141414;
-    margin-bottom: 8px; padding-left: 4px;
-  }
-
-  textarea {
-    width: 100%; min-height: 110px; border: none; border-radius: 10px;
-    padding: 14px 16px; font-family: 'Open Sans', Arial, sans-serif;
-    font-size: 15px; color: #141414; resize: vertical;
-    background: white; box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-    outline: none; transition: box-shadow 0.2s;
-  }
-  textarea:focus { box-shadow: 0 0 0 2px #E70E22; }
-
-  .optional-hint { font-size: 12px; color: #ADADAD; margin-top: 8px; margin-left: 2px; }
-
-  .nps-wrap { flex: 1; display: flex; flex-direction: column; gap: 16px; }
-  .nps-track-wrap { background: white; border-radius: 10px; padding: 20px 18px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
-  .nps-score-row { display: flex; justify-content: center; margin-bottom: 16px; }
-  .nps-score {
-    font-size: 52px; font-weight: 700; color: #E70E22;
-    line-height: 1; min-width: 64px; text-align: center;
-  }
-  input[type="range"] {
-    -webkit-appearance: none; appearance: none;
-    width: 100%; height: 4px; border-radius: 2px;
-    background: #DEDEDE; outline: none; cursor: pointer;
-  }
-  input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 26px; height: 26px; border-radius: 50%;
-    background: #E70E22; cursor: pointer;
-    box-shadow: 0 2px 8px rgba(231,14,34,0.4);
-  }
-  input[type="range"]::-moz-range-thumb {
-    width: 26px; height: 26px; border-radius: 50%;
-    background: #E70E22; cursor: pointer; border: none;
-    box-shadow: 0 2px 8px rgba(231,14,34,0.4);
-  }
-  .nps-labels {
-    display: flex; justify-content: space-between;
-    font-size: 11px; color: #ADADAD; margin-top: 10px;
-  }
-  .nps-steps {
-    display: flex; justify-content: space-between; padding: 0 2px;
-    margin-top: 8px;
-  }
-  .nps-step {
-    width: 26px; height: 26px; border-radius: 50%;
-    background: white; border: 2px solid #DEDEDE;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 11px; font-weight: 700; color: #ADADAD;
-    cursor: pointer; transition: all 0.15s;
-    flex-shrink: 0;
-  }
-  .nps-step.active { background: #E70E22; border-color: #E70E22; color: white; }
-  .nps-step.past { background: #FFE5E8; border-color: #F5B0B8; color: #E70E22; }
-
-  .incentive-box {
-    background: white; border-radius: 10px; padding: 14px 16px;
-    margin-top: 16px; margin-bottom: 16px; font-size: 13px; line-height: 1.55; color: #555;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-    border-left: 3px solid #E70E22;
-  }
-  .incentive-box strong { color: #141414; }
-
-  .error-msg { color: #E70E22; font-size: 12px; margin-top: 6px; display: none; }
-  .error-msg.visible { display: block; }
-
-  .nav { margin-top: 24px; display: flex; gap: 10px; align-items: center; }
-  .btn-back {
-    width: 44px; height: 44px; border-radius: 22px;
-    border: 2px solid #DEDEDE; background: white;
-    display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;
-  }
-  .btn-next {
-    flex: 1; height: 44px; background: #141414; color: white; border: none;
-    border-radius: 6px; font-family: 'Open Sans', Arial, sans-serif;
-    font-size: 15px; font-weight: 700; cursor: pointer;
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-    transition: opacity 0.2s;
-  }
-  .btn-next:hover { opacity: 0.85; }
-
-  .step { display: none; flex-direction: column; flex: 1; }
-  .step.active { display: flex; }
-
-  .thank-you {
+  .closed {
     flex: 1; display: flex; flex-direction: column;
     align-items: center; justify-content: center;
     text-align: center; padding: 20px; gap: 16px;
   }
-  .thank-you .ty-icon {
+  .closed .closed-icon {
     width: 72px; height: 72px; background: #E70E22; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
   }
-  .thank-you h2 { font-size: 22px; font-weight: 700; color: #141414; }
-  .thank-you p { font-size: 15px; color: #6b6b6b; line-height: 1.6; }
+  .closed h2 { font-size: 22px; font-weight: 700; color: #141414; }
+  .closed p { font-size: 15px; color: #6b6b6b; line-height: 1.6; max-width: 320px; }
 
   .main-panel { display: contents; }
 
@@ -261,110 +130,12 @@
     </select>
   </div>
 
-  <div class="seg-progress" id="segProgress">
-    <div class="seg filled"></div>
-    <div class="seg"></div>
-    <div class="seg"></div>
-    <div class="seg"></div>
-  </div>
-
-  <!-- Step 1 -->
-  <div class="step active" id="step-1">
-    <div class="question-block">
-      <div class="milo-avatar">
-        <svg width="22" height="22" viewBox="0 0 61 25" fill="none"><path d="M60.5365 25.0014H55.9676C51.9359 25.0014 48.0867 23.3177 45.3491 20.3565L31.4536 5.31674L35.9979 0.399178C36.486 -0.127851 37.3185 -0.127851 37.8046 0.399178L60.5365 25.0014Z" fill="white"/><path d="M22.1372 0.395558L0 24.9977H28.0535C35.1489 24.9977 38.8463 16.5509 34.0313 11.3401L23.909 0.385305C23.4312 -0.133521 22.611 -0.127369 22.1372 0.397609V0.395558Z" fill="white"/></svg>
-      </div>
-      <div class="speech-bubble" data-i18n="q1Question">Hilft dir der Coach, deine Leistungen zu verbessern?</div>
+  <div class="closed">
+    <div class="closed-icon">
+      <svg width="36" height="36" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
-    <div class="options" id="opts-1">
-      <label class="option"><input type="radio" name="q1" value="Ja, deutlich"><span class="dot"></span><span>Ja, deutlich</span></label>
-      <label class="option"><input type="radio" name="q1" value="Noch zu früh, um das zu sagen"><span class="dot"></span><span>Noch zu früh, um das zu sagen</span></label>
-      <label class="option"><input type="radio" name="q1" value="Noch nicht"><span class="dot"></span><span>Noch nicht</span></label>
-      <label class="option"><input type="radio" name="q1" value="Nein"><span class="dot"></span><span>Nein</span></label>
-    </div>
-    <div class="conditional-block" id="q1-follow-block">
-      <p class="sub-question" id="q1-follow-label"></p>
-      <textarea id="q1-follow" data-i18n-ph="answerPlaceholder" placeholder="Deine Antwort..."></textarea>
-      <p class="optional-hint" data-i18n="optional">Optional</p>
-    </div>
-    <div class="error-msg" id="err-1" data-i18n="err1">Bitte wähle eine Option aus.</div>
-    <div class="nav">
-      <button class="btn-next" onclick="next(1)"><span data-i18n="btnNext">Weiter</span> <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-    </div>
-  </div>
-
-  <!-- Step 2 -->
-  <div class="step" id="step-2">
-    <div class="question-block">
-      <div class="milo-avatar">
-        <svg width="22" height="22" viewBox="0 0 61 25" fill="none"><path d="M60.5365 25.0014H55.9676C51.9359 25.0014 48.0867 23.3177 45.3491 20.3565L31.4536 5.31674L35.9979 0.399178C36.486 -0.127851 37.3185 -0.127851 37.8046 0.399178L60.5365 25.0014Z" fill="white"/><path d="M22.1372 0.395558L0 24.9977H28.0535C35.1489 24.9977 38.8463 16.5509 34.0313 11.3401L23.909 0.385305C23.4312 -0.133521 22.611 -0.127369 22.1372 0.397609V0.395558Z" fill="white"/></svg>
-      </div>
-      <div class="speech-bubble" data-i18n="q2Question">Nenn uns ein oder zwei Dinge, die wir dringend verbessern müssen.</div>
-    </div>
-    <textarea id="q2" data-i18n-ph="feedbackPlaceholder" placeholder="Dein Feedback..."></textarea>
-    <p class="optional-hint" data-i18n="optional">Optional</p>
-    <div class="nav">
-      <button class="btn-back" onclick="back(2)"><svg fill="none" viewBox="0 0 24 24" width="18" height="18"><path d="M15 18l-6-6 6-6" stroke="#141414" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <button class="btn-next" onclick="next(2)"><span data-i18n="btnNext">Weiter</span> <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-    </div>
-  </div>
-
-  <!-- Step 3: NPS -->
-  <div class="step" id="step-3">
-    <div class="question-block">
-      <div class="milo-avatar">
-        <svg width="22" height="22" viewBox="0 0 61 25" fill="none"><path d="M60.5365 25.0014H55.9676C51.9359 25.0014 48.0867 23.3177 45.3491 20.3565L31.4536 5.31674L35.9979 0.399178C36.486 -0.127851 37.3185 -0.127851 37.8046 0.399178L60.5365 25.0014Z" fill="white"/><path d="M22.1372 0.395558L0 24.9977H28.0535C35.1489 24.9977 38.8463 16.5509 34.0313 11.3401L23.909 0.385305C23.4312 -0.133521 22.611 -0.127369 22.1372 0.397609V0.395558Z" fill="white"/></svg>
-      </div>
-      <div class="speech-bubble" data-i18n="npsQuestion">Auf einer Skala von 0 bis 10: Würdest du Fit for Life Coach jemandem in deinem Umfeld empfehlen?</div>
-    </div>
-    <div class="nps-wrap">
-      <div class="nps-track-wrap">
-        <div class="nps-score-row">
-          <div class="nps-score" id="npsScore">5</div>
-        </div>
-        <input type="range" id="npsSlider" min="0" max="10" value="5" oninput="updateNPS(this.value)">
-        <div class="nps-labels">
-          <span data-i18n="npsLow">0 — Gar nicht</span>
-          <span data-i18n="npsHigh">10 — Auf jeden Fall</span>
-        </div>
-      </div>
-      <div class="nps-steps" id="npsSteps"></div>
-    </div>
-    <div class="nav">
-      <button class="btn-back" onclick="back(3)"><svg fill="none" viewBox="0 0 24 24" width="18" height="18"><path d="M15 18l-6-6 6-6" stroke="#141414" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <button class="btn-next" onclick="next(3)"><span data-i18n="btnNext">Weiter</span> <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-    </div>
-  </div>
-
-  <!-- Step 4 -->
-  <div class="step" id="step-4">
-    <div class="question-block">
-      <div class="milo-avatar">
-        <svg width="22" height="22" viewBox="0 0 61 25" fill="none"><path d="M60.5365 25.0014H55.9676C51.9359 25.0014 48.0867 23.3177 45.3491 20.3565L31.4536 5.31674L35.9979 0.399178C36.486 -0.127851 37.3185 -0.127851 37.8046 0.399178L60.5365 25.0014Z" fill="white"/><path d="M22.1372 0.395558L0 24.9977H28.0535C35.1489 24.9977 38.8463 16.5509 34.0313 11.3401L23.909 0.385305C23.4312 -0.133521 22.611 -0.127369 22.1372 0.397609V0.395558Z" fill="white"/></svg>
-      </div>
-      <div class="speech-bubble" data-i18n="q4Question">Wenn du Fit for Life Coach einem Freund erklären müsstest, was würdest du sagen?</div>
-    </div>
-    <textarea id="q4" data-i18n-ph="answerPlaceholder" placeholder="Deine Antwort..."></textarea>
-    <p class="optional-hint" data-i18n="optional">Optional</p>
-    <div class="incentive-box">
-      <strong>CHF 20.– Gutschein bei Datasport</strong> — Als Dankeschön für dein Feedback erhältst du einen Gutschein über CHF 20.–, den du für die Anmeldung zu einem Event deiner Wahl einlösen kannst. Wir schicken ihn direkt an deine hinterlegte E-Mail-Adresse.
-    </div>
-    <div class="error-msg" id="err-4" data-i18n="err4">Bitte beantworte diese Frage.</div>
-    <div class="nav">
-      <button class="btn-back" onclick="back(4)"><svg fill="none" viewBox="0 0 24 24" width="18" height="18"><path d="M15 18l-6-6 6-6" stroke="#141414" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <button class="btn-next" onclick="submit()"><span data-i18n="btnSubmit">Absenden</span> <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-    </div>
-  </div>
-
-  <!-- Thank you -->
-  <div class="step" id="step-done">
-    <div class="thank-you">
-      <div class="ty-icon">
-        <svg width="36" height="36" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <h2 data-i18n="tyTitle">Vielen Dank!</h2>
-      <p data-i18n="tyText">Dein Feedback hilft uns, Fit for Life Coach noch besser zu machen. Wir freuen uns, dich als Teil der Community zu haben.</p>
-    </div>
+    <h2 data-i18n="closedTitle">Die Umfrage ist beendet</h2>
+    <p data-i18n="closedText">Der Befragungszeitraum ist abgeschlossen. Ein herzliches Dankeschön an alle, die teilgenommen haben — eure Antworten haben uns enorm geholfen, Fit for Life Coach weiter zu verbessern!</p>
   </div>
 
 </div>
@@ -373,251 +144,38 @@
 <script>
   var TRANSLATIONS = {
     de: {
-      q1Question: 'Hilft dir der Coach, deine Leistungen zu verbessern?',
-      q1Options: ['Ja, deutlich', 'Noch zu früh, um das zu sagen', 'Noch nicht', 'Nein'],
-      q1Follow: {
-        'Ja, deutlich': 'Was gefällt dir besonders gut? Nenn uns ein oder zwei Dinge.',
-        'Noch zu früh, um das zu sagen': 'Was hat dich bisher überzeugt — oder was fehlt noch?',
-        'Noch nicht': 'Was hält dich zurück? Was würde dir helfen?',
-        'Nein': 'Was hat dich enttäuscht? Was hättest du erwartet?'
-      },
-      answerPlaceholder: 'Deine Antwort...',
-      feedbackPlaceholder: 'Dein Feedback...',
-      optional: 'Optional',
-      err1: 'Bitte wähle eine Option aus.',
-      q2Question: 'Nenn uns ein oder zwei Dinge, die wir dringend verbessern müssen.',
-      npsQuestion: 'Auf einer Skala von 0 bis 10: Würdest du Fit for Life Coach jemandem in deinem Umfeld empfehlen?',
-      npsLow: '0 — Gar nicht',
-      npsHigh: '10 — Auf jeden Fall',
-      q4Question: 'Wenn du Fit for Life Coach einem Freund erklären müsstest, was würdest du sagen?',
-      err4: 'Bitte beantworte diese Frage.',
-      incentive: '<strong>CHF 20.– Gutschein bei Datasport</strong> — Als Dankeschön für dein Feedback erhältst du einen Gutschein über CHF 20.–, den du für die Anmeldung zu einem Event deiner Wahl einlösen kannst. Wir schicken ihn direkt an deine hinterlegte E-Mail-Adresse.',
-      btnNext: 'Weiter',
-      btnSubmit: 'Absenden',
-      tyTitle: 'Vielen Dank!',
-      tyText: 'Dein Feedback hilft uns, Fit for Life Coach noch besser zu machen. Wir freuen uns, dich als Teil der Community zu haben.'
+      closedTitle: 'Die Umfrage ist beendet',
+      closedText: 'Der Befragungszeitraum ist abgeschlossen. Ein herzliches Dankeschön an alle, die teilgenommen haben — eure Antworten haben uns enorm geholfen, Fit for Life Coach weiter zu verbessern!'
     },
     fr: {
-      q1Question: 'Le coach t’aide-t-il à améliorer tes performances ?',
-      q1Options: ['Oui, clairement', 'Trop tôt pour le dire', 'Pas encore', 'Non'],
-      q1Follow: {
-        'Oui, clairement': 'Qu’est-ce qui te plaît particulièrement ? Cite une ou deux choses.',
-        'Trop tôt pour le dire': 'Qu’est-ce qui t’a convaincu jusqu’ici — ou qu’est-ce qui manque encore ?',
-        'Pas encore': 'Qu’est-ce qui te retient ? Qu’est-ce qui t’aiderait ?',
-        'Non': 'Qu’est-ce qui t’a déçu ? À quoi t’attendais-tu ?'
-      },
-      answerPlaceholder: 'Ta réponse...',
-      feedbackPlaceholder: 'Ton feedback...',
-      optional: 'Optionnel',
-      err1: 'Merci de choisir une option.',
-      q2Question: 'Cite une ou deux choses que nous devons absolument améliorer.',
-      npsQuestion: 'Sur une échelle de 0 à 10 : recommanderais-tu Fit for Life Coach à quelqu’un de ton entourage ?',
-      npsLow: '0 — Pas du tout',
-      npsHigh: '10 — Absolument',
-      q4Question: 'Si tu devais expliquer Fit for Life Coach à un ami, que dirais-tu ?',
-      err4: 'Merci de répondre à cette question.',
-      incentive: '<strong>Bon de CHF 20.– chez Datasport</strong> — En remerciement de ton feedback, tu recevras un bon d’une valeur de CHF 20.– à utiliser pour t’inscrire à l’événement de ton choix. Nous l’enverrons directement à ton adresse e-mail.',
-      btnNext: 'Suivant',
-      btnSubmit: 'Envoyer',
-      tyTitle: 'Merci beaucoup !',
-      tyText: 'Ton feedback nous aide à améliorer Fit for Life Coach. Nous sommes ravis de t’avoir dans notre communauté.'
+      closedTitle: 'Le sondage est terminé',
+      closedText: 'La période de réponse est désormais close. Un grand merci à toutes celles et ceux qui ont participé — vos réponses nous ont énormément aidés à améliorer Fit for Life Coach !'
     },
     en: {
-      q1Question: 'Is the coach helping you improve your performance?',
-      q1Options: ['Yes, clearly', 'Too early to say', 'Not yet', 'No'],
-      q1Follow: {
-        'Yes, clearly': 'What do you particularly like? Name one or two things.',
-        'Too early to say': 'What has convinced you so far — or what’s still missing?',
-        'Not yet': 'What’s holding you back? What would help you?',
-        'No': 'What disappointed you? What did you expect?'
-      },
-      answerPlaceholder: 'Your answer...',
-      feedbackPlaceholder: 'Your feedback...',
-      optional: 'Optional',
-      err1: 'Please select an option.',
-      q2Question: 'Name one or two things we urgently need to improve.',
-      npsQuestion: 'On a scale of 0 to 10: would you recommend Fit for Life Coach to someone in your circle?',
-      npsLow: '0 — Not at all',
-      npsHigh: '10 — Absolutely',
-      q4Question: 'If you had to explain Fit for Life Coach to a friend, what would you say?',
-      err4: 'Please answer this question.',
-      incentive: '<strong>CHF 20.– voucher at Datasport</strong> — As a thank-you for your feedback, you’ll receive a CHF 20.– voucher to use for registering for an event of your choice. We’ll send it directly to your registered email address.',
-      btnNext: 'Next',
-      btnSubmit: 'Submit',
-      tyTitle: 'Thank you!',
-      tyText: 'Your feedback helps us make Fit for Life Coach even better. We’re glad to have you as part of the community.'
+      closedTitle: 'The survey is now closed',
+      closedText: 'The response period has ended. A big thank you to everyone who took part — your answers have helped us enormously in improving Fit for Life Coach!'
     },
     it: {
-      q1Question: 'Il coach ti aiuta a migliorare le tue prestazioni?',
-      q1Options: ['Sì, chiaramente', 'È troppo presto per dirlo', 'Non ancora', 'No'],
-      q1Follow: {
-        'Sì, chiaramente': 'Cosa ti piace particolarmente? Indica una o due cose.',
-        'È troppo presto per dirlo': 'Cosa ti ha convinto finora — o cosa manca ancora?',
-        'Non ancora': 'Cosa ti trattiene? Cosa ti aiuterebbe?',
-        'No': 'Cosa ti ha deluso? Cosa ti aspettavi?'
-      },
-      answerPlaceholder: 'La tua risposta...',
-      feedbackPlaceholder: 'Il tuo feedback...',
-      optional: 'Facoltativo',
-      err1: 'Seleziona un’opzione.',
-      q2Question: 'Indica una o due cose che dobbiamo migliorare urgentemente.',
-      npsQuestion: 'Su una scala da 0 a 10: consiglieresti Fit for Life Coach a qualcuno della tua cerchia?',
-      npsLow: '0 — Per niente',
-      npsHigh: '10 — Assolutamente',
-      q4Question: 'Se dovessi spiegare Fit for Life Coach a un amico, cosa diresti?',
-      err4: 'Rispondi a questa domanda.',
-      incentive: '<strong>Buono da CHF 20.– da Datasport</strong> — Come ringraziamento per il tuo feedback, riceverai un buono del valore di CHF 20.– da utilizzare per iscriverti all’evento di tua scelta. Lo invieremo direttamente al tuo indirizzo email.',
-      btnNext: 'Avanti',
-      btnSubmit: 'Invia',
-      tyTitle: 'Grazie mille!',
-      tyText: 'Il tuo feedback ci aiuta a migliorare Fit for Life Coach. Siamo felici di averti nella nostra comunità.'
+      closedTitle: 'Il sondaggio è terminato',
+      closedText: 'Il periodo di risposta è ora concluso. Un grande grazie a tutti coloro che hanno partecipato — le vostre risposte ci hanno aiutato enormemente a migliorare Fit for Life Coach!'
     }
   };
 
-  var currentLang = 'de';
-  var Q1_FOLLOW = TRANSLATIONS.de.q1Follow;
-
   function setLang(lang) {
-    currentLang = lang;
     document.documentElement.lang = lang;
-    var t = TRANSLATIONS[lang];
-
+    var t = TRANSLATIONS[lang] || TRANSLATIONS.de;
     document.querySelectorAll('[data-i18n]').forEach(function(el) {
       var key = el.getAttribute('data-i18n');
       if (t[key] !== undefined) el.textContent = t[key];
     });
-
-    document.querySelectorAll('[data-i18n-ph]').forEach(function(el) {
-      var key = el.getAttribute('data-i18n-ph');
-      if (t[key] !== undefined) el.placeholder = t[key];
-    });
-
-    document.querySelector('.incentive-box').innerHTML = t.incentive;
-
-    var opts = document.querySelectorAll('#opts-1 .option');
-    var prevSelected = -1;
-    opts.forEach(function(opt, i) { if (opt.querySelector('input').checked) prevSelected = i; });
-    opts.forEach(function(opt, i) {
-      var newVal = t.q1Options[i];
-      opt.querySelector('input').value = newVal;
-      opt.querySelector('span:last-child').textContent = newVal;
-    });
-
-    Q1_FOLLOW = t.q1Follow;
-
-    if (prevSelected >= 0) {
-      var val = document.querySelectorAll('#opts-1 .option')[prevSelected].querySelector('input').value;
-      var followLabel = Q1_FOLLOW[val];
-      if (followLabel) document.getElementById('q1-follow-label').textContent = followLabel;
-    }
   }
 
-  var current = 1;
-  var total = 4;
   var params = new URLSearchParams(window.location.search);
-  var answers = { nps: 5, email: params.get('email') || '' };
-
   var initLang = params.get('lang') || 'de';
   if (!TRANSLATIONS[initLang]) initLang = 'de';
   if (initLang !== 'de') {
     document.getElementById('langSelect').value = initLang;
     setLang(initLang);
-  }
-
-  var stepsEl = document.getElementById('npsSteps');
-  for (var i = 0; i <= 10; i++) {
-    var d = document.createElement('div');
-    d.className = 'nps-step' + (i === 5 ? ' active' : (i < 5 ? ' past' : ''));
-    d.textContent = i;
-    d.dataset.val = i;
-    d.addEventListener('click', (function(v) {
-      return function() { updateNPS(v); document.getElementById('npsSlider').value = v; };
-    })(i));
-    stepsEl.appendChild(d);
-  }
-
-  function updateNPS(val) {
-    val = parseInt(val, 10);
-    answers.nps = val;
-    document.getElementById('npsScore').textContent = val;
-    var pct = (val / 10) * 100;
-    document.getElementById('npsSlider').style.background =
-      'linear-gradient(to right, #E70E22 ' + pct + '%, #DEDEDE ' + pct + '%)';
-    document.querySelectorAll('.nps-step').forEach(function(s) {
-      var v = parseInt(s.dataset.val, 10);
-      s.className = 'nps-step' + (v === val ? ' active' : (v < val ? ' past' : ''));
-    });
-  }
-  updateNPS(5);
-
-  document.querySelectorAll('#opts-1 .option').forEach(function(opt) {
-    opt.addEventListener('click', function() {
-      document.querySelectorAll('#opts-1 .option').forEach(function(o) { o.classList.remove('selected'); });
-      opt.classList.add('selected');
-      opt.querySelector('input').checked = true;
-      var val = opt.querySelector('input').value;
-      var followBlock = document.getElementById('q1-follow-block');
-      document.getElementById('q1-follow-label').textContent = Q1_FOLLOW[val] || '';
-      document.getElementById('q1-follow').value = '';
-      followBlock.classList.add('visible');
-    });
-  });
-
-  function updateProgress(n) {
-    document.querySelectorAll('.seg').forEach(function(s, i) {
-      s.classList.toggle('filled', i < n);
-    });
-  }
-
-  function getSelected(name) {
-    var el = document.querySelector('input[name="' + name + '"]:checked');
-    return el ? el.value : null;
-  }
-
-  function showStep(n) {
-    document.querySelectorAll('.step').forEach(function(s) { s.classList.remove('active'); });
-    document.getElementById(n === 'done' ? 'step-done' : 'step-' + n).classList.add('active');
-    if (n !== 'done') updateProgress(n);
-    else document.getElementById('segProgress').style.display = 'none';
-  }
-
-  function next(step) {
-    if (step === 1) {
-      var val = getSelected('q1');
-      if (!val) { document.getElementById('err-1').classList.add('visible'); return; }
-      document.getElementById('err-1').classList.remove('visible');
-      answers['q1'] = val;
-      answers['q1_follow'] = document.getElementById('q1-follow').value;
-    } else if (step === 2) {
-      answers['q2'] = document.getElementById('q2').value;
-    } else if (step === 3) {
-      answers['nps'] = parseInt(document.getElementById('npsSlider').value, 10);
-    }
-    current = step + 1;
-    showStep(current);
-  }
-
-  function back(step) { current = step - 1; showStep(current); }
-
-  function submit() {
-    var q4 = document.getElementById('q4').value.trim();
-    if (!q4) { document.getElementById('err-4').classList.add('visible'); return; }
-    document.getElementById('err-4').classList.remove('visible');
-    answers['q4'] = q4;
-    answers['lang'] = currentLang;
-    submitForm(answers);
-    showStep('done');
-  }
-
-  function submitForm(data) {
-    data.formType = 'active';
-    fetch('https://script.google.com/macros/s/AKfycbyu_G3-Q1JanWo0mQMZ7EbowcPE2oNB0HC7RqjUEwyi2y2mA7IUprJ6Irnry0Ne8ZaEDw/exec', {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(data)
-    })
-    .catch(function(err) { console.error('Submit error:', err); });
   }
 </script>
 </body>

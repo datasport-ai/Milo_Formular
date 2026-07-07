@@ -1,17 +1,25 @@
 # Fit for Life Coach Feedback Forms — Project Context
 
+## Status (as of 2026-07-07): CLOSED
+The survey period is over — enough responses were collected. To avoid having to keep generating CHF 20.– promo codes for late/new submissions, the three form URLs on GitHub Pages (`form-active.html`, `form-inactive.html`, `form-onboarding-dropout.html`) were replaced with a single shared "closed" notice template (same branding, DE/FR/EN/IT support, no form fields, no submission to Apps Script). This keeps every link already sent by email working (no 404s) while stopping new responses. The original working forms were preserved by renaming them to `form-active-original.html`, `form-inactive-original.html`, `form-onboarding-dropout-original.html` in case the survey needs to be reopened.
+
 ## Objective
 Collect feedback from ~150 Fit for Life Coach users segmented into 3 groups. Each user receives a personalized link generated from Google Sheets with pre-filled `?email=` parameter. Responses are submitted to Google Apps Script and written to Google Sheets.
 
 ## Files
 ```
-form-active.html              → Users actively using Fit for Life Coach (≥ 20% training ratio)
-form-inactive.html            → Users who completed onboarding but stopped (< 20% training ratio)
-form-onboarding-dropout.html  → Users who never completed onboarding
-google-apps-script.js         → Apps Script code to paste in Google Sheets editor
-send-mails.ps1                → PowerShell script to send personalized emails (Office 365 SMTP)
-preview-email.html            → Email template for local preview
+form-active.html                       → CLOSED notice (was: users actively using Fit for Life Coach, ≥ 20% training ratio)
+form-inactive.html                     → CLOSED notice (was: users who completed onboarding but stopped, < 20% training ratio)
+form-onboarding-dropout.html           → CLOSED notice (was: users who never completed onboarding)
+form-active-original.html              → preserved original active form (functional, not linked live)
+form-inactive-original.html            → preserved original inactive form (functional, not linked live)
+form-onboarding-dropout-original.html  → preserved original onboarding-dropout form (functional, not linked live)
+google-apps-script.js                  → Apps Script code to paste in Google Sheets editor
+send-mails.ps1                         → PowerShell script to send personalized emails (Office 365 SMTP)
+preview-email.html                     → Email template for local preview
 ```
+
+The **Form Structures**, **Query Parameters**, and **Design System** sections below describe the *original* forms (now under the `-original.html` filenames) — kept for reference in case the survey is reopened.
 
 ## Infrastructure
 - **Google Sheet:** `1O-dJv9CNcgidMwbd23dw5fErdzZuRW1MWrIDFtMFBsA`
@@ -167,4 +175,5 @@ Once responses came in, an executive summary report was built from `Milo Formula
 - **Published to Confluence:** https://datasport.atlassian.net/wiki/spaces/MC/pages/2080800769/Milo+Executive+Summary+Nutzerfeedback+Juli+2026 (space `MC`, under the "User Analytics Feedback" folder). Recreated in native Confluence storage format (panels/status lozenges/tables/expand macros) since Confluence doesn't support the custom CSS progress bars — the page links to the Artifact above for the visually-identical version. The three copies (HTML file, Artifact, Confluence page) do not auto-sync; each must be updated separately when the report changes.
 
 ## Pending
-- [ ] Incentive fulfillment — process to send CHF 20.– voucher (all 3 forms) within 48h
+- [ ] Incentive fulfillment — process to send CHF 20.– voucher for responses already collected (all 3 forms) within 48h
+- [x] Close the forms to new submissions (done 2026-07-07, see Status above)
